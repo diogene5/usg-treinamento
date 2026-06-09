@@ -1,8 +1,6 @@
 # Treinamento de USG point-of-care
 
-Material rápido para a equipe da **UPA** começar a usar o ultrassom point-of-care da unidade com segurança.
-
-![Aparelho USG Konted C10RL portátil](../assets/media/aparelho-c10rl.png)
+Material de consulta para a equipe da **UPA** começar a usar o ultrassom point-of-care da unidade com segurança.
 
 O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo conseguir:
 
@@ -14,6 +12,17 @@ O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo
 6. chamar ajuda quando necessário.
 
 > O aparelho é para uso da equipe. Quem trabalha na UPA precisa saber conectar, cuidar e usar com responsabilidade.
+
+## O que é POCUS
+
+POCUS é ultrassom feito à beira-leito por quem está cuidando do paciente, com uma pergunta clínica limitada e imediata.
+
+| Não é | É |
+|---|---|
+| exame completo de radiologia | resposta focada no contexto clínico |
+| laudo definitivo isolado | dado adicional para decisão imediata |
+| imagem bonita para arquivo | imagem suficiente para responder uma pergunta |
+| substituto de reavaliação | ferramenta integrada ao exame físico e evolução |
 
 ## Antes da aula
 
@@ -28,3 +37,7 @@ O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo
 - Não atrase reanimação ou conduta urgente para procurar imagem perfeita.
 - Se a imagem estiver ruim ou o exame for limitado, diga isso claramente.
 - Limpe e guarde o aparelho depois de usar.
+
+## Como estudar depois
+
+Use este site como roteiro rápido. Para aprofundar, vá direto à página **Fontes FOAM** no final: ali estão guias, atlas de imagens, vídeos e referências abertas para consulta.

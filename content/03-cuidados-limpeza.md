@@ -4,12 +4,13 @@ Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para t
 
 ## Antes de usar
 
-- Conferir carga da sonda.
-- Conferir carga do celular/tablet.
-- Conferir se o My USG abre.
-- Conferir gel.
-- Conferir material de limpeza.
-- Fazer uma imagem teste antes de começar a aula ou atendimento.
+| Item | O que fazer |
+|---|---|
+| Sonda | conferir carga, carcaça, face do transdutor e botão |
+| Celular/tablet | conferir bateria, Wi-Fi e app My USG |
+| Gel | garantir quantidade suficiente antes de chamar o paciente |
+| Limpeza | confirmar produto aprovado pela instituição |
+| Teste | fazer imagem teste antes da aula ou antes do primeiro uso do plantão |
 
 ## Durante o uso
 
@@ -18,6 +19,8 @@ Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para t
 - Não apoiar a face da sonda em superfície suja.
 - Não guardar com gel.
 - Não usar se houver trinca, afundamento do transdutor ou porta danificada.
+- Evitar gel escorrendo para porta/conector.
+- Se houver contato com sangue, secreção ou mucosa, seguir protocolo institucional de desinfecção.
 
 ## Depois de usar
 
@@ -26,6 +29,28 @@ Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para t
 3. Secar antes de guardar.
 4. Conferir se a sonda ficou íntegra.
 5. Deixar carregando ou guardar no local definido.
+
+## Gel
+
+- Use gel próprio para ultrassom.
+- Evite frasco encostando em pele não limpa ou ferida.
+- Não reponha gel de forma improvisada sem política local.
+- Descarte sachê aberto conforme rotina da unidade.
+
+## Quando tirar de uso
+
+Não insista no aparelho se houver:
+
+- dano visível na face do transdutor;
+- rachadura na carcaça;
+- aquecimento anormal;
+- cheiro de queimado;
+- botão quebrado;
+- porta danificada;
+- queda importante;
+- contato biológico sem limpeza adequada.
+
+Nesses casos, separe o aparelho, avise o responsável e registre o problema.
 
 ## Quando pedir ajuda
 

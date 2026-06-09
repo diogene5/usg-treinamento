@@ -14,24 +14,74 @@ A primeira turma não precisa sair fazendo laudo completo. Ela precisa aprender 
 | Acesso venoso | visualizar vaso e ponta da agulha | linear |
 | Cardíaco focado | derrame pericárdico? atividade cardíaca? disfunção grosseira? | convexa/cardíaca |
 
-## eFAST inicial
-
-- Janelas: RUQ, LUQ, pelve, subxifoide/paraesternal e pleura anterior.
-- Treinar primeiro anatomia normal.
-- Não prometer exclusão total de lesão; exame negativo não encerra avaliação clínica.
-
 ## Pulmão
 
-- Lung sliding presente reduz probabilidade de pneumotórax naquele ponto.
-- Ausência de sliding não é pneumotórax automaticamente.
-- B-lines difusas sugerem síndrome intersticial, mas contexto define causa.
-- Derrame pleural precisa ser diferenciado de consolidação/atelectasia.
+Perguntas úteis na UPA:
+
+- há deslizamento pleural no ponto avaliado?
+- há B-lines difusas?
+- há derrame pleural?
+- há consolidação subpleural evidente?
+
+Procure primeiro a linha pleural entre duas sombras de costelas. Ajuste a profundidade para não deixar metade da tela mostrando tecido inútil.
+
+| Achado | Interpretação prática | Armadilha |
+|---|---|---|
+| Sliding presente | reduz pneumotórax naquele ponto | não avalia o pulmão inteiro |
+| Sliding ausente | pode ocorrer em pneumotórax | também ocorre em apneia, intubação seletiva, pleurodese, atelectasia |
+| Linhas A | padrão horizontal repetido | pode ser normal ou hiperinsuflação |
+| B-lines difusas | síndrome intersticial | causa depende do contexto clínico |
+| Derrame | líquido pleural | não confundir com fígado/baço/atelectasia |
+
+## eFAST inicial
+
+Janelas mínimas:
+
+1. quadrante superior direito;
+2. quadrante superior esquerdo;
+3. pelve;
+4. janela cardíaca se indicada e possível;
+5. pleura anterior para pneumotórax.
+
+Treine primeiro anatomia normal. No trauma instável, o objetivo é reconhecer líquido livre grosseiro e pneumotórax provável, sem atrasar conduta.
+
+| Janela | O que procurar | Dica |
+|---|---|---|
+| RUQ | líquido entre fígado/rim, ponta hepática, base torácica | vá alto e posterior |
+| LUQ | líquido entre baço/rim e subdiafragmático | geralmente é mais difícil que RUQ |
+| Pelve | líquido atrás da bexiga | bexiga cheia ajuda |
+| Cardíaca | derrame pericárdico/atividade | se janela ruim, registre limitação |
+| Pleura anterior | sliding | compare os lados |
+
+FAST negativo não exclui lesão abdominal. Exame limitado deve ser dito como limitado.
+
+## Bexiga e rim
+
+Use convexa. Comece pela bexiga se a queixa é retenção, anúria, dor hipogástrica ou dificuldade de sondagem.
+
+| Pergunta | Achado útil | Armadilha |
+|---|---|---|
+| Bexiga cheia? | estrutura anecoica arredondada na pelve | bexiga vazia não exclui problema se janela foi ruim |
+| Hidronefrose grosseira? | dilatação anecoica no sistema coletor | vasos renais/cistos podem confundir |
+| Sonda vesical está drenando? | bexiga ainda cheia apesar da sonda | avaliar posição e obstrução conforme protocolo |
 
 ## Partes moles
 
 - Celulite: padrão em casca de laranja/cobblestoning.
 - Abscesso: coleção hipoecoica/complexa, geralmente compressível ou com reforço posterior.
 - Cuidado com vasos antes de drenagem.
+
+Antes de incisar ou puncionar, varra a área em dois eixos. Se houver dúvida entre coleção e vaso, use compressão e Doppler quando disponível.
+
+## Procedimentos guiados
+
+Regra única para iniciante: **não avance o instrumento se a ponta não está visível**.
+
+| Procedimento | Antes de furar | Durante |
+|---|---|---|
+| Acesso periférico | diferenciar veia/artéria | rastrear ponta da agulha |
+| Drenagem superficial | confirmar coleção e profundidade | evitar vasos e estruturas profundas |
+| Corpo estranho superficial | confirmar localização e profundidade | marcar pele e planejar trajeto |
 
 ## Acesso vascular
 
@@ -47,3 +97,5 @@ A primeira turma não precisa sair fazendo laudo completo. Ela precisa aprender 
 - Achado positivo/negativo.
 - Limitação do exame.
 - Conduta que mudou ou não mudou.
+
+Frase segura: “POCUS realizado para pergunta focada. Achados interpretados no contexto clínico. Exame limitado por janela/tempo/colaboração quando aplicável.”

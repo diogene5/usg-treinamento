@@ -20,7 +20,12 @@ PUBLIC_PAGES = [
     "03-cuidados-limpeza.md",
     "04-controles-imagem.md",
     "05-o-que-vamos-treinar.md",
+    "05-protocolos-pocus.md",
+    "07-acesso-vascular.md",
     "06-armadilhas.md",
+    "08-roteiro-aula.md",
+    "09-checklists.md",
+    "08-fontes-foam.md",
 ]
 
 
@@ -255,71 +260,76 @@ def build_html(pages: list[dict[str, str]]) -> str:
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308756f'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
   <style>
     :root {{
-      --bg: #ffffff;
-      --surface: #f7faf9;
-      --surface-strong: #edf5f3;
-      --ink: #102025;
-      --muted: #52656c;
-      --line: #d6e2e0;
+      --bg: #fbfcfc;
+      --surface: #ffffff;
+      --surface-quiet: #f4f7f6;
+      --surface-strong: #e8efed;
+      --ink: #172326;
+      --muted: #5b686b;
+      --line: #d8e1df;
       --accent: #08756f;
       --accent-dark: #064f4b;
       --accent-soft: #dff2ef;
-      --warn: #b45309;
-      --warn-soft: #fff3e0;
-      --danger: #b91c1c;
-      --danger-soft: #fee2e2;
-      --ok: #15803d;
-      --ok-soft: #e7f7ed;
-      --max: 1120px;
+      --amber: #8a5a12;
+      --amber-soft: #fff6e6;
+      --max: 1160px;
+      --sidebar: 282px;
       color-scheme: light;
     }}
     * {{ box-sizing: border-box; }}
     html {{ scroll-behavior: smooth; }}
     body {{
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--ink);
       background: var(--bg);
       line-height: 1.58;
+      text-rendering: optimizeLegibility;
     }}
-    a {{ color: var(--accent); text-underline-offset: 3px; }}
+    a {{ color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }}
     a:hover {{ color: var(--accent-dark); }}
+    a:focus-visible, button:focus-visible, input:focus-visible {{
+      outline: 3px solid rgba(8,117,111,.24);
+      outline-offset: 2px;
+    }}
     .layout {{
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      min-height: 100vh;
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      min-height: 100dvh;
     }}
     aside {{
       position: sticky;
       top: 0;
-      height: 100vh;
+      height: 100dvh;
       overflow: auto;
-      padding: 20px 16px;
+      padding: 22px 16px;
       border-right: 1px solid var(--line);
-      background: #fbfdfc;
+      background: #f6faf9;
     }}
     .brand {{
       border-bottom: 1px solid var(--line);
-      padding-bottom: 16px;
-      margin-bottom: 16px;
+      padding-bottom: 18px;
+      margin-bottom: 14px;
     }}
-    .brand strong {{ display: block; font-size: 18px; }}
-    .brand span {{ display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }}
+    .brand strong {{ display: block; font-size: 20px; line-height: 1.12; }}
+    .brand span {{ display: block; color: var(--muted); font-size: 13px; margin-top: 6px; }}
     nav a {{
       display: block;
-      padding: 9px 10px;
+      padding: 8px 10px;
       border-radius: 8px;
       color: var(--ink);
       text-decoration: none;
       font-size: 14px;
+      line-height: 1.28;
+      transition: background-color .18s ease, color .18s ease, transform .18s ease;
     }}
-    nav a:hover {{ background: var(--accent-soft); color: var(--accent-dark); }}
+    nav a:hover {{ background: var(--accent-soft); color: var(--accent-dark); transform: translateX(2px); }}
     .topbar {{
       position: sticky;
       top: 0;
       z-index: 4;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.94);
+      background: rgba(251,252,252,.94);
       backdrop-filter: blur(12px);
       padding: 14px 22px;
     }}
@@ -336,12 +346,14 @@ def build_html(pages: list[dict[str, str]]) -> str:
       border-radius: 8px;
       padding: 11px 12px;
       font-size: 15px;
+      background: var(--surface);
+      color: var(--ink);
     }}
     .actions {{ display: flex; gap: 8px; flex-wrap: wrap; }}
     .actions a, .actions button {{
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fff;
+      background: var(--surface);
       color: var(--ink);
       padding: 10px 12px;
       font-size: 13px;
@@ -349,31 +361,48 @@ def build_html(pages: list[dict[str, str]]) -> str:
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
+      transition: border-color .18s ease, color .18s ease, transform .18s ease;
     }}
+    .actions a:hover, .actions button:hover {{ border-color: var(--accent); color: var(--accent-dark); }}
+    .actions a:active, .actions button:active {{ transform: translateY(1px); }}
     main {{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 28px 22px 64px;
+      padding: 26px 26px 72px;
     }}
     section {{
       scroll-margin-top: 86px;
       border-bottom: 1px solid var(--line);
-      padding: 34px 0;
+      padding: 38px 0;
+    }}
+    section:first-of-type {{
+      padding-top: 26px;
+    }}
+    section:first-of-type h1 {{
+      max-width: 920px;
+      font-size: 48px;
+      letter-spacing: 0;
+    }}
+    section:first-of-type > p:first-of-type {{
+      max-width: 760px;
+      font-size: 18px;
+      color: var(--muted);
     }}
     h1, h2, h3, h4, h5 {{ margin: 0 0 12px; line-height: 1.16; letter-spacing: 0; }}
-    h1 {{ font-size: clamp(32px, 5vw, 52px); }}
-    h2 {{ font-size: clamp(26px, 3.5vw, 38px); margin-top: 8px; }}
+    h1 {{ font-size: 42px; }}
+    h2 {{ font-size: 32px; margin-top: 8px; }}
     h3 {{ font-size: 24px; margin-top: 28px; }}
     h4 {{ font-size: 19px; margin-top: 22px; }}
-    p {{ margin: 0 0 12px; }}
+    p {{ margin: 0 0 12px; max-width: 78ch; }}
     ul, ol {{ margin: 8px 0 16px; padding-left: 22px; }}
     li {{ margin: 6px 0; }}
     blockquote {{
       margin: 16px 0;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-left: 4px solid var(--accent);
-      background: var(--surface);
+      background: var(--surface-quiet);
       border-radius: 0 8px 8px 0;
+      max-width: 84ch;
     }}
     code {{
       background: var(--surface-strong);
@@ -395,12 +424,13 @@ def build_html(pages: list[dict[str, str]]) -> str:
       padding: 10px;
     }}
     .figure img {{ display: block; width: 100%; height: auto; }}
-    .figure video {{ display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #000; }}
+    .figure video {{ display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #12181a; }}
     figcaption {{ color: var(--muted); font-size: 13px; margin-top: 8px; }}
     .table-wrap {{ overflow-x: auto; margin: 14px 0 18px; }}
-    table {{ width: 100%; border-collapse: collapse; font-size: 14px; }}
-    th, td {{ border: 1px solid var(--line); padding: 10px; vertical-align: top; text-align: left; }}
-    th {{ background: var(--surface-strong); }}
+    table {{ width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); }}
+    th, td {{ border: 1px solid var(--line); padding: 11px 12px; vertical-align: top; text-align: left; }}
+    th {{ background: var(--surface-strong); color: #263638; }}
+    tbody tr:nth-child(even) td {{ background: #fafcfc; }}
     .task input {{ margin-right: 8px; }}
     .hidden-by-search {{ display: none !important; }}
     @media (max-width: 900px) {{
@@ -409,6 +439,11 @@ def build_html(pages: list[dict[str, str]]) -> str:
       nav {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; }}
       .topbar {{ position: static; }}
       .topbar-inner {{ flex-direction: column; align-items: stretch; }}
+      main {{ padding: 22px 16px 56px; }}
+      section {{ padding: 30px 0; scroll-margin-top: 18px; }}
+      h1, section:first-of-type h1 {{ font-size: 34px; }}
+      h2 {{ font-size: 27px; }}
+      h3 {{ font-size: 22px; }}
     }}
     @media print {{
       aside, .topbar {{ display: none; }}

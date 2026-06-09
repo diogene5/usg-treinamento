@@ -30,6 +30,16 @@
 - FAST negativo não exclui lesão abdominal.
 - Exame limitado deve ser registrado como limitado.
 
+## Falsas seguranças frequentes
+
+| Situação | Erro | Melhor postura |
+|---|---|---|
+| FAST negativo | “não há sangramento” | “não vi líquido livre nas janelas avaliadas” |
+| Pulmão com sliding | “não há doença pulmonar” | sliding responde principalmente pneumotórax naquele ponto |
+| B-lines | “é edema agudo cardiogênico” | integrar com clínica, coração, volume e contexto |
+| Bexiga vazia | “não é retenção” | confirmar se a janela foi adequada e se o paciente urinou |
+| Abscesso | drenar sem Doppler/sem pensar em vaso | antes de furar, confirme que não é vaso |
+
 ## Procedimento
 
 Se perdeu a ponta da agulha, pare. Reencontre a ponta antes de avançar.

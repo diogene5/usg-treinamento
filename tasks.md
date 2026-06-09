@@ -10,3 +10,8 @@
 - [x] Testar o site em navegador/local server após a versão enxuta.
 - [ ] Fazer commit do ajuste de publicação enxuta.
 - [ ] Incorporar links do Raindrop quando houver exportação/conector disponível.
+- [x] Remover imagens/vídeo não aprovados do site público.
+- [x] Adicionar fontes FOAM validadas para consulta.
+- [x] Ampliar fundamentos, protocolos, armadilhas e acesso vascular sem transformar o site em enciclopédia.
+- [x] Publicar também protocolos POCUS, roteiro de aula e checklists rápidos.
+- [x] Revisar layout do HTML estático para leitura melhor em desktop/mobile.

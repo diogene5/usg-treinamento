@@ -24,6 +24,28 @@ A primeira prática é operacional. A equipe deve sair sabendo usar o aparelho s
 | Pele e partes moles | há coleção drenável? |
 | Acesso venoso | vejo vaso e ponta da agulha? |
 
+## Protocolos práticos para UPA
+
+| Módulo | Transdutor | Resultado esperado para iniciante |
+|---|---|---|
+| Pulmão | linear ou convexa | reconhecer sliding, linhas A, B-lines, derrame grosseiro |
+| eFAST | convexa | procurar líquido livre em RUQ, LUQ, pelve e tórax |
+| Bexiga/rim | convexa | identificar bexiga cheia e hidronefrose grosseira |
+| Partes moles | linear | diferenciar celulite de coleção drenável |
+| Acesso vascular | linear | identificar veia, artéria e ponta da agulha |
+
+## Documentação mínima
+
+Registre sempre:
+
+- pergunta clínica;
+- região/janela avaliada;
+- achado positivo ou negativo;
+- limitação do exame;
+- conduta tomada ou motivo de não mudar conduta.
+
+Exemplo: “POCUS pulmonar limitado por dor e pouca colaboração. Avaliados campos anteriores bilateralmente. Sliding presente nos pontos avaliados. Sem B-lines difusas nos pontos avaliados. Exame limitado.”
+
 ## Meta mínima de cada participante
 
 Conectar, gerar uma imagem, ajustar profundidade/ganho, congelar, salvar e verbalizar uma limitação.

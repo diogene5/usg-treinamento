@@ -7,71 +7,76 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308756f'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
   <style>
     :root {
-      --bg: #ffffff;
-      --surface: #f7faf9;
-      --surface-strong: #edf5f3;
-      --ink: #102025;
-      --muted: #52656c;
-      --line: #d6e2e0;
+      --bg: #fbfcfc;
+      --surface: #ffffff;
+      --surface-quiet: #f4f7f6;
+      --surface-strong: #e8efed;
+      --ink: #172326;
+      --muted: #5b686b;
+      --line: #d8e1df;
       --accent: #08756f;
       --accent-dark: #064f4b;
       --accent-soft: #dff2ef;
-      --warn: #b45309;
-      --warn-soft: #fff3e0;
-      --danger: #b91c1c;
-      --danger-soft: #fee2e2;
-      --ok: #15803d;
-      --ok-soft: #e7f7ed;
-      --max: 1120px;
+      --amber: #8a5a12;
+      --amber-soft: #fff6e6;
+      --max: 1160px;
+      --sidebar: 282px;
       color-scheme: light;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--ink);
       background: var(--bg);
       line-height: 1.58;
+      text-rendering: optimizeLegibility;
     }
-    a { color: var(--accent); text-underline-offset: 3px; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--accent-dark); }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(8,117,111,.24);
+      outline-offset: 2px;
+    }
     .layout {
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      min-height: 100vh;
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      min-height: 100dvh;
     }
     aside {
       position: sticky;
       top: 0;
-      height: 100vh;
+      height: 100dvh;
       overflow: auto;
-      padding: 20px 16px;
+      padding: 22px 16px;
       border-right: 1px solid var(--line);
-      background: #fbfdfc;
+      background: #f6faf9;
     }
     .brand {
       border-bottom: 1px solid var(--line);
-      padding-bottom: 16px;
-      margin-bottom: 16px;
+      padding-bottom: 18px;
+      margin-bottom: 14px;
     }
-    .brand strong { display: block; font-size: 18px; }
-    .brand span { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .brand strong { display: block; font-size: 20px; line-height: 1.12; }
+    .brand span { display: block; color: var(--muted); font-size: 13px; margin-top: 6px; }
     nav a {
       display: block;
-      padding: 9px 10px;
+      padding: 8px 10px;
       border-radius: 8px;
       color: var(--ink);
       text-decoration: none;
       font-size: 14px;
+      line-height: 1.28;
+      transition: background-color .18s ease, color .18s ease, transform .18s ease;
     }
-    nav a:hover { background: var(--accent-soft); color: var(--accent-dark); }
+    nav a:hover { background: var(--accent-soft); color: var(--accent-dark); transform: translateX(2px); }
     .topbar {
       position: sticky;
       top: 0;
       z-index: 4;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.94);
+      background: rgba(251,252,252,.94);
       backdrop-filter: blur(12px);
       padding: 14px 22px;
     }
@@ -88,12 +93,14 @@
       border-radius: 8px;
       padding: 11px 12px;
       font-size: 15px;
+      background: var(--surface);
+      color: var(--ink);
     }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .actions a, .actions button {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fff;
+      background: var(--surface);
       color: var(--ink);
       padding: 10px 12px;
       font-size: 13px;
@@ -101,31 +108,48 @@
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
+      transition: border-color .18s ease, color .18s ease, transform .18s ease;
     }
+    .actions a:hover, .actions button:hover { border-color: var(--accent); color: var(--accent-dark); }
+    .actions a:active, .actions button:active { transform: translateY(1px); }
     main {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 28px 22px 64px;
+      padding: 26px 26px 72px;
     }
     section {
       scroll-margin-top: 86px;
       border-bottom: 1px solid var(--line);
-      padding: 34px 0;
+      padding: 38px 0;
+    }
+    section:first-of-type {
+      padding-top: 26px;
+    }
+    section:first-of-type h1 {
+      max-width: 920px;
+      font-size: 48px;
+      letter-spacing: 0;
+    }
+    section:first-of-type > p:first-of-type {
+      max-width: 760px;
+      font-size: 18px;
+      color: var(--muted);
     }
     h1, h2, h3, h4, h5 { margin: 0 0 12px; line-height: 1.16; letter-spacing: 0; }
-    h1 { font-size: clamp(32px, 5vw, 52px); }
-    h2 { font-size: clamp(26px, 3.5vw, 38px); margin-top: 8px; }
+    h1 { font-size: 42px; }
+    h2 { font-size: 32px; margin-top: 8px; }
     h3 { font-size: 24px; margin-top: 28px; }
     h4 { font-size: 19px; margin-top: 22px; }
-    p { margin: 0 0 12px; }
+    p { margin: 0 0 12px; max-width: 78ch; }
     ul, ol { margin: 8px 0 16px; padding-left: 22px; }
     li { margin: 6px 0; }
     blockquote {
       margin: 16px 0;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-left: 4px solid var(--accent);
-      background: var(--surface);
+      background: var(--surface-quiet);
       border-radius: 0 8px 8px 0;
+      max-width: 84ch;
     }
     code {
       background: var(--surface-strong);
@@ -147,12 +171,13 @@
       padding: 10px;
     }
     .figure img { display: block; width: 100%; height: auto; }
-    .figure video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #000; }
+    .figure video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #12181a; }
     figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
     .table-wrap { overflow-x: auto; margin: 14px 0 18px; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { border: 1px solid var(--line); padding: 10px; vertical-align: top; text-align: left; }
-    th { background: var(--surface-strong); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); }
+    th, td { border: 1px solid var(--line); padding: 11px 12px; vertical-align: top; text-align: left; }
+    th { background: var(--surface-strong); color: #263638; }
+    tbody tr:nth-child(even) td { background: #fafcfc; }
     .task input { margin-right: 8px; }
     .hidden-by-search { display: none !important; }
     @media (max-width: 900px) {
@@ -161,6 +186,11 @@
       nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; }
       .topbar { position: static; }
       .topbar-inner { flex-direction: column; align-items: stretch; }
+      main { padding: 22px 16px 56px; }
+      section { padding: 30px 0; scroll-margin-top: 18px; }
+      h1, section:first-of-type h1 { font-size: 34px; }
+      h2 { font-size: 27px; }
+      h3 { font-size: 22px; }
     }
     @media print {
       aside, .topbar { display: none; }
@@ -184,7 +214,12 @@
 <a href="#cuidados-e-limpeza">Cuidados e limpeza</a>
 <a href="#controles-de-imagem">Controles de imagem</a>
 <a href="#o-que-vamos-treinar">O que vamos treinar</a>
+<a href="#protocolos-pocus-para-upa">Protocolos POCUS para UPA</a>
+<a href="#acesso-vascular-seguro">Acesso vascular seguro</a>
 <a href="#armadilhas-comuns">Armadilhas comuns</a>
+<a href="#roteiro-da-aula">Roteiro da aula</a>
+<a href="#checklists-rapidos">Checklists rápidos</a>
+<a href="#fontes-foam-e-consulta">Fontes FOAM e consulta</a>
       </nav>
     </aside>
     <div>
@@ -200,8 +235,7 @@
       </header>
       <main>
         <section id="treinamento-de-usg-point-of-care" data-search><h2 id="h-treinamento-de-usg-point-of-care">Treinamento de USG point-of-care</h2>
-<p>Material rápido para a equipe da <strong>UPA</strong> começar a usar o ultrassom point-of-care da unidade com segurança.</p>
-<figure class="figure"><img src="assets/media/aparelho-c10rl.png" alt="Aparelho USG Konted C10RL portátil"><figcaption>Aparelho USG Konted C10RL portátil</figcaption></figure>
+<p>Material de consulta para a equipe da <strong>UPA</strong> começar a usar o ultrassom point-of-care da unidade com segurança.</p>
 <p>O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo conseguir:</p>
 <ol>
 <li>baixar o aplicativo correto;</li>
@@ -212,6 +246,9 @@
 <li>chamar ajuda quando necessário.</li>
 </ol>
 <blockquote>O aparelho é para uso da equipe. Quem trabalha na UPA precisa saber conectar, cuidar e usar com responsabilidade.</blockquote>
+<h3 id="h-o-que-e-pocus">O que é POCUS</h3>
+<p>POCUS é ultrassom feito à beira-leito por quem está cuidando do paciente, com uma pergunta clínica limitada e imediata.</p>
+<div class="table-wrap"><table><thead><tr><th>Não é</th><th>É</th></tr></thead><tbody><tr><td>exame completo de radiologia</td><td>resposta focada no contexto clínico</td></tr><tr><td>laudo definitivo isolado</td><td>dado adicional para decisão imediata</td></tr><tr><td>imagem bonita para arquivo</td><td>imagem suficiente para responder uma pergunta</td></tr><tr><td>substituto de reavaliação</td><td>ferramenta integrada ao exame físico e evolução</td></tr></tbody></table></div>
 <h3 id="h-antes-da-aula">Antes da aula</h3>
 <ul>
 <li>Baixe o app <strong>My USG</strong>.</li>
@@ -225,7 +262,9 @@
 <li>Não atrase reanimação ou conduta urgente para procurar imagem perfeita.</li>
 <li>Se a imagem estiver ruim ou o exame for limitado, diga isso claramente.</li>
 <li>Limpe e guarde o aparelho depois de usar.</li>
-</ul></section>
+</ul>
+<h3 id="h-como-estudar-depois">Como estudar depois</h3>
+<p>Use este site como roteiro rápido. Para aprofundar, vá direto à página <strong>Fontes FOAM</strong> no final: ali estão guias, atlas de imagens, vídeos e referências abertas para consulta.</p></section>
 <section id="baixar-o-app" data-search><h2 id="h-baixar-o-app">Baixar o app</h2>
 <p>O aplicativo do aparelho é <strong>My USG</strong>.</p>
 <p>Baixe antes do treinamento para evitar perda de tempo na hora da prática.</p>
@@ -243,7 +282,6 @@
 </ul></section>
 <section id="conexao-my-usg" data-search><h2 id="h-conexao-my-usg">Conexão My USG</h2>
 <p>A conexão deve ser feita sempre na mesma ordem. O ponto mais importante dos manuais locais é: a senha do Wi-Fi da sonda é o <strong>número de série da sonda em letras minúsculas</strong>.</p>
-<figure class="figure"><img src="assets/diagrams/conexao-c10rl.svg" alt="Fluxo de conexão C10RL + My USG"><figcaption>Fluxo de conexão C10RL + My USG</figcaption></figure>
 <h3 id="h-primeiro-acesso-ao-app">Primeiro acesso ao app</h3>
 <p>Se o My USG pedir login:</p>
 <ol>
@@ -252,7 +290,6 @@
 <li>se fizer sentido para o treinamento, ative <strong>Auto login</strong>;</li>
 <li>confirme e vá para a tela de exame.</li>
 </ol>
-<figure class="figure video-figure"><video controls preload="metadata" src="assets/media/myusg-senha-autologin.mp4" poster="assets/media/myusg-senha-autologin-thumb.png"></video><figcaption>Vídeo local: senha inicial 123456 e auto login no My USG</figcaption></figure>
 <h3 id="h-wi-fi-da-sonda">Wi-Fi da sonda</h3>
 <ol>
 <li>Ligue a sonda.</li>
@@ -264,19 +301,27 @@
 <li>Confirme que a sonda aparece conectada.</li>
 <li>Coloque gel e gere imagem teste em modo B.</li>
 </ol>
+<h3 id="h-iphone-android-e-cabo">iPhone, Android e cabo</h3>
+<div class="table-wrap"><table><thead><tr><th>Dispositivo</th><th>Caminho recomendado no treinamento</th></tr></thead><tbody><tr><td>iPhone/iPad</td><td>Wi-Fi da sonda como padrão</td></tr><tr><td>Android</td><td>Wi-Fi como padrão; USB/Type-C só se o cabo compatível estiver disponível</td></tr><tr><td>Windows</td><td>deixar para demonstração separada, se houver software e notebook preparados</td></tr></tbody></table></div>
+<p>Não gaste a aula inteira tentando resolver cabo. Para treinamento inicial, o fluxo mais reprodutível é Wi-Fi da sonda + My USG.</p>
 <h3 id="h-se-nao-funcionar">Se não funcionar</h3>
-<div class="table-wrap"><table><thead><tr><th>Problema</th><th>Solução prática</th></tr></thead><tbody><tr><td>Wi-Fi da sonda não aparece</td><td>ligar, carregar alguns minutos e aproximar o celular/tablet</td></tr><tr><td>Senha recusada</td><td>redigitar o SN todo em minúsculas, sem espaços</td></tr><tr><td>App pede senha</td><td>usar <code>123456</code> em Administer</td></tr><tr><td>Wi-Fi conecta, mas não sai imagem</td><td>fechar/abrir app, selecionar sonda e desconectar outro aparelho</td></tr><tr><td>Imagem trava</td><td>aproximar aparelho, reiniciar sonda/app e checar bateria</td></tr><tr><td>Cabo não funciona</td><td>no iPhone, prefira Wi-Fi; no Android, testar cabo/orientação compatível</td></tr></tbody></table></div></section>
+<div class="table-wrap"><table><thead><tr><th>Problema</th><th>Solução prática</th></tr></thead><tbody><tr><td>Wi-Fi da sonda não aparece</td><td>ligar, carregar alguns minutos e aproximar o celular/tablet</td></tr><tr><td>Senha recusada</td><td>redigitar o SN todo em minúsculas, sem espaços</td></tr><tr><td>App pede senha</td><td>usar <code>123456</code> em Administer</td></tr><tr><td>Wi-Fi conecta, mas não sai imagem</td><td>fechar/abrir app, selecionar sonda e desconectar outro aparelho</td></tr><tr><td>Imagem trava</td><td>aproximar aparelho, reiniciar sonda/app e checar bateria</td></tr><tr><td>Cabo não funciona</td><td>no iPhone, prefira Wi-Fi; no Android, testar cabo/orientação compatível</td></tr></tbody></table></div>
+<h3 id="h-sequencia-de-recuperacao-em-90-segundos">Sequência de recuperação em 90 segundos</h3>
+<ol>
+<li>A sonda está ligada?</li>
+<li>A bateria da sonda está suficiente?</li>
+<li>O celular está conectado ao Wi-Fi da sonda, não ao Wi-Fi da UPA?</li>
+<li>A senha foi digitada em minúsculas?</li>
+<li>O My USG foi aberto depois da conexão Wi-Fi?</li>
+<li>Há outro celular/tablet conectado à sonda?</li>
+<li>O app volta a funcionar se fechar e abrir?</li>
+<li>A imagem aparece se pressionar o botão físico freeze/live?</li>
+</ol>
+<p>Se falhar depois disso, pare e peça outro dispositivo. A aula deve continuar.</p></section>
 <section id="cuidados-e-limpeza" data-search><h2 id="h-cuidados-e-limpeza">Cuidados e limpeza</h2>
 <p>Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para toda a equipe.</p>
 <h3 id="h-antes-de-usar">Antes de usar</h3>
-<ul>
-<li>Conferir carga da sonda.</li>
-<li>Conferir carga do celular/tablet.</li>
-<li>Conferir se o My USG abre.</li>
-<li>Conferir gel.</li>
-<li>Conferir material de limpeza.</li>
-<li>Fazer uma imagem teste antes de começar a aula ou atendimento.</li>
-</ul>
+<div class="table-wrap"><table><thead><tr><th>Item</th><th>O que fazer</th></tr></thead><tbody><tr><td>Sonda</td><td>conferir carga, carcaça, face do transdutor e botão</td></tr><tr><td>Celular/tablet</td><td>conferir bateria, Wi-Fi e app My USG</td></tr><tr><td>Gel</td><td>garantir quantidade suficiente antes de chamar o paciente</td></tr><tr><td>Limpeza</td><td>confirmar produto aprovado pela instituição</td></tr><tr><td>Teste</td><td>fazer imagem teste antes da aula ou antes do primeiro uso do plantão</td></tr></tbody></table></div>
 <h3 id="h-durante-o-uso">Durante o uso</h3>
 <ul>
 <li>Não puxar pelo cabo.</li>
@@ -284,6 +329,8 @@
 <li>Não apoiar a face da sonda em superfície suja.</li>
 <li>Não guardar com gel.</li>
 <li>Não usar se houver trinca, afundamento do transdutor ou porta danificada.</li>
+<li>Evitar gel escorrendo para porta/conector.</li>
+<li>Se houver contato com sangue, secreção ou mucosa, seguir protocolo institucional de desinfecção.</li>
 </ul>
 <h3 id="h-depois-de-usar">Depois de usar</h3>
 <ol>
@@ -293,6 +340,26 @@
 <li>Conferir se a sonda ficou íntegra.</li>
 <li>Deixar carregando ou guardar no local definido.</li>
 </ol>
+<h3 id="h-gel">Gel</h3>
+<ul>
+<li>Use gel próprio para ultrassom.</li>
+<li>Evite frasco encostando em pele não limpa ou ferida.</li>
+<li>Não reponha gel de forma improvisada sem política local.</li>
+<li>Descarte sachê aberto conforme rotina da unidade.</li>
+</ul>
+<h3 id="h-quando-tirar-de-uso">Quando tirar de uso</h3>
+<p>Não insista no aparelho se houver:</p>
+<ul>
+<li>dano visível na face do transdutor;</li>
+<li>rachadura na carcaça;</li>
+<li>aquecimento anormal;</li>
+<li>cheiro de queimado;</li>
+<li>botão quebrado;</li>
+<li>porta danificada;</li>
+<li>queda importante;</li>
+<li>contato biológico sem limpeza adequada.</li>
+</ul>
+<p>Nesses casos, separe o aparelho, avise o responsável e registre o problema.</p>
 <h3 id="h-quando-pedir-ajuda">Quando pedir ajuda</h3>
 <ul>
 <li>aparelho não liga mesmo após carregar;</li>
@@ -303,7 +370,10 @@
 </ul></section>
 <section id="controles-de-imagem" data-search><h2 id="h-controles-de-imagem">Controles de imagem</h2>
 <p>Não tente fazer uma imagem perfeita. Primeiro faça uma imagem útil para responder a pergunta clínica.</p>
-<figure class="figure"><img src="assets/media/controles-pocus-iniciantes.png" alt="Infográfico de controles básicos de POCUS"><figcaption>Infográfico de controles básicos de POCUS</figcaption></figure>
+<h3 id="h-modelo-mental-rapido">Modelo mental rápido</h3>
+<p>O transdutor emite som, recebe ecos e transforma o retorno em pontos na tela. Eco forte fica branco; eco fraco fica cinza; líquido costuma ficar preto.</p>
+<div class="table-wrap"><table><thead><tr><th>Termo</th><th>Como aparece</th><th>Exemplos</th></tr></thead><tbody><tr><td>Anecoico</td><td>preto</td><td>sangue, urina, cisto, derrame</td></tr><tr><td>Hipoecoico</td><td>cinza escuro</td><td>músculo, tecido inflamado</td></tr><tr><td>Hiperecoico</td><td>branco</td><td>osso, pleura, agulha, cálculo</td></tr><tr><td>Sombra</td><td>escuro atrás de algo branco</td><td>osso ou cálculo bloqueando o feixe</td></tr><tr><td>Reforço posterior</td><td>brilho atrás de líquido</td><td>bexiga, cisto, vesícula</td></tr></tbody></table></div>
+<p>Regra prática: <strong>líquido é preto, osso/agulha são brancos, ar atrapalha</strong>. Por isso gel importa.</p>
 <h3 id="h-ajuste-basico">Ajuste básico</h3>
 <ol>
 <li>Escolha a face correta: convexa para profundo, linear para superficial.</li>
@@ -317,6 +387,10 @@
 </ol>
 <h3 id="h-controles-mais-usados">Controles mais usados</h3>
 <div class="table-wrap"><table><thead><tr><th>Controle</th><th>Para que serve</th></tr></thead><tbody><tr><td>Preset</td><td>ponto de partida para órgão/estrutura</td></tr><tr><td>Gain/GN</td><td>clarear ou escurecer a imagem</td></tr><tr><td>Depth/D</td><td>aumentar ou reduzir profundidade</td></tr><tr><td>TGC</td><td>ajustar ganho por profundidade</td></tr><tr><td>Focus</td><td>colocar foco no alvo</td></tr><tr><td>Freeze/Live</td><td>congelar ou voltar ao vivo</td></tr><tr><td>Save image/video</td><td>registrar imagem ou clipe</td></tr></tbody></table></div>
+<h3 id="h-movimentos-da-sonda">Movimentos da sonda</h3>
+<div class="table-wrap"><table><thead><tr><th>Movimento</th><th>Para que serve</th></tr></thead><tbody><tr><td>Deslizar</td><td>procurar a melhor janela</td></tr><tr><td>Inclinar/fanar</td><td>varrer o órgão sem perder o ponto de contato</td></tr><tr><td>Rotacionar</td><td>mudar eixo curto para eixo longo</td></tr><tr><td>Bascular</td><td>centralizar o alvo</td></tr><tr><td>Comprimir</td><td>diferenciar veia de artéria, testar partes moles</td></tr></tbody></table></div>
+<h3 id="h-orientacao">Orientação</h3>
+<p>O marcador físico da sonda precisa corresponder ao marcador da tela. Se estiver em dúvida, faça o “teste do balanço”: mexa uma ponta da sonda e veja qual lado da tela se mexe.</p>
 <h3 id="h-erro-comum">Erro comum</h3>
 <p>Se a imagem está ruim, não mexa só no ganho. Confira gel, contato, face correta, preset, profundidade e orientação.</p></section>
 <section id="o-que-vamos-treinar" data-search><h2 id="h-o-que-vamos-treinar">O que vamos treinar</h2>
@@ -335,8 +409,115 @@
 </ol>
 <h3 id="h-protocolos-que-serao-demonstrados">Protocolos que serão demonstrados</h3>
 <div class="table-wrap"><table><thead><tr><th>Situação</th><th>Pergunta POCUS</th></tr></thead><tbody><tr><td>Trauma</td><td>há líquido livre ou pneumotórax provável?</td></tr><tr><td>Dispneia</td><td>há B-lines difusas, derrame, consolidação ou pneumotórax provável?</td></tr><tr><td>Retenção urinária/dor lombar</td><td>bexiga está cheia? há hidronefrose grosseira?</td></tr><tr><td>Pele e partes moles</td><td>há coleção drenável?</td></tr><tr><td>Acesso venoso</td><td>vejo vaso e ponta da agulha?</td></tr></tbody></table></div>
+<h3 id="h-protocolos-praticos-para-upa">Protocolos práticos para UPA</h3>
+<div class="table-wrap"><table><thead><tr><th>Módulo</th><th>Transdutor</th><th>Resultado esperado para iniciante</th></tr></thead><tbody><tr><td>Pulmão</td><td>linear ou convexa</td><td>reconhecer sliding, linhas A, B-lines, derrame grosseiro</td></tr><tr><td>eFAST</td><td>convexa</td><td>procurar líquido livre em RUQ, LUQ, pelve e tórax</td></tr><tr><td>Bexiga/rim</td><td>convexa</td><td>identificar bexiga cheia e hidronefrose grosseira</td></tr><tr><td>Partes moles</td><td>linear</td><td>diferenciar celulite de coleção drenável</td></tr><tr><td>Acesso vascular</td><td>linear</td><td>identificar veia, artéria e ponta da agulha</td></tr></tbody></table></div>
+<h3 id="h-documentacao-minima">Documentação mínima</h3>
+<p>Registre sempre:</p>
+<ul>
+<li>pergunta clínica;</li>
+<li>região/janela avaliada;</li>
+<li>achado positivo ou negativo;</li>
+<li>limitação do exame;</li>
+<li>conduta tomada ou motivo de não mudar conduta.</li>
+</ul>
+<p>Exemplo: “POCUS pulmonar limitado por dor e pouca colaboração. Avaliados campos anteriores bilateralmente. Sliding presente nos pontos avaliados. Sem B-lines difusas nos pontos avaliados. Exame limitado.”</p>
 <h3 id="h-meta-minima-de-cada-participante">Meta mínima de cada participante</h3>
 <p>Conectar, gerar uma imagem, ajustar profundidade/ganho, congelar, salvar e verbalizar uma limitação.</p></section>
+<section id="protocolos-pocus-para-upa" data-search><h2 id="h-protocolos-pocus-para-upa">Protocolos POCUS para UPA</h2>
+<p>A primeira turma não precisa sair fazendo laudo completo. Ela precisa aprender perguntas clínicas seguras, repetíveis e úteis para emergência.</p>
+<h3 id="h-modulos-prioritarios">Módulos prioritários</h3>
+<div class="table-wrap"><table><thead><tr><th>Módulo</th><th>Pergunta clínica</th><th>Transdutor</th></tr></thead><tbody><tr><td>eFAST/FAST</td><td>há líquido livre ou pneumotórax em trauma?</td><td>convexa/cardíaca e linear para pleura se disponível</td></tr><tr><td>Pulmão</td><td>há B-lines difusas, consolidação, derrame, pneumotórax provável?</td><td>linear ou convexa</td></tr><tr><td>Bexiga/rim</td><td>bexiga cheia? hidronefrose grosseira?</td><td>convexa</td></tr><tr><td>Partes moles</td><td>abscesso ou celulite? corpo estranho superficial?</td><td>linear</td></tr><tr><td>Vascular</td><td>veia compressível? trombose proximal evidente?</td><td>linear</td></tr><tr><td>Acesso venoso</td><td>visualizar vaso e ponta da agulha</td><td>linear</td></tr><tr><td>Cardíaco focado</td><td>derrame pericárdico? atividade cardíaca? disfunção grosseira?</td><td>convexa/cardíaca</td></tr></tbody></table></div>
+<h3 id="h-pulmao">Pulmão</h3>
+<p>Perguntas úteis na UPA:</p>
+<ul>
+<li>há deslizamento pleural no ponto avaliado?</li>
+<li>há B-lines difusas?</li>
+<li>há derrame pleural?</li>
+<li>há consolidação subpleural evidente?</li>
+</ul>
+<p>Procure primeiro a linha pleural entre duas sombras de costelas. Ajuste a profundidade para não deixar metade da tela mostrando tecido inútil.</p>
+<div class="table-wrap"><table><thead><tr><th>Achado</th><th>Interpretação prática</th><th>Armadilha</th></tr></thead><tbody><tr><td>Sliding presente</td><td>reduz pneumotórax naquele ponto</td><td>não avalia o pulmão inteiro</td></tr><tr><td>Sliding ausente</td><td>pode ocorrer em pneumotórax</td><td>também ocorre em apneia, intubação seletiva, pleurodese, atelectasia</td></tr><tr><td>Linhas A</td><td>padrão horizontal repetido</td><td>pode ser normal ou hiperinsuflação</td></tr><tr><td>B-lines difusas</td><td>síndrome intersticial</td><td>causa depende do contexto clínico</td></tr><tr><td>Derrame</td><td>líquido pleural</td><td>não confundir com fígado/baço/atelectasia</td></tr></tbody></table></div>
+<h3 id="h-efast-inicial">eFAST inicial</h3>
+<p>Janelas mínimas:</p>
+<ol>
+<li>quadrante superior direito;</li>
+<li>quadrante superior esquerdo;</li>
+<li>pelve;</li>
+<li>janela cardíaca se indicada e possível;</li>
+<li>pleura anterior para pneumotórax.</li>
+</ol>
+<p>Treine primeiro anatomia normal. No trauma instável, o objetivo é reconhecer líquido livre grosseiro e pneumotórax provável, sem atrasar conduta.</p>
+<div class="table-wrap"><table><thead><tr><th>Janela</th><th>O que procurar</th><th>Dica</th></tr></thead><tbody><tr><td>RUQ</td><td>líquido entre fígado/rim, ponta hepática, base torácica</td><td>vá alto e posterior</td></tr><tr><td>LUQ</td><td>líquido entre baço/rim e subdiafragmático</td><td>geralmente é mais difícil que RUQ</td></tr><tr><td>Pelve</td><td>líquido atrás da bexiga</td><td>bexiga cheia ajuda</td></tr><tr><td>Cardíaca</td><td>derrame pericárdico/atividade</td><td>se janela ruim, registre limitação</td></tr><tr><td>Pleura anterior</td><td>sliding</td><td>compare os lados</td></tr></tbody></table></div>
+<p>FAST negativo não exclui lesão abdominal. Exame limitado deve ser dito como limitado.</p>
+<h3 id="h-bexiga-e-rim">Bexiga e rim</h3>
+<p>Use convexa. Comece pela bexiga se a queixa é retenção, anúria, dor hipogástrica ou dificuldade de sondagem.</p>
+<div class="table-wrap"><table><thead><tr><th>Pergunta</th><th>Achado útil</th><th>Armadilha</th></tr></thead><tbody><tr><td>Bexiga cheia?</td><td>estrutura anecoica arredondada na pelve</td><td>bexiga vazia não exclui problema se janela foi ruim</td></tr><tr><td>Hidronefrose grosseira?</td><td>dilatação anecoica no sistema coletor</td><td>vasos renais/cistos podem confundir</td></tr><tr><td>Sonda vesical está drenando?</td><td>bexiga ainda cheia apesar da sonda</td><td>avaliar posição e obstrução conforme protocolo</td></tr></tbody></table></div>
+<h3 id="h-partes-moles">Partes moles</h3>
+<ul>
+<li>Celulite: padrão em casca de laranja/cobblestoning.</li>
+<li>Abscesso: coleção hipoecoica/complexa, geralmente compressível ou com reforço posterior.</li>
+<li>Cuidado com vasos antes de drenagem.</li>
+</ul>
+<p>Antes de incisar ou puncionar, varra a área em dois eixos. Se houver dúvida entre coleção e vaso, use compressão e Doppler quando disponível.</p>
+<h3 id="h-procedimentos-guiados">Procedimentos guiados</h3>
+<p>Regra única para iniciante: <strong>não avance o instrumento se a ponta não está visível</strong>.</p>
+<div class="table-wrap"><table><thead><tr><th>Procedimento</th><th>Antes de furar</th><th>Durante</th></tr></thead><tbody><tr><td>Acesso periférico</td><td>diferenciar veia/artéria</td><td>rastrear ponta da agulha</td></tr><tr><td>Drenagem superficial</td><td>confirmar coleção e profundidade</td><td>evitar vasos e estruturas profundas</td></tr><tr><td>Corpo estranho superficial</td><td>confirmar localização e profundidade</td><td>marcar pele e planejar trajeto</td></tr></tbody></table></div>
+<h3 id="h-acesso-vascular">Acesso vascular</h3>
+<ul>
+<li>Primeiro identificar artéria e veia.</li>
+<li>Confirmar compressibilidade da veia.</li>
+<li>Usar eixo curto ou longo conforme habilidade.</li>
+<li>A regra de segurança é ver a ponta da agulha antes de avançar.</li>
+</ul>
+<h3 id="h-documentacao-minima">Documentação mínima</h3>
+<ul>
+<li>Pergunta clínica.</li>
+<li>Janela(s) avaliada(s).</li>
+<li>Achado positivo/negativo.</li>
+<li>Limitação do exame.</li>
+<li>Conduta que mudou ou não mudou.</li>
+</ul>
+<p>Frase segura: “POCUS realizado para pergunta focada. Achados interpretados no contexto clínico. Exame limitado por janela/tempo/colaboração quando aplicável.”</p></section>
+<section id="acesso-vascular-seguro" data-search><h2 id="h-acesso-vascular-seguro">Acesso vascular seguro</h2>
+<p>Acesso vascular guiado por ultrassom é uma das habilidades mais úteis para UPA, mas precisa ser ensinado com regra de segurança simples: <strong>não avance a agulha se não sabe onde está a ponta</strong>.</p>
+<h3 id="h-primeiro-arteria-ou-veia">Primeiro: artéria ou veia?</h3>
+<div class="table-wrap"><table><thead><tr><th>Achado</th><th>Veia</th><th>Artéria</th></tr></thead><tbody><tr><td>Compressão</td><td>colaba</td><td>não colaba ou colaba pouco</td></tr><tr><td>Forma</td><td>oval, variável</td><td>redonda, parede mais espessa</td></tr><tr><td>Pulsação</td><td>ausente ou transmitida</td><td>pulsátil</td></tr><tr><td>Doppler</td><td>fluxo venoso</td><td>fluxo pulsátil</td></tr></tbody></table></div>
+<p>Mnemônico: <strong>veia espreme, artéria pulsa</strong>.</p>
+<h3 id="h-eixo-curto-e-eixo-longo">Eixo curto e eixo longo</h3>
+<div class="table-wrap"><table><thead><tr><th>Técnica</th><th>Vantagem</th><th>Risco</th></tr></thead><tbody><tr><td>Eixo curto / fora do plano</td><td>mais fácil para achar vaso</td><td>confundir corpo da agulha com ponta</td></tr><tr><td>Eixo longo / no plano</td><td>mostra trajeto da agulha</td><td>exige alinhar sonda, vaso e agulha</td></tr></tbody></table></div>
+<p>Para iniciante, comece em eixo curto e rastreie a ponta dinamicamente.</p>
+<h3 id="h-passo-a-passo-periferico">Passo a passo periférico</h3>
+<ol>
+<li>Sonda linear, preset vascular.</li>
+<li>Identifique veia e artéria.</li>
+<li>Comprima para confirmar a veia.</li>
+<li>Centralize a veia na tela.</li>
+<li>Entre com agulha em ângulo raso.</li>
+<li>Veja a ponta como ponto hiperecoico.</li>
+<li>Avance pouco, deslize a sonda, reencontre a ponta.</li>
+<li>Repita até a ponta entrar no lúmen.</li>
+<li>Reduza ângulo e avance o cateter.</li>
+<li>Confirme com refluxo, flush e imagem quando possível.</li>
+</ol>
+<h3 id="h-erros-que-devem-parar-a-mao">Erros que devem parar a mão</h3>
+<ul>
+<li>Não vejo a ponta.</li>
+<li>Veia saiu do centro da tela.</li>
+<li>Estou vendo só o corpo da agulha.</li>
+<li>A veia colabou completamente.</li>
+<li>A agulha atravessou a parede posterior.</li>
+<li>Não tenho certeza se é vaso.</li>
+</ul>
+<p>Se qualquer item acontecer: pare, reposicione e recomece.</p>
+<h3 id="h-treino-antes-de-paciente">Treino antes de paciente</h3>
+<p>Use phantom sempre que possível. Opções simples:</p>
+<ul>
+<li>gelatina/psyllium com tubo de látex;</li>
+<li>gel balístico quando houver orçamento;</li>
+<li>modelos comerciais;</li>
+<li>carne/tofu apenas para treino pontual, com descarte adequado.</li>
+</ul>
+<p>Meta inicial: cada pessoa conseguir manter a ponta visível e entrar no “vaso” do phantom antes de tentar em paciente difícil.</p></section>
 <section id="armadilhas-comuns" data-search><h2 id="h-armadilhas-comuns">Armadilhas comuns</h2>
 <h3 id="h-conexao">Conexão</h3>
 <div class="table-wrap"><table><thead><tr><th>Armadilha</th><th>Solução</th></tr></thead><tbody><tr><td>Confundir senha do app com senha Wi-Fi</td><td>app Administer usa <code>123456</code>; Wi-Fi usa SN em minúsculas</td></tr><tr><td>Começar sem testar</td><td>ligar, conectar e gerar imagem antes da turma chegar</td></tr><tr><td>Usar cabo no iPhone como plano principal</td><td>usar Wi-Fi</td></tr><tr><td>Senha recusada</td><td>redigitar SN em minúsculas, sem espaços</td></tr><tr><td>Imagem preta</td><td>reiniciar app, reconectar Wi-Fi e checar bateria</td></tr></tbody></table></div>
@@ -351,8 +532,146 @@
 <li>FAST negativo não exclui lesão abdominal.</li>
 <li>Exame limitado deve ser registrado como limitado.</li>
 </ul>
+<h3 id="h-falsas-segurancas-frequentes">Falsas seguranças frequentes</h3>
+<div class="table-wrap"><table><thead><tr><th>Situação</th><th>Erro</th><th>Melhor postura</th></tr></thead><tbody><tr><td>FAST negativo</td><td>“não há sangramento”</td><td>“não vi líquido livre nas janelas avaliadas”</td></tr><tr><td>Pulmão com sliding</td><td>“não há doença pulmonar”</td><td>sliding responde principalmente pneumotórax naquele ponto</td></tr><tr><td>B-lines</td><td>“é edema agudo cardiogênico”</td><td>integrar com clínica, coração, volume e contexto</td></tr><tr><td>Bexiga vazia</td><td>“não é retenção”</td><td>confirmar se a janela foi adequada e se o paciente urinou</td></tr><tr><td>Abscesso</td><td>drenar sem Doppler/sem pensar em vaso</td><td>antes de furar, confirme que não é vaso</td></tr></tbody></table></div>
 <h3 id="h-procedimento">Procedimento</h3>
 <p>Se perdeu a ponta da agulha, pare. Reencontre a ponta antes de avançar.</p></section>
+<section id="roteiro-da-aula" data-search><h2 id="h-roteiro-da-aula">Roteiro da aula</h2>
+<h3 id="h-duracao-sugerida-2h30-a-3h">Duração sugerida: 2h30 a 3h</h3>
+<div class="table-wrap"><table><thead><tr><th>Tempo</th><th>Atividade</th></tr></thead><tbody><tr><td>0-10 min</td><td>Objetivo: POCUS como resposta focada a pergunta clínica</td></tr><tr><td>10-25 min</td><td>Cuidados com aparelho, limpeza, carga, gel, armazenamento</td></tr><tr><td>25-45 min</td><td>Conexão My USG: senha app, Wi-Fi da sonda, teste de imagem</td></tr><tr><td>45-65 min</td><td>Controles básicos: profundidade, ganho, foco, preset, freeze/save</td></tr><tr><td>65-85 min</td><td>Demonstração: convexa e linear, orientação e movimentos</td></tr><tr><td>85-125 min</td><td>Rodízio prático: cada participante conecta, gera, ajusta e salva imagem</td></tr><tr><td>125-160 min</td><td>Protocolos prioritários: eFAST, pulmão, bexiga/rim, partes moles e acesso vascular</td></tr><tr><td>160-180 min</td><td>Armadilhas, checklist final e plano de prática supervisionada</td></tr></tbody></table></div>
+<h3 id="h-promessa-pedagogica">Promessa pedagógica</h3>
+<p>Ao final, a pessoa não precisa “saber ultrassom”. Ela precisa conseguir:</p>
+<ul>
+<li>cuidar do aparelho;</li>
+<li>conectar sem travar;</li>
+<li>produzir imagem básica;</li>
+<li>reconhecer quando a imagem é limitada;</li>
+<li>usar uma pergunta clínica simples;</li>
+<li>saber quando não deve confiar no exame.</li>
+</ul>
+<h3 id="h-primeiro-bloco-aparelho">Primeiro bloco: aparelho</h3>
+<p>Mostre a sonda desligada, ligada, carregando e conectada. A equipe deve tocar no aparelho antes de discutir protocolos.</p>
+<h3 id="h-segundo-bloco-conexao">Segundo bloco: conexão</h3>
+<p>Faça uma demonstração com erro proposital:</p>
+<ol>
+<li>senha Wi-Fi com letra maiúscula;</li>
+<li>app pedindo senha de Administer;</li>
+<li>imagem preta por conexão perdida;</li>
+<li>profundidade errada.</li>
+</ol>
+<p>Depois peça para alguém resolver usando o checklist.</p>
+<h3 id="h-terceiro-bloco-imagem">Terceiro bloco: imagem</h3>
+<p>Use uma estrutura fácil: veia superficial, bexiga ou parede torácica. Evite começar por janela cardíaca difícil.</p>
+<p>Peça para o participante falar em voz alta:</p>
+<ul>
+<li>qual é a face da sonda;</li>
+<li>onde está o marcador;</li>
+<li>qual lado da tela corresponde ao marcador;</li>
+<li>o que está ajustando: profundidade, ganho, foco, freeze ou preset.</li>
+</ul>
+<h3 id="h-quarto-bloco-aplicacao-clinica">Quarto bloco: aplicação clínica</h3>
+<p>Ensine cada protocolo como pergunta clínica:</p>
+<ul>
+<li>trauma: “vejo líquido livre?”</li>
+<li>dispneia: “há padrão difuso de B-lines? há pneumotórax provável?”</li>
+<li>dor lombar/oligúria: “há hidronefrose grosseira? bexiga está cheia?”</li>
+<li>pele: “há coleção drenável?”</li>
+<li>acesso: “vejo vaso e ponta da agulha?”</li>
+</ul>
+<h3 id="h-estacoes-praticas">Estações práticas</h3>
+<div class="table-wrap"><table><thead><tr><th>Estação</th><th>Tarefa</th><th>Critério de passagem</th></tr></thead><tbody><tr><td>Aparelho</td><td>ligar, conectar, abrir app</td><td>imagem ao vivo aparece</td></tr><tr><td>Imagem</td><td>ajustar ganho/profundidade</td><td>alvo fica centralizado e visível</td></tr><tr><td>Pulmão</td><td>achar linha pleural</td><td>participante aponta costelas e pleura</td></tr><tr><td>Vascular</td><td>comprimir veia</td><td>diferencia veia de artéria</td></tr><tr><td>Procedimento</td><td>phantom ou simulação</td><td>não avança sem ponta visível</td></tr><tr><td>Registro</td><td>narrar achado</td><td>inclui limitação quando houver</td></tr></tbody></table></div>
+<h3 id="h-erros-propositalmente-demonstraveis">Erros propositalmente demonstráveis</h3>
+<p>Use erros seguros para ensinar troubleshoot:</p>
+<div class="table-wrap"><table><thead><tr><th>Erro</th><th>O que a turma deve perceber</th></tr></thead><tbody><tr><td>senha Wi-Fi com letra maiúscula</td><td>número de série precisa estar em minúsculas</td></tr><tr><td>abrir app antes do Wi-Fi</td><td>app pode não achar a sonda</td></tr><tr><td>profundidade muito alta</td><td>alvo fica pequeno e longe</td></tr><tr><td>ganho exagerado</td><td>tudo fica branco e artefatos aumentam</td></tr><tr><td>pouco gel</td><td>contato ruim e imagem falha</td></tr><tr><td>esquecer freeze/live</td><td>parece que “travou”, mas está congelado</td></tr></tbody></table></div>
+<h3 id="h-fechamento">Fechamento</h3>
+<p>Cada participante deve demonstrar: conectar, gerar imagem, ajustar ganho/profundidade, congelar, salvar e verbalizar uma limitação do exame.</p>
+<h3 id="h-plano-pos-aula">Plano pós-aula</h3>
+<ul>
+<li>Primeira semana: usar só com supervisão ou dupla checagem.</li>
+<li>Registrar exames como limitados quando a janela for ruim.</li>
+<li>Guardar imagens/clipes úteis para discussão interna, respeitando privacidade.</li>
+<li>Separar dúvidas recorrentes para atualizar este site.</li>
+</ul></section>
+<section id="checklists-rapidos" data-search><h2 id="h-checklists-rapidos">Checklists rápidos</h2>
+<p>Esta página é para usar na hora da aula, no início do plantão ou quando o aparelho “não quer funcionar”.</p>
+<h3 id="h-antes-da-aula">Antes da aula</h3>
+<ul>
+<li>Sonda carregada.</li>
+<li>Celular/tablet carregado.</li>
+<li>My USG instalado.</li>
+<li>Senha Wi-Fi/número de série disponível.</li>
+<li>Senha inicial do app lembrada: <code>123456</code> para Administer.</li>
+<li>Gel disponível.</li>
+<li>Papel/pano macio disponível.</li>
+<li>Produto de limpeza institucional disponível.</li>
+<li>Teste de imagem feito antes da turma chegar.</li>
+<li>Um segundo celular/tablet separado para contingência.</li>
+</ul>
+<h3 id="h-conexao">Conexão</h3>
+<ol>
+<li>Ligar a sonda.</li>
+<li>Entrar no Wi-Fi da sonda.</li>
+<li>Usar senha do número de série em minúsculas.</li>
+<li>Abrir My USG.</li>
+<li>Fazer login como Administer se necessário.</li>
+<li>Selecionar a sonda no app.</li>
+<li>Gerar imagem teste.</li>
+<li>Ajustar profundidade e ganho.</li>
+<li>Congelar e salvar uma imagem.</li>
+</ol>
+<h3 id="h-imagem-ruim">Imagem ruim</h3>
+<div class="table-wrap"><table><thead><tr><th>Checar</th><th>Correção rápida</th></tr></thead><tbody><tr><td>Sem gel</td><td>colocar gel suficiente</td></tr><tr><td>Sonda invertida</td><td>conferir marcador físico e marcador da tela</td></tr><tr><td>Profundidade excessiva</td><td>reduzir até o alvo ocupar a tela</td></tr><tr><td>Ganho alto/baixo</td><td>ajustar até separar líquido, tecido e osso</td></tr><tr><td>Preset inadequado</td><td>trocar para vascular, abdome, pulmão ou partes moles</td></tr><tr><td>Alvo fora do centro</td><td>deslizar, inclinar e centralizar</td></tr></tbody></table></div>
+<h3 id="h-seguranca-clinica">Segurança clínica</h3>
+<ul>
+<li>POCUS responde pergunta focada.</li>
+<li>Exame ruim não vira exame normal.</li>
+<li>Achado negativo não substitui reavaliação.</li>
+<li>Procedimento só avança com ponta visível.</li>
+<li>Toda limitação deve ser verbalizada e registrada.</li>
+<li>Em paciente instável, POCUS não deve atrasar intervenção essencial.</li>
+</ul>
+<h3 id="h-limpeza-pos-uso">Limpeza pós-uso</h3>
+<ol>
+<li>Remover gel.</li>
+<li>Limpar com pano macio/produto aprovado pela instituição.</li>
+<li>Secar.</li>
+<li>Inspecionar transdutor e carcaça.</li>
+<li>Recarregar.</li>
+<li>Guardar no local definido.</li>
+</ol>
+<h3 id="h-entrega-minima-do-aluno">Entrega mínima do aluno</h3>
+<p>Ao fim da prática, cada participante deve demonstrar:</p>
+<ul>
+<li>ligar a sonda;</li>
+<li>conectar no My USG;</li>
+<li>gerar imagem em modo B;</li>
+<li>ajustar profundidade e ganho;</li>
+<li>congelar e salvar;</li>
+<li>explicar uma limitação do exame;</li>
+<li>limpar e guardar corretamente.</li>
+</ul></section>
+<section id="fontes-foam-e-consulta" data-search><h2 id="h-fontes-foam-e-consulta">Fontes FOAM e consulta</h2>
+<p>Use esta página quando quiser estudar depois da aula. A seleção privilegia material aberto, visual e útil para emergência/UPA.</p>
+<h3 id="h-comecar-por-aqui">Começar por aqui</h3>
+<div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://www.acep.org/sonoguide" target="_blank" rel="noopener">ACEP Sonoguide</a></td><td>referência estruturada de ultrassom de emergência por aplicação</td></tr><tr><td><a href="https://www.pocus101.com/" target="_blank" rel="noopener">POCUS 101</a></td><td>tutoriais passo a passo para iniciantes</td></tr><tr><td><a href="https://coreultrasound.com/" target="_blank" rel="noopener">Core Ultrasound</a></td><td>vídeos curtos, “5 Minute Sono” e aplicações de emergência</td></tr><tr><td><a href="https://litfl.com/ultrasound-library/" target="_blank" rel="noopener">LITFL Ultrasound Library</a></td><td>revisão rápida para emergência e terapia intensiva</td></tr><tr><td><a href="https://www.thepocusatlas.com/" target="_blank" rel="noopener">The POCUS Atlas</a></td><td>atlas visual de achados e clipes</td></tr></tbody></table></div>
+<h3 id="h-imagens-e-casos">Imagens e casos</h3>
+<div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://www.thepocusatlas.com/" target="_blank" rel="noopener">The POCUS Atlas</a></td><td>comparar seu achado com clipes reais</td></tr><tr><td><a href="https://www.ultrasoundcases.info/" target="_blank" rel="noopener">Ultrasound Cases</a></td><td>casos com imagens por órgão/sistema</td></tr><tr><td><a href="https://www.raysofgray.com/" target="_blank" rel="noopener">Rays of Gray</a></td><td>aprendizagem visual e explicações didáticas</td></tr><tr><td><a href="https://radiopaedia.org/" target="_blank" rel="noopener">Radiopaedia</a></td><td>anatomia, artefatos, casos e correlação radiológica</td></tr></tbody></table></div>
+<h3 id="h-acesso-vascular-e-procedimentos">Acesso vascular e procedimentos</h3>
+<div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://www.pocus101.com/ultrasound-guided-peripheral-iv-insertion-placement-and-access-made-easy/" target="_blank" rel="noopener">POCUS101: ultrasound-guided peripheral IV</a></td><td>passo a passo de acesso periférico guiado</td></tr><tr><td><a href="https://www.merckmanuals.com/professional/critical-care-medicine/how-to-do-peripheral-vascular-procedures/how-to-do-ultrasound-guided-peripheral-intravenous-catheter-insertion" target="_blank" rel="noopener">Merck Manual: ultrasound-guided peripheral IV</a></td><td>referência procedural objetiva</td></tr><tr><td><a href="https://emultrasound.sdsc.edu/index.php/2017/12/07/usgpiv-phantom/" target="_blank" rel="noopener">UCSD: USGPIV phantom</a></td><td>receita de phantom para treino</td></tr></tbody></table></div>
+<h3 id="h-pulmao-fast-e-emergencia">Pulmão, FAST e emergência</h3>
+<div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://www.acep.org/sonoguide" target="_blank" rel="noopener">ACEP Sonoguide</a></td><td>FAST, pulmão, vascular, renal, partes moles</td></tr><tr><td><a href="https://coreultrasound.com/" target="_blank" rel="noopener">Core Ultrasound</a></td><td>vídeos rápidos para revisão antes do plantão</td></tr><tr><td><a href="https://www.showmethepocus.com/" target="_blank" rel="noopener">Show Me The POCUS</a></td><td>casos e clipes curtos para fixação</td></tr><tr><td><a href="https://litfl.com/ultrasound-library/" target="_blank" rel="noopener">LITFL Ultrasound Library</a></td><td>revisão rápida de protocolos e achados</td></tr></tbody></table></div>
+<h3 id="h-eco-focado-focus">Eco focado / FoCUS</h3>
+<div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://torontoimpocus.ca/cardiac-views/" target="_blank" rel="noopener">Toronto IM POCUS: Cardiac Views</a></td><td>janelas cardíacas básicas</td></tr><tr><td><a href="https://www.nysora.com/pocus/essential-cardiac-ultrasound/" target="_blank" rel="noopener">NYSORA: Essential Cardiac Ultrasound</a></td><td>revisão didática de eco cardíaco essencial</td></tr></tbody></table></div>
+<h3 id="h-limpeza-e-seguranca">Limpeza e segurança</h3>
+<div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://www.aium.org/resources/official-statements/view/guidelines-for-cleaning-and-preparing-external--and-internal-use-ultrasound-transducers-and-equipment-between-patients-as-well-as-safe-handling-and-use-of-ultrasound-coupling-gel" target="_blank" rel="noopener">AIUM: limpeza de transdutores e gel</a></td><td>política de limpeza/desinfecção e manuseio de gel</td></tr></tbody></table></div>
+<h3 id="h-arquivos-locais-do-aparelho">Arquivos locais do aparelho</h3>
+<p>Os PDFs originais do aparelho e do app estão preservados no projeto:</p>
+<ul>
+<li><a href="references/myusg-quick-user-guide-usb-wifi-probe.pdf">Manual rápido My USG USB/Wi-Fi</a></li>
+<li><a href="references/c10rl-pro-myusg-quick-user-manual-v1-1.pdf">Manual C10RL Pro + My USG</a></li>
+<li><a href="references/c10rl-double-head-wireless-ultrasound.pdf">PDF C10RL double head wireless ultrasound</a></li>
+<li><a href="references/c10rl-3-in-1-color-doppler-ultrasound.pdf">PDF comercial C10RL 3 in 1 Color Doppler</a></li>
+</ul></section>
       </main>
     </div>
   </div>
