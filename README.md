@@ -12,7 +12,8 @@ Este projeto agora está no diretório correto:
 
 1. Abra esta pasta no Obsidian como vault.
 2. Edite as páginas em [content/](content).
-3. Para atualizar o site, dê duplo clique em [atualizar-site.command](atualizar-site.command) ou rode:
+3. O site público usa só as páginas curtas listadas em `PUBLIC_PAGES` dentro de `scripts/build_site.py`; as demais páginas ficam como apoio interno no Obsidian.
+4. Para atualizar o site, dê duplo clique em [atualizar-site.command](atualizar-site.command) ou rode:
 
 ```bash
 python3 scripts/build_site.py
@@ -27,7 +28,7 @@ python3 scripts/build_site.py
 - [assets/media/](assets/media): imagens e vídeo didáticos com nomes limpos.
 - [assets/diagrams/](assets/diagrams): diagramas SVG usados no site.
 - [references/](references): cópias dos PDFs originais do aparelho e do app.
-- [index.html](index.html): site estático gerado.
+- [index.html](index.html): website estático enxuto para compartilhar com a equipe, gerado apenas a partir das páginas públicas de `content/`.
 
 ## Arquivos originais preservados
 

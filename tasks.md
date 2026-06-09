@@ -6,6 +6,7 @@
 - [x] Copiar PDFs para `references/`.
 - [x] Criar conteúdo editável em `content/`.
 - [x] Criar documentação de apoio em `docs/`.
-- [ ] Testar o site em navegador local.
-- [ ] Fazer commit inicial no vault correto.
+- [x] Portar do thread antigo a ideia de site público enxuto para equipe.
+- [x] Testar o site em navegador/local server após a versão enxuta.
+- [ ] Fazer commit do ajuste de publicação enxuta.
 - [ ] Incorporar links do Raindrop quando houver exportação/conector disponível.

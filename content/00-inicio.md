@@ -1,30 +1,30 @@
-# POCUS UPA: Konted C10RL + My USG
+# Treinamento de USG point-of-care
 
-Material de referência para uma primeira turma de médicos e enfermeiros de UPA usando o aparelho **USG Konted C10RL** com o app **My USG**.
+Material rápido para a equipe da **UPA** começar a usar o ultrassom point-of-care da unidade com segurança.
 
 ![Aparelho USG Konted C10RL portátil](../assets/media/aparelho-c10rl.png)
 
-## Objetivo da primeira aula
+O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo conseguir:
 
-Ao final da aula, a equipe deve conseguir:
+1. baixar o aplicativo correto;
+2. conectar o celular ou tablet ao aparelho;
+3. cuidar do equipamento antes e depois do uso;
+4. gerar uma imagem básica;
+5. reconhecer quando a imagem ou o exame estão limitados;
+6. chamar ajuda quando necessário.
 
-- cuidar do aparelho antes, durante e depois do plantão;
-- ligar, carregar, conectar e reconhecer falhas comuns;
-- abrir o My USG, fazer login, conectar à sonda e gerar uma imagem teste;
-- ajustar profundidade, ganho, foco, preset e orientação;
-- entender o que é POCUS: exame focado para responder uma pergunta clínica imediata;
-- reconhecer quando o exame está limitado e quando chamar alguém mais experiente.
+> O aparelho é para uso da equipe. Quem trabalha na UPA precisa saber conectar, cuidar e usar com responsabilidade.
 
-## Ordem recomendada
+## Antes da aula
 
-1. Segurança, limpeza, bateria, gel e armazenamento.
-2. Aparelho C10RL: faces convexa/linear, botão físico, porta Type-C e indicadores.
-3. Conexão no My USG: Wi-Fi, senha da sonda, senha inicial do app e problemas comuns.
-4. Imagem básica: marcador, profundidade, ganho, TGC, foco, congelar, salvar.
-5. Protocolos de UPA: eFAST, pulmão, bexiga/rim, partes moles, vascular e acesso venoso.
-6. Armadilhas: imagem bonita com pergunta ruim, Doppler mal ajustado, falso positivo/negativo.
-7. Treino prático supervisionado.
+- Baixe o app **My USG**.
+- Leve o celular ou tablet com bateria.
+- Se puder, abra o app uma vez antes do treinamento.
+- Não precisa decorar protocolos antes da primeira prática.
 
-## Regra central
+## Regras simples de segurança
 
-POCUS não é “fazer ultrassom completo”. É responder uma pergunta clínica limitada, no leito, com documentação clara do que foi visto e do que não foi visto.
+- POCUS responde uma pergunta clínica específica; não substitui avaliação completa.
+- Não atrase reanimação ou conduta urgente para procurar imagem perfeita.
+- Se a imagem estiver ruim ou o exame for limitado, diga isso claramente.
+- Limpe e guarde o aparelho depois de usar.

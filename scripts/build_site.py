@@ -11,6 +11,18 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
 OUTPUT = ROOT / "index.html"
 
+# Only these pages are published to the team-facing site. Other Markdown files
+# stay in the vault as internal support material for preparing the training.
+PUBLIC_PAGES = [
+    "00-inicio.md",
+    "01-baixar-app.md",
+    "02-conexao-my-usg.md",
+    "03-cuidados-limpeza.md",
+    "04-controles-imagem.md",
+    "05-o-que-vamos-treinar.md",
+    "06-armadilhas.md",
+]
+
 
 def slugify(text: str) -> str:
     text = unicodedata.normalize("NFKD", text)
@@ -26,6 +38,15 @@ def normalize_href(href: str) -> str:
     if href.endswith(".md") and not href.startswith(("http://", "https://")):
         return "#fontes" if "fontes" in href.lower() else href
     return href
+
+
+def render_link(label: str, href: str) -> str:
+    escaped_href = html.escape(href, quote=True)
+    escaped_label = html.escape(label)
+    attrs = ""
+    if href.startswith(("http://", "https://")):
+        attrs = ' target="_blank" rel="noopener"'
+    return f'<a href="{escaped_href}"{attrs}>{escaped_label}</a>'
 
 
 def inline(text: str) -> str:
@@ -45,9 +66,7 @@ def inline(text: str) -> str:
     )
     text = re.sub(
         r"\[([^\]]+)\]\(([^)]+)\)",
-        lambda m: stash(
-            f'<a href="{html.escape(normalize_href(m.group(2)), quote=True)}">{html.escape(m.group(1))}</a>'
-        ),
+        lambda m: stash(render_link(m.group(1), normalize_href(m.group(2)))),
         text,
     )
     text = re.sub(r"`([^`]+)`", lambda m: stash(f"<code>{html.escape(m.group(1))}</code>"), text)
@@ -202,7 +221,10 @@ def render_markdown(markdown: str) -> str:
 
 def read_pages() -> list[dict[str, str]]:
     pages = []
-    for path in sorted(CONTENT_DIR.glob("*.md")):
+    for filename in PUBLIC_PAGES:
+        path = CONTENT_DIR / filename
+        if not path.exists():
+            raise SystemExit(f"Pagina publica nao encontrada: {path}")
         text = path.read_text(encoding="utf-8")
         first_heading = re.search(r"^#\s+(.+)$", text, flags=re.MULTILINE)
         title = first_heading.group(1).strip() if first_heading else path.stem
@@ -220,8 +242,8 @@ def read_pages() -> list[dict[str, str]]:
 def build_html(pages: list[dict[str, str]]) -> str:
     nav = "\n".join(f'<a href="#{page["slug"]}">{html.escape(page["title"])}</a>' for page in pages)
     sections = "\n".join(
-        f'<section id="{page["slug"]}" data-search data-source="{html.escape(page["path"])}">'
-        f'<div class="source-note">Fonte editável: <code>{html.escape(page["path"])}</code></div>{page["html"]}</section>'
+        f'<section id="{page["slug"]}" data-search>'
+        f'{page["html"]}</section>'
         for page in pages
     )
     return f"""<!doctype html>
@@ -229,7 +251,7 @@ def build_html(pages: list[dict[str, str]]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>POCUS UPA | Konted C10RL + My USG</title>
+  <title>Treinamento USG point-of-care | UPA</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308756f'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
   <style>
     :root {{
@@ -365,16 +387,6 @@ def build_html(pages: list[dict[str, str]]) -> str:
       padding: 14px;
       overflow: auto;
     }}
-    .source-note {{
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--muted);
-      font-size: 12px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 5px 9px;
-    }}
     .figure {{
       margin: 18px 0;
       border: 1px solid var(--line);
@@ -399,7 +411,7 @@ def build_html(pages: list[dict[str, str]]) -> str:
       .topbar-inner {{ flex-direction: column; align-items: stretch; }}
     }}
     @media print {{
-      aside, .topbar, .source-note {{ display: none; }}
+      aside, .topbar {{ display: none; }}
       .layout {{ display: block; }}
       main {{ max-width: none; padding: 0; }}
       section {{ page-break-inside: avoid; }}
@@ -411,7 +423,7 @@ def build_html(pages: list[dict[str, str]]) -> str:
     <aside>
       <div class="brand">
         <strong>POCUS UPA</strong>
-        <span>Fonte Markdown editável no Obsidian</span>
+        <span>Guia rápido para uso na UPA</span>
       </div>
       <nav aria-label="Navegação">
         {nav}
@@ -422,8 +434,8 @@ def build_html(pages: list[dict[str, str]]) -> str:
         <div class="topbar-inner">
           <input id="searchInput" type="search" placeholder="Buscar no material: conexão, ganho, pneumotórax, acesso...">
           <div class="actions">
-            <a href="content/00-inicio.md">Editar fonte</a>
-            <a href="references/c10rl-3-in-1-color-doppler-ultrasound.pdf">PDF C10RL</a>
+            <a href="https://apps.apple.com/br/app/my-usg/id1606311898" target="_blank" rel="noopener">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.konted.wirelesskus" target="_blank" rel="noopener">Google Play</a>
             <button type="button" onclick="window.print()">Imprimir</button>
           </div>
         </div>

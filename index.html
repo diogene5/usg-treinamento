@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>POCUS UPA | Konted C10RL + My USG</title>
+  <title>Treinamento USG point-of-care | UPA</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308756f'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
   <style>
     :root {
@@ -139,16 +139,6 @@
       padding: 14px;
       overflow: auto;
     }
-    .source-note {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--muted);
-      font-size: 12px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 5px 9px;
-    }
     .figure {
       margin: 18px 0;
       border: 1px solid var(--line);
@@ -173,7 +163,7 @@
       .topbar-inner { flex-direction: column; align-items: stretch; }
     }
     @media print {
-      aside, .topbar, .source-note { display: none; }
+      aside, .topbar { display: none; }
       .layout { display: block; }
       main { max-width: none; padding: 0; }
       section { page-break-inside: avoid; }
@@ -185,19 +175,16 @@
     <aside>
       <div class="brand">
         <strong>POCUS UPA</strong>
-        <span>Fonte Markdown editável no Obsidian</span>
+        <span>Guia rápido para uso na UPA</span>
       </div>
       <nav aria-label="Navegação">
-        <a href="#pocus-upa-konted-c10rl-my-usg">POCUS UPA: Konted C10RL + My USG</a>
-<a href="#aparelho-c10rl">Aparelho C10RL</a>
+        <a href="#treinamento-de-usg-point-of-care">Treinamento de USG point-of-care</a>
+<a href="#baixar-o-app">Baixar o app</a>
 <a href="#conexao-my-usg">Conexão My USG</a>
-<a href="#cuidados-limpeza-e-armazenamento">Cuidados, limpeza e armazenamento</a>
+<a href="#cuidados-e-limpeza">Cuidados e limpeza</a>
 <a href="#controles-de-imagem">Controles de imagem</a>
-<a href="#protocolos-pocus-para-upa">Protocolos POCUS para UPA</a>
-<a href="#armadilhas-comuns-e-solucoes">Armadilhas comuns e soluções</a>
-<a href="#imagens-videos-e-fontes">Imagens, vídeos e fontes</a>
-<a href="#roteiro-da-aula">Roteiro da aula</a>
-<a href="#como-editar-e-publicar">Como editar e publicar</a>
+<a href="#o-que-vamos-treinar">O que vamos treinar</a>
+<a href="#armadilhas-comuns">Armadilhas comuns</a>
       </nav>
     </aside>
     <div>
@@ -205,85 +192,65 @@
         <div class="topbar-inner">
           <input id="searchInput" type="search" placeholder="Buscar no material: conexão, ganho, pneumotórax, acesso...">
           <div class="actions">
-            <a href="content/00-inicio.md">Editar fonte</a>
-            <a href="references/c10rl-3-in-1-color-doppler-ultrasound.pdf">PDF C10RL</a>
+            <a href="https://apps.apple.com/br/app/my-usg/id1606311898" target="_blank" rel="noopener">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.konted.wirelesskus" target="_blank" rel="noopener">Google Play</a>
             <button type="button" onclick="window.print()">Imprimir</button>
           </div>
         </div>
       </header>
       <main>
-        <section id="pocus-upa-konted-c10rl-my-usg" data-search data-source="content/00-inicio.md"><div class="source-note">Fonte editável: <code>content/00-inicio.md</code></div><h2 id="h-pocus-upa-konted-c10rl-my-usg">POCUS UPA: Konted C10RL + My USG</h2>
-<p>Material de referência para uma primeira turma de médicos e enfermeiros de UPA usando o aparelho <strong>USG Konted C10RL</strong> com o app <strong>My USG</strong>.</p>
+        <section id="treinamento-de-usg-point-of-care" data-search><h2 id="h-treinamento-de-usg-point-of-care">Treinamento de USG point-of-care</h2>
+<p>Material rápido para a equipe da <strong>UPA</strong> começar a usar o ultrassom point-of-care da unidade com segurança.</p>
 <figure class="figure"><img src="assets/media/aparelho-c10rl.png" alt="Aparelho USG Konted C10RL portátil"><figcaption>Aparelho USG Konted C10RL portátil</figcaption></figure>
-<h3 id="h-objetivo-da-primeira-aula">Objetivo da primeira aula</h3>
-<p>Ao final da aula, a equipe deve conseguir:</p>
-<ul>
-<li>cuidar do aparelho antes, durante e depois do plantão;</li>
-<li>ligar, carregar, conectar e reconhecer falhas comuns;</li>
-<li>abrir o My USG, fazer login, conectar à sonda e gerar uma imagem teste;</li>
-<li>ajustar profundidade, ganho, foco, preset e orientação;</li>
-<li>entender o que é POCUS: exame focado para responder uma pergunta clínica imediata;</li>
-<li>reconhecer quando o exame está limitado e quando chamar alguém mais experiente.</li>
-</ul>
-<h3 id="h-ordem-recomendada">Ordem recomendada</h3>
+<p>O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo conseguir:</p>
 <ol>
-<li>Segurança, limpeza, bateria, gel e armazenamento.</li>
-<li>Aparelho C10RL: faces convexa/linear, botão físico, porta Type-C e indicadores.</li>
-<li>Conexão no My USG: Wi-Fi, senha da sonda, senha inicial do app e problemas comuns.</li>
-<li>Imagem básica: marcador, profundidade, ganho, TGC, foco, congelar, salvar.</li>
-<li>Protocolos de UPA: eFAST, pulmão, bexiga/rim, partes moles, vascular e acesso venoso.</li>
-<li>Armadilhas: imagem bonita com pergunta ruim, Doppler mal ajustado, falso positivo/negativo.</li>
-<li>Treino prático supervisionado.</li>
+<li>baixar o aplicativo correto;</li>
+<li>conectar o celular ou tablet ao aparelho;</li>
+<li>cuidar do equipamento antes e depois do uso;</li>
+<li>gerar uma imagem básica;</li>
+<li>reconhecer quando a imagem ou o exame estão limitados;</li>
+<li>chamar ajuda quando necessário.</li>
 </ol>
-<h3 id="h-regra-central">Regra central</h3>
-<p>POCUS não é “fazer ultrassom completo”. É responder uma pergunta clínica limitada, no leito, com documentação clara do que foi visto e do que não foi visto.</p></section>
-<section id="aparelho-c10rl" data-search data-source="content/01-aparelho-c10rl.md"><div class="source-note">Fonte editável: <code>content/01-aparelho-c10rl.md</code></div><h2 id="h-aparelho-c10rl">Aparelho C10RL</h2>
-<p>O material local identifica o aparelho como <strong>Konted C10RL</strong>, sonda dupla com cabeça <strong>convexa/cardíaca</strong> e <strong>linear</strong>, conectada ao app <strong>My USG</strong>.</p>
-<figure class="figure"><img src="assets/media/componentes-c10rl.png" alt="Componentes internos e externos da sonda"><figcaption>Componentes internos e externos da sonda</figcaption></figure>
-<h3 id="h-componentes-que-a-equipe-deve-reconhecer">Componentes que a equipe deve reconhecer</h3>
+<blockquote>O aparelho é para uso da equipe. Quem trabalha na UPA precisa saber conectar, cuidar e usar com responsabilidade.</blockquote>
+<h3 id="h-antes-da-aula">Antes da aula</h3>
 <ul>
-<li><strong>Marca de orientação</strong>: deve ser alinhada com o marcador da tela.</li>
-<li><strong>Marca central/mid-line</strong>: ajuda a centralizar o alvo.</li>
-<li><strong>Botão físico</strong>: liga, congela/retorna ao vivo e alterna a cabeça ativa conforme tempo de pressão.</li>
-<li><strong>Porta Type-C</strong>: usada para cabo/recarga conforme dispositivo e cabo correto.</li>
-<li><strong>Indicadores de bateria</strong>: observar antes de sair para atendimento.</li>
-<li><strong>Cabeça convexa</strong>: abdome, bexiga, rim, eFAST, pulmão profundo e avaliação cardíaca limitada.</li>
-<li><strong>Cabeça linear</strong>: partes moles, vascular, acesso venoso, nervo, tireoide, estruturas superficiais.</li>
+<li>Baixe o app <strong>My USG</strong>.</li>
+<li>Leve o celular ou tablet com bateria.</li>
+<li>Se puder, abra o app uma vez antes do treinamento.</li>
+<li>Não precisa decorar protocolos antes da primeira prática.</li>
 </ul>
-<h3 id="h-especificacoes-uteis-para-aula">Especificações úteis para aula</h3>
-<div class="table-wrap"><table><thead><tr><th>Item</th><th>Informação prática</th></tr></thead><tbody><tr><td>Conexão</td><td>Wi-Fi e USB/Type-C conforme dispositivo e cabo compatível</td></tr><tr><td>App</td><td>My USG</td></tr><tr><td>Modos</td><td>B, B/M, Color, PDI, PW e combinações conforme preset/cabeça</td></tr><tr><td>Linear</td><td>7,5/10 MHz; profundidades superficiais, como 20 a 100 mm nos PDFs locais</td></tr><tr><td>Convexa/cardíaca</td><td>baixa frequência; profundidades maiores, como 90 a 305 mm nos PDFs locais</td></tr><tr><td>Bateria</td><td>bateria interna; PDFs locais citam cerca de 2800 mAh e uso em torno de 3 horas</td></tr><tr><td>Idioma</td><td>há suporte a português do Brasil nos PDFs comerciais locais</td></tr></tbody></table></div>
-<h3 id="h-botao-fisico">Botão físico</h3>
+<h3 id="h-regras-simples-de-seguranca">Regras simples de segurança</h3>
 <ul>
-<li>Pressionar para ligar.</li>
-<li>Manter pressionado para desligar.</li>
-<li>Pressão intermediária alterna a cabeça de varredura em modelos de dupla cabeça.</li>
-<li>Se não desligar, o manual orienta segurar o botão por 15 a 20 segundos.</li>
-</ul>
-<h3 id="h-antes-de-levar-para-a-sala">Antes de levar para a sala</h3>
-<ul>
-<li>Conferir carga.</li>
-<li>Conferir se a tampa/vedação da porta está adequada antes de limpeza.</li>
-<li>Conferir se há gel suficiente.</li>
-<li>Conferir se o celular/tablet já tem My USG instalado.</li>
-<li>Fazer um teste rápido de conexão antes da turma chegar.</li>
-</ul>
-<h3 id="h-fontes-locais">Fontes locais</h3>
-<ul>
-<li><a href="references/myusg-quick-user-guide-usb-wifi-probe.pdf">Manual rápido My USG USB/Wi-Fi</a></li>
-<li><a href="references/c10rl-pro-myusg-quick-user-manual-v1-1.pdf">Manual C10RL Pro + My USG</a></li>
-<li><a href="references/c10rl-double-head-wireless-ultrasound.pdf">PDF C10RL double head wireless ultrasound</a></li>
-<li><a href="references/c10rl-3-in-1-color-doppler-ultrasound.pdf">PDF comercial C10RL 3 in 1 Color Doppler</a></li>
+<li>POCUS responde uma pergunta clínica específica; não substitui avaliação completa.</li>
+<li>Não atrase reanimação ou conduta urgente para procurar imagem perfeita.</li>
+<li>Se a imagem estiver ruim ou o exame for limitado, diga isso claramente.</li>
+<li>Limpe e guarde o aparelho depois de usar.</li>
 </ul></section>
-<section id="conexao-my-usg" data-search data-source="content/02-conexao-my-usg.md"><div class="source-note">Fonte editável: <code>content/02-conexao-my-usg.md</code></div><h2 id="h-conexao-my-usg">Conexão My USG</h2>
-<p>A conexão deve ser ensinada como uma sequência curta e repetível. O principal ponto operacional dos manuais locais é: a senha do Wi-Fi da sonda é o <strong>número de série da sonda em letras minúsculas</strong>.</p>
+<section id="baixar-o-app" data-search><h2 id="h-baixar-o-app">Baixar o app</h2>
+<p>O aplicativo do aparelho é <strong>My USG</strong>.</p>
+<p>Baixe antes do treinamento para evitar perda de tempo na hora da prática.</p>
+<h3 id="h-iphone-ou-ipad">iPhone ou iPad</h3>
+<p><a href="https://apps.apple.com/br/app/my-usg/id1606311898" target="_blank" rel="noopener">Baixar na App Store</a></p>
+<p>Use conexão <strong>Wi-Fi</strong> com a sonda.</p>
+<h3 id="h-android">Android</h3>
+<p><a href="https://play.google.com/store/apps/details?id=com.konted.wirelesskus" target="_blank" rel="noopener">Baixar no Google Play</a></p>
+<p>Android pode usar <strong>Wi-Fi</strong> e, quando houver cabo compatível, pode usar <strong>USB/Type-C</strong>.</p>
+<h3 id="h-na-hora-da-aula">Na hora da aula</h3>
+<ul>
+<li>Abra o app somente depois de conectar no Wi-Fi da sonda.</li>
+<li>Se o app pedir permissões, permita acesso necessário para funcionar.</li>
+<li>Se não conseguir instalar, avise antes da prática para organizarmos outro dispositivo.</li>
+</ul></section>
+<section id="conexao-my-usg" data-search><h2 id="h-conexao-my-usg">Conexão My USG</h2>
+<p>A conexão deve ser feita sempre na mesma ordem. O ponto mais importante dos manuais locais é: a senha do Wi-Fi da sonda é o <strong>número de série da sonda em letras minúsculas</strong>.</p>
 <figure class="figure"><img src="assets/diagrams/conexao-c10rl.svg" alt="Fluxo de conexão C10RL + My USG"><figcaption>Fluxo de conexão C10RL + My USG</figcaption></figure>
 <h3 id="h-primeiro-acesso-ao-app">Primeiro acesso ao app</h3>
-<p>O vídeo local mostra a tela de login do My USG com as opções <strong>Administer</strong> e <strong>Operator</strong>. Para configurar acesso administrativo:</p>
+<p>Se o My USG pedir login:</p>
 <ol>
-<li>tocar em <strong>Administer</strong>;</li>
-<li>usar a senha inicial <strong>123456</strong>;</li>
-<li>se fizer sentido para o treinamento, ativar <strong>Auto login</strong>;</li>
-<li>confirmar e seguir para a tela de varredura.</li>
+<li>toque em <strong>Administer</strong>;</li>
+<li>use a senha inicial <strong>123456</strong>;</li>
+<li>se fizer sentido para o treinamento, ative <strong>Auto login</strong>;</li>
+<li>confirme e vá para a tela de exame.</li>
 </ol>
 <figure class="figure video-figure"><video controls preload="metadata" src="assets/media/myusg-senha-autologin.mp4" poster="assets/media/myusg-senha-autologin-thumb.png"></video><figcaption>Vídeo local: senha inicial 123456 e auto login no My USG</figcaption></figure>
 <h3 id="h-wi-fi-da-sonda">Wi-Fi da sonda</h3>
@@ -291,217 +258,101 @@
 <li>Ligue a sonda.</li>
 <li>Aguarde os indicadores de bateria/funcionamento.</li>
 <li>No celular/tablet, abra Wi-Fi.</li>
-<li>Selecione a rede da sonda. O nome costuma terminar com parte do SN.</li>
+<li>Selecione a rede da sonda.</li>
 <li>Digite a senha usando o SN em minúsculas, sem espaços.</li>
 <li>Abra o My USG.</li>
 <li>Confirme que a sonda aparece conectada.</li>
 <li>Coloque gel e gere imagem teste em modo B.</li>
 </ol>
-<h3 id="h-cabo-usb-type-c">Cabo USB/Type-C</h3>
-<p>Os PDFs locais descrevem conexão por USB/Type-C, mas os screenshots de conversa com o fornecedor registram uma limitação prática importante: <strong>iPhone deve ser tratado como conexão por Wi-Fi</strong>; Android pode usar <strong>Wi-Fi ou cabo USB</strong> quando o cabo compatível está disponível. Para a primeira aula na UPA, considere Wi-Fi como caminho padrão.</p>
-<h3 id="h-troubleshoot-rapido">Troubleshoot rápido</h3>
-<div class="table-wrap"><table><thead><tr><th>Problema</th><th>Causa provável</th><th>Solução prática</th></tr></thead><tbody><tr><td>Wi-Fi da sonda não aparece</td><td>sonda desligada, bateria baixa, inicialização incompleta</td><td>ligar, carregar alguns minutos, aproximar o celular/tablet</td></tr><tr><td>Senha recusada</td><td>SN digitado com maiúsculas, espaço ou erro de caractere</td><td>redigitar o SN todo em minúsculas</td></tr><tr><td>App pede senha de Administer</td><td>primeiro acesso/configuração</td><td>usar senha inicial 123456 e avaliar auto login para treino</td></tr><tr><td>Wi-Fi conecta, mas não sai imagem</td><td>app travado, sonda ainda não selecionada, outro aparelho conectado</td><td>fechar/abrir app, selecionar sonda, desconectar outro dispositivo</td></tr><tr><td>Imagem trava ou atrasa</td><td>interferência ou canal Wi-Fi ruim</td><td>aproximar aparelho, reduzir distância, reiniciar sonda/app; manual cita ajuste de canal Wi-Fi com suporte</td></tr><tr><td>Cabo não funciona</td><td>lado A/B invertido, cabo incompleto, iPhone sem suporte prático via cabo</td><td>inserir totalmente, testar outro lado do conector, preferir Wi-Fi no iPhone</td></tr><tr><td>Tela preta ou imagem não atualiza</td><td>app congelado ou conexão instável</td><td>fechar app, desconectar/reconectar, recarregar sonda</td></tr></tbody></table></div>
-<h3 id="h-conduta-na-aula">Conduta na aula</h3>
-<p>Antes de iniciar protocolos clínicos, cada participante deve conseguir fazer três tarefas sem ajuda: conectar ao Wi-Fi da sonda, abrir imagem B e congelar/salvar uma imagem teste.</p></section>
-<section id="cuidados-limpeza-e-armazenamento" data-search data-source="content/03-cuidados-limpeza.md"><div class="source-note">Fonte editável: <code>content/03-cuidados-limpeza.md</code></div><h2 id="h-cuidados-limpeza-e-armazenamento">Cuidados, limpeza e armazenamento</h2>
-<p>O cuidado com a sonda é parte do treinamento. A equipe precisa tratar o aparelho como dispositivo compartilhado de beira-leito: limpar, secar, carregar, guardar e registrar problema.</p>
-<h3 id="h-cuidados-basicos">Cuidados básicos</h3>
+<h3 id="h-se-nao-funcionar">Se não funcionar</h3>
+<div class="table-wrap"><table><thead><tr><th>Problema</th><th>Solução prática</th></tr></thead><tbody><tr><td>Wi-Fi da sonda não aparece</td><td>ligar, carregar alguns minutos e aproximar o celular/tablet</td></tr><tr><td>Senha recusada</td><td>redigitar o SN todo em minúsculas, sem espaços</td></tr><tr><td>App pede senha</td><td>usar <code>123456</code> em Administer</td></tr><tr><td>Wi-Fi conecta, mas não sai imagem</td><td>fechar/abrir app, selecionar sonda e desconectar outro aparelho</td></tr><tr><td>Imagem trava</td><td>aproximar aparelho, reiniciar sonda/app e checar bateria</td></tr><tr><td>Cabo não funciona</td><td>no iPhone, prefira Wi-Fi; no Android, testar cabo/orientação compatível</td></tr></tbody></table></div></section>
+<section id="cuidados-e-limpeza" data-search><h2 id="h-cuidados-e-limpeza">Cuidados e limpeza</h2>
+<p>Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para toda a equipe.</p>
+<h3 id="h-antes-de-usar">Antes de usar</h3>
 <ul>
-<li>Não modificar software, cabo ou componentes.</li>
+<li>Conferir carga da sonda.</li>
+<li>Conferir carga do celular/tablet.</li>
+<li>Conferir se o My USG abre.</li>
+<li>Conferir gel.</li>
+<li>Conferir material de limpeza.</li>
+<li>Fazer uma imagem teste antes de começar a aula ou atendimento.</li>
+</ul>
+<h3 id="h-durante-o-uso">Durante o uso</h3>
+<ul>
 <li>Não puxar pelo cabo.</li>
 <li>Não deixar cair.</li>
-<li>Não guardar com gel seco.</li>
-<li>Não guardar molhado.</li>
-<li>Não usar se houver trinca, afundamento do transdutor, porta aberta, corrosão ou imagem persistentemente degradada.</li>
-<li>Conferir bateria antes de sair para atendimento.</li>
+<li>Não apoiar a face da sonda em superfície suja.</li>
+<li>Não guardar com gel.</li>
+<li>Não usar se houver trinca, afundamento do transdutor ou porta danificada.</li>
 </ul>
-<h3 id="h-limpeza-apos-uso-em-pele-integra">Limpeza após uso em pele íntegra</h3>
+<h3 id="h-depois-de-usar">Depois de usar</h3>
 <ol>
-<li>Desligar ou congelar e interromper o exame.</li>
-<li>Remover gel imediatamente com pano macio sem fiapos ou papel apropriado.</li>
-<li>Evitar fricção agressiva no transdutor.</li>
-<li>Limpar superfície externa conforme produto aprovado pela instituição.</li>
+<li>Remover o gel com pano macio ou papel apropriado.</li>
+<li>Limpar conforme produto aprovado pela instituição.</li>
 <li>Secar antes de guardar.</li>
-<li>Checar integridade da sonda.</li>
+<li>Conferir se a sonda ficou íntegra.</li>
+<li>Deixar carregando ou guardar no local definido.</li>
 </ol>
-<h3 id="h-desinfeccao">Desinfecção</h3>
+<h3 id="h-quando-pedir-ajuda">Quando pedir ajuda</h3>
 <ul>
-<li>Para contato com pele íntegra, usualmente é necessário baixo nível de desinfecção, conforme política institucional.</li>
-<li>Para mucosa, pele não íntegra, sangue, secreções ou procedimento invasivo, seguir protocolo institucional de proteção/cobertura e desinfecção de alto nível quando aplicável.</li>
-<li>Não improvisar produto químico sem compatibilidade com o fabricante e com o serviço de controle de infecção.</li>
-</ul>
-<h3 id="h-pontos-do-manual-local">Pontos do manual local</h3>
-<p>O manual local orienta: usar EPI, remover gel antes de secar, evitar entrada de líquido no corpo da sonda, secar em ambiente ventilado e interromper uso se houver rachaduras, protrusão/afundamento do transdutor ou dano estrutural.</p>
-<h3 id="h-checklist-para-inicio-do-plantao">Checklist para início do plantão</h3>
-<ul>
-<li>Sonda carregada.</li>
-<li>Celular/tablet carregado.</li>
-<li>My USG instalado e testado.</li>
-<li>Gel disponível.</li>
-<li>Produto de limpeza disponível.</li>
-<li>Local de guarda definido.</li>
-<li>Alguém sabe a senha Wi-Fi/SN da sonda.</li>
+<li>aparelho não liga mesmo após carregar;</li>
+<li>app trava repetidamente;</li>
+<li>imagem fica preta mesmo conectado;</li>
+<li>transdutor tem dano físico;</li>
+<li>houve contato com sangue/secreção e você não sabe o protocolo de desinfecção.</li>
 </ul></section>
-<section id="controles-de-imagem" data-search data-source="content/04-controles-imagem.md"><div class="source-note">Fonte editável: <code>content/04-controles-imagem.md</code></div><h2 id="h-controles-de-imagem">Controles de imagem</h2>
-<p>Para iniciantes, a prioridade é gerar imagem suficiente para responder a pergunta clínica. A primeira aula deve treinar mão, tela e corpo ao mesmo tempo.</p>
+<section id="controles-de-imagem" data-search><h2 id="h-controles-de-imagem">Controles de imagem</h2>
+<p>Não tente fazer uma imagem perfeita. Primeiro faça uma imagem útil para responder a pergunta clínica.</p>
 <figure class="figure"><img src="assets/media/controles-pocus-iniciantes.png" alt="Infográfico de controles básicos de POCUS"><figcaption>Infográfico de controles básicos de POCUS</figcaption></figure>
-<h3 id="h-sequencia-de-ajuste">Sequência de ajuste</h3>
+<h3 id="h-ajuste-basico">Ajuste básico</h3>
 <ol>
-<li>Escolha a cabeça correta: convexa para profundo, linear para superficial.</li>
-<li>Escolha preset próximo do órgão/estrutura.</li>
-<li>Encontre a estrutura no modo B.</li>
-<li>Ajuste profundidade: o alvo deve ocupar a tela, sem profundidade sobrando demais.</li>
-<li>Ajuste ganho: imagem nem lavada, nem escura.</li>
-<li>Ajuste foco na região de interesse.</li>
-<li>Use TGC se superficial e profundo precisam de ganhos diferentes.</li>
-<li>Congele e salve apenas quando a imagem responde a pergunta.</li>
+<li>Escolha a face correta: convexa para profundo, linear para superficial.</li>
+<li>Escolha preset próximo da região.</li>
+<li>Coloque gel suficiente.</li>
+<li>Ache a estrutura em modo B.</li>
+<li>Ajuste profundidade.</li>
+<li>Ajuste ganho.</li>
+<li>Ajuste foco se necessário.</li>
+<li>Congele e salve quando a imagem responder a pergunta.</li>
 </ol>
-<h3 id="h-controles-do-my-usg-presentes-nos-manuais">Controles do My USG presentes nos manuais</h3>
-<div class="table-wrap"><table><thead><tr><th>Controle</th><th>Uso prático</th></tr></thead><tbody><tr><td>Preset</td><td>ponto de partida para órgão/estrutura</td></tr><tr><td>GN/gain</td><td>clarear ou escurecer a imagem inteira</td></tr><tr><td>D/depth</td><td>aumentar ou reduzir profundidade</td></tr><tr><td>TGC</td><td>ajustar ganho por profundidade</td></tr><tr><td>ENH</td><td>realce de imagem</td></tr><tr><td>DR</td><td>faixa dinâmica/contraste</td></tr><tr><td>F/frequency</td><td>equilibrar resolução e penetração</td></tr><tr><td>Focus</td><td>posicionar foco no alvo</td></tr><tr><td>U/D e R/L flip</td><td>corrigir orientação quando necessário</td></tr><tr><td>Freeze/Live</td><td>congelar ou voltar para imagem ao vivo</td></tr><tr><td>Save image/video</td><td>registrar imagem ou clipe</td></tr></tbody></table></div>
-<h3 id="h-movimentos-da-sonda">Movimentos da sonda</h3>
-<ul>
-<li>Deslizar: muda a janela.</li>
-<li>Inclinar/fanar: varre o órgão.</li>
-<li>Rotacionar: muda eixo longo/eixo curto.</li>
-<li>Comprimir: útil em veias, partes moles e avaliação dinâmica.</li>
-<li>Rocking: centraliza alvo sem perder contato.</li>
-</ul>
+<h3 id="h-controles-mais-usados">Controles mais usados</h3>
+<div class="table-wrap"><table><thead><tr><th>Controle</th><th>Para que serve</th></tr></thead><tbody><tr><td>Preset</td><td>ponto de partida para órgão/estrutura</td></tr><tr><td>Gain/GN</td><td>clarear ou escurecer a imagem</td></tr><tr><td>Depth/D</td><td>aumentar ou reduzir profundidade</td></tr><tr><td>TGC</td><td>ajustar ganho por profundidade</td></tr><tr><td>Focus</td><td>colocar foco no alvo</td></tr><tr><td>Freeze/Live</td><td>congelar ou voltar ao vivo</td></tr><tr><td>Save image/video</td><td>registrar imagem ou clipe</td></tr></tbody></table></div>
 <h3 id="h-erro-comum">Erro comum</h3>
-<p>Não “consertar” tudo no ganho. Primeiro confirme contato, gel, face correta, preset, profundidade e orientação.</p></section>
-<section id="protocolos-pocus-para-upa" data-search data-source="content/05-protocolos-pocus.md"><div class="source-note">Fonte editável: <code>content/05-protocolos-pocus.md</code></div><h2 id="h-protocolos-pocus-para-upa">Protocolos POCUS para UPA</h2>
-<p>A primeira turma não precisa sair fazendo laudo completo. Ela precisa aprender perguntas clínicas seguras, repetíveis e úteis para emergência.</p>
-<h3 id="h-modulos-prioritarios">Módulos prioritários</h3>
-<div class="table-wrap"><table><thead><tr><th>Módulo</th><th>Pergunta clínica</th><th>Transdutor</th></tr></thead><tbody><tr><td>eFAST/FAST</td><td>há líquido livre ou pneumotórax em trauma?</td><td>convexa/cardíaca e linear para pleura se disponível</td></tr><tr><td>Pulmão</td><td>há B-lines difusas, consolidação, derrame, pneumotórax provável?</td><td>linear ou convexa</td></tr><tr><td>Bexiga/rim</td><td>bexiga cheia? hidronefrose grosseira?</td><td>convexa</td></tr><tr><td>Partes moles</td><td>abscesso ou celulite? corpo estranho superficial?</td><td>linear</td></tr><tr><td>Vascular</td><td>veia compressível? trombose proximal evidente?</td><td>linear</td></tr><tr><td>Acesso venoso</td><td>visualizar vaso e ponta da agulha</td><td>linear</td></tr><tr><td>Cardíaco focado</td><td>derrame pericárdico? atividade cardíaca? disfunção grosseira?</td><td>convexa/cardíaca</td></tr></tbody></table></div>
-<h3 id="h-efast-inicial">eFAST inicial</h3>
-<ul>
-<li>Janelas: RUQ, LUQ, pelve, subxifoide/paraesternal e pleura anterior.</li>
-<li>Treinar primeiro anatomia normal.</li>
-<li>Não prometer exclusão total de lesão; exame negativo não encerra avaliação clínica.</li>
-</ul>
-<h3 id="h-pulmao">Pulmão</h3>
-<ul>
-<li>Lung sliding presente reduz probabilidade de pneumotórax naquele ponto.</li>
-<li>Ausência de sliding não é pneumotórax automaticamente.</li>
-<li>B-lines difusas sugerem síndrome intersticial, mas contexto define causa.</li>
-<li>Derrame pleural precisa ser diferenciado de consolidação/atelectasia.</li>
-</ul>
-<h3 id="h-partes-moles">Partes moles</h3>
-<ul>
-<li>Celulite: padrão em casca de laranja/cobblestoning.</li>
-<li>Abscesso: coleção hipoecoica/complexa, geralmente compressível ou com reforço posterior.</li>
-<li>Cuidado com vasos antes de drenagem.</li>
-</ul>
-<h3 id="h-acesso-vascular">Acesso vascular</h3>
-<ul>
-<li>Primeiro identificar artéria e veia.</li>
-<li>Confirmar compressibilidade da veia.</li>
-<li>Usar eixo curto ou longo conforme habilidade.</li>
-<li>A regra de segurança é ver a ponta da agulha antes de avançar.</li>
-</ul>
-<h3 id="h-documentacao-minima">Documentação mínima</h3>
-<ul>
-<li>Pergunta clínica.</li>
-<li>Janela(s) avaliada(s).</li>
-<li>Achado positivo/negativo.</li>
-<li>Limitação do exame.</li>
-<li>Conduta que mudou ou não mudou.</li>
-</ul></section>
-<section id="armadilhas-comuns-e-solucoes" data-search data-source="content/06-armadilhas.md"><div class="source-note">Fonte editável: <code>content/06-armadilhas.md</code></div><h2 id="h-armadilhas-comuns-e-solucoes">Armadilhas comuns e soluções</h2>
-<h3 id="h-conexao-e-aparelho">Conexão e aparelho</h3>
-<div class="table-wrap"><table><thead><tr><th>Armadilha</th><th>Solução</th></tr></thead><tbody><tr><td>Começar a aula sem teste prévio</td><td>ligar, conectar e gerar imagem antes da turma chegar</td></tr><tr><td>Confundir senha do app com senha Wi-Fi da sonda</td><td>app Administer usa 123456 inicialmente; Wi-Fi usa SN em minúsculas</td></tr><tr><td>Tentar cabo no iPhone como plano principal</td><td>usar Wi-Fi como padrão no iPhone</td></tr><tr><td>Cabo USB não funciona</td><td>testar orientação A/B, inserção completa e outro cabo compatível</td></tr><tr><td>Esquecer de carregar</td><td>criar rotina de carga ao fim do plantão/aula</td></tr></tbody></table></div>
+<p>Se a imagem está ruim, não mexa só no ganho. Confira gel, contato, face correta, preset, profundidade e orientação.</p></section>
+<section id="o-que-vamos-treinar" data-search><h2 id="h-o-que-vamos-treinar">O que vamos treinar</h2>
+<p>A primeira prática é operacional. A equipe deve sair sabendo usar o aparelho sem travar na conexão e sem danificar a sonda.</p>
+<h3 id="h-sequencia-de-pratica">Sequência de prática</h3>
+<ol>
+<li>Ligar a sonda.</li>
+<li>Conectar no Wi-Fi da sonda.</li>
+<li>Abrir o My USG.</li>
+<li>Entrar como Administer se necessário.</li>
+<li>Gerar imagem em modo B.</li>
+<li>Ajustar profundidade e ganho.</li>
+<li>Congelar a imagem.</li>
+<li>Salvar imagem ou vídeo curto.</li>
+<li>Limpar e guardar o aparelho.</li>
+</ol>
+<h3 id="h-protocolos-que-serao-demonstrados">Protocolos que serão demonstrados</h3>
+<div class="table-wrap"><table><thead><tr><th>Situação</th><th>Pergunta POCUS</th></tr></thead><tbody><tr><td>Trauma</td><td>há líquido livre ou pneumotórax provável?</td></tr><tr><td>Dispneia</td><td>há B-lines difusas, derrame, consolidação ou pneumotórax provável?</td></tr><tr><td>Retenção urinária/dor lombar</td><td>bexiga está cheia? há hidronefrose grosseira?</td></tr><tr><td>Pele e partes moles</td><td>há coleção drenável?</td></tr><tr><td>Acesso venoso</td><td>vejo vaso e ponta da agulha?</td></tr></tbody></table></div>
+<h3 id="h-meta-minima-de-cada-participante">Meta mínima de cada participante</h3>
+<p>Conectar, gerar uma imagem, ajustar profundidade/ganho, congelar, salvar e verbalizar uma limitação.</p></section>
+<section id="armadilhas-comuns" data-search><h2 id="h-armadilhas-comuns">Armadilhas comuns</h2>
+<h3 id="h-conexao">Conexão</h3>
+<div class="table-wrap"><table><thead><tr><th>Armadilha</th><th>Solução</th></tr></thead><tbody><tr><td>Confundir senha do app com senha Wi-Fi</td><td>app Administer usa <code>123456</code>; Wi-Fi usa SN em minúsculas</td></tr><tr><td>Começar sem testar</td><td>ligar, conectar e gerar imagem antes da turma chegar</td></tr><tr><td>Usar cabo no iPhone como plano principal</td><td>usar Wi-Fi</td></tr><tr><td>Senha recusada</td><td>redigitar SN em minúsculas, sem espaços</td></tr><tr><td>Imagem preta</td><td>reiniciar app, reconectar Wi-Fi e checar bateria</td></tr></tbody></table></div>
 <h3 id="h-imagem">Imagem</h3>
-<div class="table-wrap"><table><thead><tr><th>Armadilha</th><th>Solução</th></tr></thead><tbody><tr><td>Alvo pequeno no meio da tela</td><td>reduzir profundidade</td></tr><tr><td>Imagem muito clara</td><td>reduzir ganho</td></tr><tr><td>Imagem escura</td><td>aumentar ganho, usar mais gel, melhorar contato</td></tr><tr><td>Estrutura profunda com linear</td><td>trocar para convexa</td></tr><tr><td>Estrutura superficial com convexa</td><td>trocar para linear</td></tr><tr><td>Marcador invertido confundindo direita/esquerda</td><td>alinhar marcador da sonda com marcador da tela antes de ensinar anatomia</td></tr></tbody></table></div>
-<h3 id="h-interpretacao-clinica">Interpretação clínica</h3>
+<div class="table-wrap"><table><thead><tr><th>Armadilha</th><th>Solução</th></tr></thead><tbody><tr><td>Alvo pequeno</td><td>reduzir profundidade</td></tr><tr><td>Imagem clara demais</td><td>reduzir ganho</td></tr><tr><td>Imagem escura</td><td>aumentar ganho, melhorar contato e usar mais gel</td></tr><tr><td>Estrutura profunda com linear</td><td>trocar para convexa</td></tr><tr><td>Estrutura superficial com convexa</td><td>trocar para linear</td></tr><tr><td>Direita/esquerda confusa</td><td>alinhar marcador da sonda com marcador da tela</td></tr></tbody></table></div>
+<h3 id="h-clinica">Clínica</h3>
 <ul>
 <li>Derrame pericárdico não significa tamponamento automaticamente.</li>
 <li>Ausência de lung sliding não significa pneumotórax automaticamente.</li>
 <li>B-lines não significam sempre edema cardiogênico.</li>
 <li>IVC isolada não define volemia.</li>
 <li>FAST negativo não exclui lesão abdominal.</li>
-<li>Hidroureter/hidronefrose leve pode ser difícil para iniciante.</li>
-<li>Abscesso pequeno pode parecer vaso: usar compressão e Doppler quando necessário.</li>
+<li>Exame limitado deve ser registrado como limitado.</li>
 </ul>
 <h3 id="h-procedimento">Procedimento</h3>
-<p>Se perdeu a ponta da agulha, pare. Reencontre a ponta antes de avançar.</p>
-<h3 id="h-frase-para-ensinar-aos-iniciantes">Frase para ensinar aos iniciantes</h3>
-<p>“Se a imagem não responde a pergunta, ela não serve ainda. Ajuste a imagem ou declare o exame limitado.”</p></section>
-<section id="imagens-videos-e-fontes" data-search data-source="content/07-videos-fontes.md"><div class="source-note">Fonte editável: <code>content/07-videos-fontes.md</code></div><h2 id="h-imagens-videos-e-fontes">Imagens, vídeos e fontes</h2>
-<p>Esta página reúne materiais para estudo antes e depois da aula.</p>
-<h3 id="h-materiais-locais-do-aparelho">Materiais locais do aparelho</h3>
-<ul>
-<li><a href="references/myusg-quick-user-guide-usb-wifi-probe.pdf">Manual rápido My USG USB/Wi-Fi</a></li>
-<li><a href="references/c10rl-pro-myusg-quick-user-manual-v1-1.pdf">Manual C10RL Pro + My USG</a></li>
-<li><a href="references/c10rl-double-head-wireless-ultrasound.pdf">PDF C10RL double head wireless ultrasound</a></li>
-<li><a href="references/c10rl-3-in-1-color-doppler-ultrasound.pdf">PDF comercial C10RL 3 in 1 Color Doppler</a></li>
-<li><a href="assets/media/myusg-senha-autologin.mp4">Vídeo local de senha/admin no My USG</a></li>
-</ul>
-<h3 id="h-fontes-externas-uteis">Fontes externas úteis</h3>
-<ul>
-<li><a href="https://www.acep.org/sonoguide">ACEP Sonoguide</a>: guia de ultrassom de emergência por aplicações.</li>
-<li><a href="https://www.acep.org/by-medical-focus/ultrasound">ACEP Ultrasound</a>: recursos e políticas de ultrassom em emergência.</li>
-<li><a href="https://www.thepocusatlas.com/">POCUS Atlas</a>: biblioteca visual de achados em POCUS.</li>
-<li><a href="https://coreultrasound.com/">Core Ultrasound</a>: vídeos e aulas de ultrassom de emergência.</li>
-<li><a href="https://www.pocus101.com/">POCUS 101</a>: tutoriais introdutórios e protocolos.</li>
-<li><a href="https://litfl.com/ultrasound-library/">LITFL Ultrasound Library</a>: revisões práticas para emergência e terapia intensiva.</li>
-<li><a href="https://showmethepocus.com/">Show Me The POCUS</a>: vídeos curtos de achados e técnicas.</li>
-<li><a href="https://www.raysofgray.com/">Rays of Gray</a>: recursos de aprendizagem visual.</li>
-<li><a href="https://www.ultrasoundcases.info/">Ultrasound Cases</a>: casos com imagens e correlação clínica.</li>
-<li><a href="https://www.aium.org/resources/official-statements/view/guidelines-for-cleaning-and-preparing-external--and-internal-use-ultrasound-transducers-and-equipment-between-patients-as-well-as-safe-handling-and-use-of-ultrasound-coupling-gel">AIUM: limpeza e preparo de transdutores</a>: referência de limpeza/desinfecção.</li>
-</ul>
-<h3 id="h-raindrop">Raindrop</h3>
-<p>O conector Raindrop não está disponível neste ambiente. Para incorporar seus links salvos depois, exporte do Raindrop em CSV/HTML/JSON ou conecte um app compatível; eu organizo as referências nesta página.</p></section>
-<section id="roteiro-da-aula" data-search data-source="content/08-roteiro-aula.md"><div class="source-note">Fonte editável: <code>content/08-roteiro-aula.md</code></div><h2 id="h-roteiro-da-aula">Roteiro da aula</h2>
-<h3 id="h-duracao-sugerida-2h30-a-3h">Duração sugerida: 2h30 a 3h</h3>
-<div class="table-wrap"><table><thead><tr><th>Tempo</th><th>Atividade</th></tr></thead><tbody><tr><td>0-10 min</td><td>Objetivo: POCUS como resposta focada a pergunta clínica</td></tr><tr><td>10-25 min</td><td>Cuidados com aparelho, limpeza, carga, gel, armazenamento</td></tr><tr><td>25-45 min</td><td>Conexão My USG: senha app, Wi-Fi da sonda, teste de imagem</td></tr><tr><td>45-65 min</td><td>Controles básicos: profundidade, ganho, foco, preset, freeze/save</td></tr><tr><td>65-85 min</td><td>Demonstração: convexa e linear, orientação e movimentos</td></tr><tr><td>85-125 min</td><td>Rodízio prático: cada participante conecta, gera, ajusta e salva imagem</td></tr><tr><td>125-160 min</td><td>Protocolos prioritários: eFAST, pulmão, bexiga/rim, partes moles e acesso vascular</td></tr><tr><td>160-180 min</td><td>Armadilhas, checklist final e plano de prática supervisionada</td></tr></tbody></table></div>
-<h3 id="h-primeiro-bloco-aparelho">Primeiro bloco: aparelho</h3>
-<p>Mostre a sonda desligada, ligada, carregando e conectada. A equipe deve tocar no aparelho antes de discutir protocolos.</p>
-<h3 id="h-segundo-bloco-conexao">Segundo bloco: conexão</h3>
-<p>Faça uma demonstração com erro proposital:</p>
-<ol>
-<li>senha Wi-Fi com letra maiúscula;</li>
-<li>app pedindo senha de Administer;</li>
-<li>imagem preta por conexão perdida;</li>
-<li>profundidade errada.</li>
-</ol>
-<p>Depois peça para alguém resolver usando o checklist.</p>
-<h3 id="h-terceiro-bloco-imagem">Terceiro bloco: imagem</h3>
-<p>Use uma estrutura fácil: veia superficial, bexiga ou parede torácica. Evite começar por janela cardíaca difícil.</p>
-<h3 id="h-quarto-bloco-aplicacao-clinica">Quarto bloco: aplicação clínica</h3>
-<p>Ensine cada protocolo como pergunta clínica:</p>
-<ul>
-<li>trauma: “vejo líquido livre?”</li>
-<li>dispneia: “há padrão difuso de B-lines? há pneumotórax provável?”</li>
-<li>dor lombar/oligúria: “há hidronefrose grosseira? bexiga está cheia?”</li>
-<li>pele: “há coleção drenável?”</li>
-<li>acesso: “vejo vaso e ponta da agulha?”</li>
-</ul>
-<h3 id="h-fechamento">Fechamento</h3>
-<p>Cada participante deve demonstrar: conectar, gerar imagem, ajustar ganho/profundidade, congelar, salvar e verbalizar uma limitação do exame.</p></section>
-<section id="como-editar-e-publicar" data-search data-source="content/99-como-editar-publicar.md"><div class="source-note">Fonte editável: <code>content/99-como-editar-publicar.md</code></div><h2 id="h-como-editar-e-publicar">Como editar e publicar</h2>
-<p>Este material foi montado para ser editado no Obsidian e publicado como site estático.</p>
-<h3 id="h-editar">Editar</h3>
-<ol>
-<li>Abra <code>/Users/diogenes/vaults/usg_treinamento</code> no Obsidian.</li>
-<li>Edite as páginas em <code>content/</code>.</li>
-<li>Guarde imagens novas em <code>assets/media/</code>.</li>
-<li>Guarde PDFs/fontes locais em <code>references/</code>.</li>
-<li>Rode <code>python3 scripts/build_site.py</code>.</li>
-<li>Abra <code>index.html</code>.</li>
-</ol>
-<h3 id="h-publicar">Publicar</h3>
-<p>Para publicar em GitHub Pages, Netlify, Vercel, Cloudflare Pages ou hospedagem estática, envie:</p>
-<ul>
-<li><code>index.html</code></li>
-<li><code>content/</code></li>
-<li><code>assets/</code></li>
-<li><code>references/</code></li>
-<li><code>docs/</code></li>
-<li><code>README.md</code></li>
-</ul>
-<h3 id="h-atualizacao-rapida">Atualização rápida</h3>
-<p>No macOS, você pode dar duplo clique em <code>atualizar-site.command</code>.</p>
-<h3 id="h-privacidade">Privacidade</h3>
-<p>Os screenshots <code>IMG_6455.png</code> e <code>IMG_6456.png</code> ficam preservados na raiz do vault como evidência local, mas não entram no site porque contêm conversa privada. O conteúdo técnico deles foi convertido em texto.</p></section>
+<p>Se perdeu a ponta da agulha, pare. Reencontre a ponta antes de avançar.</p></section>
       </main>
     </div>
   </div>
