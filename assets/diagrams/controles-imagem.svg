@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="Controles básicos de imagem">
+  <rect width="560" height="360" fill="#ffffff"/>
+  <style>text{font-family:Arial,Helvetica,sans-serif;fill:#102025}</style>
+  <rect x="30" y="38" width="330" height="256" rx="8" fill="#102025"/>
+  <path d="M55 230C110 140 210 120 330 178" fill="none" stroke="#b7f7e8" stroke-width="7" opacity=".8"/>
+  <path d="M72 235C136 174 228 162 330 210" fill="none" stroke="#ffffff" stroke-width="2" opacity=".75"/>
+  <path d="M98 248C166 210 238 204 330 240" fill="none" stroke="#ffffff" stroke-width="2" opacity=".45"/>
+  <line x1="380" y1="54" x2="380" y2="276" stroke="#52656c"/>
+  <text x="398" y="94" font-size="14">5 cm</text>
+  <text x="398" y="176" font-size="14">10 cm</text>
+  <text x="398" y="258" font-size="14">15 cm</text>
+  <circle cx="86" cy="98" r="16" fill="#08756f"/>
+  <text x="86" y="104" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">1</text>
+  <line x1="102" y1="98" x2="148" y2="118" stroke="#08756f" stroke-width="3"/>
+  <circle cx="118" cy="174" r="16" fill="#08756f"/>
+  <text x="118" y="180" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">2</text>
+  <line x1="134" y1="174" x2="192" y2="170" stroke="#08756f" stroke-width="3"/>
+  <circle cx="250" cy="84" r="16" fill="#08756f"/>
+  <text x="250" y="90" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">3</text>
+  <line x1="250" y1="100" x2="248" y2="142" stroke="#08756f" stroke-width="3"/>
+  <text x="30" y="330" font-size="13">1 ganho | 2 profundidade | 3 foco</text>
+</svg>
+

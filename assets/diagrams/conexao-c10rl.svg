@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 330" role="img" aria-label="Fluxo de conexão C10RL no app My USG">
+  <rect width="980" height="330" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10z" fill="#08756f"/>
+    </marker>
+    <style>text{font-family:Arial,Helvetica,sans-serif;fill:#102025}</style>
+  </defs>
+  <rect x="24" y="42" width="150" height="86" rx="8" fill="#edf5f3" stroke="#08756f"/>
+  <text x="99" y="76" text-anchor="middle" font-size="15" font-weight="700">1. Ligar</text>
+  <text x="99" y="102" text-anchor="middle" font-size="12">bateria e LED</text>
+  <path d="M185 85H262" stroke="#08756f" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="274" y="42" width="162" height="86" rx="8" fill="#edf5f3" stroke="#08756f"/>
+  <text x="355" y="74" text-anchor="middle" font-size="15" font-weight="700">2. Wi-Fi da sonda</text>
+  <text x="355" y="101" text-anchor="middle" font-size="12">Konted_C10RL...</text>
+  <path d="M448 85H525" stroke="#08756f" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="538" y="42" width="162" height="86" rx="8" fill="#fff3e0" stroke="#b45309"/>
+  <text x="619" y="74" text-anchor="middle" font-size="15" font-weight="700">3. Senha</text>
+  <text x="619" y="101" text-anchor="middle" font-size="12">SN em minúsculas</text>
+  <path d="M712 85H789" stroke="#08756f" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="802" y="42" width="154" height="86" rx="8" fill="#edf5f3" stroke="#08756f"/>
+  <text x="879" y="74" text-anchor="middle" font-size="15" font-weight="700">4. My USG</text>
+  <text x="879" y="101" text-anchor="middle" font-size="12">status conectado</text>
+  <rect x="116" y="190" width="748" height="82" rx="8" fill="#ffffff" stroke="#d6e2e0"/>
+  <text x="490" y="222" text-anchor="middle" font-size="17" font-weight="700">Se não aparecer imagem</text>
+  <text x="490" y="250" text-anchor="middle" font-size="13">desconectar outro aparelho, conferir senha, reabrir app, recarregar se necessário</text>
+</svg>
+

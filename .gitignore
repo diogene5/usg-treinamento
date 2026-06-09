@@ -1,0 +1,25 @@
+.DS_Store
+.Trashes
+.Spotlight-V100
+.fseventsd
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+*.tmp
+*.log
+
+__pycache__/
+*.pyc
+
+# Arquivos originais preservados na raiz; não versionar para evitar duplicata/privacidade
+/360bdf28-78b7-4a12-b2ce-a94cb0a19a99.mp4
+/C10RL 3 in 1 Color Doppler ultrasound.pdf
+/IMG_6455.png
+/IMG_6456.png
+/c10rl-double-head-wireless-ultrasound.pdf
+/c10rl-pro-myusg-quick-user-manual-v1-1.pdf
+/myusg-quick-user-guide-usb-wifi-probe.pdf
+/expl.png
+/image.png
+/infog.png
+/tarot.png

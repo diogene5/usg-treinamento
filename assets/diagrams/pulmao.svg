@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" role="img" aria-label="Sinais básicos do ultrassom pulmonar">
+  <rect width="560" height="330" fill="#ffffff"/>
+  <style>text{font-family:Arial,Helvetica,sans-serif;fill:#102025}</style>
+  <rect x="26" y="42" width="238" height="230" rx="8" fill="#ffffff" stroke="#d6e2e0"/>
+  <text x="145" y="74" text-anchor="middle" font-size="16" font-weight="700">Normal</text>
+  <line x1="65" y1="112" x2="225" y2="112" stroke="#08756f" stroke-width="5"/>
+  <text x="145" y="102" text-anchor="middle" font-size="12">linha pleural + sliding</text>
+  <line x1="72" y1="156" x2="218" y2="156" stroke="#52656c" stroke-width="2"/>
+  <line x1="72" y1="198" x2="218" y2="198" stroke="#52656c" stroke-width="2"/>
+  <text x="145" y="238" text-anchor="middle" font-size="13">A-lines</text>
+  <rect x="296" y="42" width="238" height="230" rx="8" fill="#ffffff" stroke="#d6e2e0"/>
+  <text x="415" y="74" text-anchor="middle" font-size="16" font-weight="700">Intersticial</text>
+  <line x1="335" y1="112" x2="495" y2="112" stroke="#08756f" stroke-width="5"/>
+  <path d="M360 116L330 248" stroke="#08756f" stroke-width="4"/>
+  <path d="M405 116L390 248" stroke="#08756f" stroke-width="4"/>
+  <path d="M450 116L505 248" stroke="#08756f" stroke-width="4"/>
+  <text x="415" y="278" text-anchor="middle" font-size="13">B-lines: conte e contextualize</text>
+</svg>
+

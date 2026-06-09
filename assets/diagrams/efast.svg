@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" role="img" aria-label="Janelas eFAST">
+  <rect width="560" height="330" fill="#ffffff"/>
+  <style>text{font-family:Arial,Helvetica,sans-serif;fill:#102025}</style>
+  <path d="M280 48C360 58 414 126 414 220C414 278 354 302 280 302C206 302 146 278 146 220C146 126 200 58 280 48Z" fill="#f7faf9" stroke="#102025" stroke-width="2"/>
+  <circle cx="280" cy="112" r="26" fill="#dff2ef" stroke="#08756f" stroke-width="3"/>
+  <text x="280" y="116" text-anchor="middle" font-size="12">coração</text>
+  <ellipse cx="212" cy="166" rx="42" ry="54" fill="#fff3e0" stroke="#b45309" stroke-width="3"/>
+  <text x="212" y="171" text-anchor="middle" font-size="12">QSD</text>
+  <ellipse cx="348" cy="166" rx="42" ry="54" fill="#fff3e0" stroke="#b45309" stroke-width="3"/>
+  <text x="348" y="171" text-anchor="middle" font-size="12">QSE</text>
+  <ellipse cx="280" cy="248" rx="52" ry="30" fill="#dff2ef" stroke="#08756f" stroke-width="3"/>
+  <text x="280" y="252" text-anchor="middle" font-size="12">pelve</text>
+  <text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700">pericárdio, quadrantes, pelve e pleura</text>
+</svg>
+

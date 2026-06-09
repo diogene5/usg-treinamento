@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" role="img" aria-label="Acesso vascular com agulha e veia">
+  <rect width="560" height="330" fill="#ffffff"/>
+  <style>text{font-family:Arial,Helvetica,sans-serif;fill:#102025}</style>
+  <rect x="24" y="42" width="512" height="230" rx="8" fill="#f7faf9" stroke="#d6e2e0"/>
+  <ellipse cx="285" cy="185" rx="118" ry="34" fill="#dff2ef" stroke="#08756f" stroke-width="3"/>
+  <text x="285" y="191" text-anchor="middle" font-size="15" font-weight="700">veia compressível</text>
+  <ellipse cx="290" cy="96" rx="52" ry="24" fill="#fee2e2" stroke="#b91c1c" stroke-width="3"/>
+  <text x="290" y="101" text-anchor="middle" font-size="13" font-weight="700">artéria</text>
+  <line x1="72" y1="64" x2="275" y2="168" stroke="#102025" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="275" cy="168" r="7" fill="#b45309"/>
+  <text x="105" y="48" font-size="13">agulha: ver a ponta</text>
+  <path d="M265 166C236 154 198 132 166 114" fill="none" stroke="#08756f" stroke-width="2" stroke-dasharray="5 5"/>
+  <text x="280" y="252" font-size="13" text-anchor="middle">Flush confirma trajeto intraluminal quando a ponta está no vaso</text>
+</svg>
+
