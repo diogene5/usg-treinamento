@@ -7,7 +7,7 @@ Esta página é para usar na hora da aula, no início do plantão ou quando o ap
 - Sonda carregada.
 - Celular/tablet carregado.
 - My USG instalado.
-- Senha Wi-Fi/número de série disponível.
+- Senha Wi-Fi da sonda: **`uxccgdh397`** (desta unidade).
 - Senha inicial do app lembrada: `123456` para Administer.
 - Gel disponível.
 - Papel/pano macio disponível.
@@ -19,7 +19,7 @@ Esta página é para usar na hora da aula, no início do plantão ou quando o ap
 
 1. Ligar a sonda.
 2. Entrar no Wi-Fi da sonda.
-3. Usar senha do número de série em minúsculas.
+3. Usar senha **`uxccgdh397`** (minúsculas, sem espaços).
 4. Abrir My USG.
 5. Fazer login como Administer se necessário.
 6. Selecionar a sonda no app.

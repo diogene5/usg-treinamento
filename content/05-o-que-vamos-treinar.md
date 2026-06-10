@@ -11,8 +11,7 @@ A primeira prática é operacional. A equipe deve sair sabendo usar o aparelho s
 5. Gerar imagem em modo B.
 6. Ajustar profundidade e ganho.
 7. Congelar a imagem.
-8. Salvar imagem ou vídeo curto.
-9. Limpar e guardar o aparelho.
+8. Limpar e guardar o aparelho.
 
 ## Núcleo obrigatório da primeira aula
 
@@ -25,13 +24,13 @@ A primeira prática é operacional. A equipe deve sair sabendo usar o aparelho s
 
 ## Demonstrações, não competência mínima
 
-| Demonstração | Mensagem principal |
-|---|---|
-| Pulmão | sliding, linhas A/B e derrame grosseiro são perguntas focadas |
-| eFAST | FAST negativo não exclui lesão; janela ruim deve ser dita como ruim |
-| Eco básico | atividade cardíaca, derrame pericárdico e função grosseira são triagem, não laudo |
-| Volume vesical | cálculo é estimativa simples, não medida absoluta |
-| Acesso periférico | apêndice para entender compressibilidade e ponta da agulha |
+| Demonstração      | Mensagem principal                                                                |
+| ----------------- | --------------------------------------------------------------------------------- |
+| Pulmão            | sliding, linhas A/B e derrame grosseiro são perguntas focadas                     |
+| eFAST             | FAST negativo não exclui lesão; janela ruim deve ser dita como ruim               |
+| Eco básico        | atividade cardíaca, derrame pericárdico e função grosseira são triagem, não laudo |
+| Volume vesical    | cálculo é estimativa simples, não medida absoluta                                 |
+| Acesso periférico | entender compressibilidade e ponta da agulha                                      |
 
 ## Documentação mínima
 
@@ -43,7 +42,7 @@ Registre sempre:
 - limitação do exame;
 - conduta tomada ou motivo de não mudar conduta.
 
-Exemplo: “POCUS pulmonar limitado por dor e pouca colaboração. Avaliados campos anteriores bilateralmente. Sliding presente nos pontos avaliados. Sem B-lines difusas nos pontos avaliados. Exame limitado.”
+Exemplo: “POCUS pulmonar limitado por dor e pouca colaboração. Avaliados campos anteriores bilateralmente. Sliding presente nos pontos avaliados. Sem linhas B difusas nos pontos avaliados. Exame limitado.”
 
 ## Meta mínima de cada participante
 

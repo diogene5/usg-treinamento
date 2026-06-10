@@ -4,10 +4,10 @@
 
 | Armadilha | Solução |
 |---|---|
-| Confundir senha do app com senha Wi-Fi | app Administer usa `123456`; Wi-Fi usa SN em minúsculas |
+| Confundir senha do app com senha Wi-Fi | app Administer usa `123456`; Wi-Fi desta sonda usa `uxccgdh397` |
 | Começar sem testar | ligar, conectar e gerar imagem antes da turma chegar |
 | Usar cabo no iPhone como plano principal | usar Wi-Fi |
-| Senha recusada | redigitar SN em minúsculas, sem espaços |
+| Senha recusada | redigitar `uxccgdh397` em minúsculas, sem espaços |
 | Imagem preta | reiniciar app, reconectar Wi-Fi e checar bateria |
 
 ## Imagem
@@ -32,13 +32,13 @@
 
 ## Falsas seguranças frequentes
 
-| Situação | Erro | Melhor postura |
-|---|---|---|
-| FAST negativo | “não há sangramento” | “não vi líquido livre nas janelas avaliadas” |
-| Pulmão com sliding | “não há doença pulmonar” | sliding responde principalmente pneumotórax naquele ponto |
-| B-lines | “é edema agudo cardiogênico” | integrar com clínica, coração, volume e contexto |
-| Bexiga vazia | “não é retenção” | confirmar se a janela foi adequada e se o paciente urinou |
-| Abscesso | drenar sem Doppler/sem pensar em vaso | antes de furar, confirme que não é vaso |
+| Situação           | Erro de raciocínio                    | Na realidade:                                                               |
+| ------------------ | ------------------------------------- | --------------------------------------------------------------------------- |
+| FAST negativo      | “não há sangramento”                  | “não vi líquido livre nas janelas avaliadas”                                |
+| Pulmão com sliding | “não há doença pulmonar”              | sliding responde principalmente sobre ausência de pneumotórax naquele ponto |
+| linhas B           | “é edema agudo cardiogênico”          | integrar com clínica, coração, volume e contexto                            |
+| Bexiga vazia       | “não é retenção”                      | confirmar se a janela foi adequada e se o paciente urinou                   |
+| Abscesso           | drenar sem Doppler/sem pensar em vaso | antes de furar, confirme que não é vaso                                     |
 
 ## Procedimento
 

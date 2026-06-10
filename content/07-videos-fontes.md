@@ -23,6 +23,3 @@ Esta página reúne materiais para estudo antes e depois da aula.
 - [Ultrasound Cases](https://www.ultrasoundcases.info/): casos com imagens e correlação clínica.
 - [AIUM: limpeza e preparo de transdutores](https://www.aium.org/resources/official-statements/view/guidelines-for-cleaning-and-preparing-external--and-internal-use-ultrasound-transducers-and-equipment-between-patients-as-well-as-safe-handling-and-use-of-ultrasound-coupling-gel): referência de limpeza/desinfecção.
 
-## Raindrop
-
-O conector Raindrop não está disponível neste ambiente. Para incorporar seus links salvos depois, exporte do Raindrop em CSV/HTML/JSON ou conecte um app compatível; eu organizo as referências nesta página.

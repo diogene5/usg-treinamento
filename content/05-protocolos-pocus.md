@@ -20,19 +20,19 @@ O foco operacional é acesso central: pré-scan, jugular interna, femoral como c
 Perguntas úteis na UPA:
 
 - há deslizamento pleural no ponto avaliado?
-- há B-lines difusas?
+- há linhas B difusas?
 - há derrame pleural?
 - há consolidação subpleural evidente?
 
-Procure primeiro a linha pleural entre duas sombras de costelas. Ajuste a profundidade para não deixar metade da tela mostrando tecido inútil.
+Procure primeiro a linha pleural entre duas sombras de costelas. Ajuste a profundidade para não deixar metade da tela mostrando imagem que não é do nosso interesse.
 
-| Achado | Interpretação prática | Armadilha |
-|---|---|---|
-| Sliding presente | reduz pneumotórax naquele ponto | não avalia o pulmão inteiro |
-| Sliding ausente | pode ocorrer em pneumotórax | também ocorre em apneia, intubação seletiva, pleurodese, atelectasia |
-| Linhas A | padrão horizontal repetido | pode ser normal ou hiperinsuflação |
-| B-lines difusas | síndrome intersticial | causa depende do contexto clínico |
-| Derrame | líquido pleural | não confundir com fígado/baço/atelectasia |
+| Achado           | Interpretação prática                 | Armadilha                                                            |
+| ---------------- | ------------------------------------- | -------------------------------------------------------------------- |
+| Sliding presente | ausência de pneumotórax naquele ponto | não avalia o pulmão inteiro                                          |
+| Sliding ausente  | pode ocorrer em pneumotórax           | também ocorre em apneia, intubação seletiva, pleurodese, atelectasia |
+| Linhas A         | padrão horizontal repetido            | pode ser normal ou hiperinsuflação                                   |
+| B-lines difusas  | síndrome intersticial                 | causa depende do contexto clínico                                    |
+| Derrame          | líquido pleural                       | não confundir com fígado/baço/atelectasia                            |
 
 ## eFAST inicial
 
@@ -46,13 +46,13 @@ Janelas mínimas:
 
 Treine primeiro anatomia normal. No trauma instável, o objetivo é reconhecer líquido livre grosseiro e pneumotórax provável, sem atrasar conduta.
 
-| Janela | O que procurar | Dica |
-|---|---|---|
-| RUQ | líquido entre fígado/rim, ponta hepática, base torácica | vá alto e posterior |
-| LUQ | líquido entre baço/rim e subdiafragmático | geralmente é mais difícil que RUQ |
-| Pelve | líquido atrás da bexiga | bexiga cheia ajuda |
-| Cardíaca | derrame pericárdico/atividade | se janela ruim, registre limitação |
-| Pleura anterior | sliding | compare os lados |
+| Janela          | O que procurar                                          | Dica                               |
+| --------------- | ------------------------------------------------------- | ---------------------------------- |
+| HCD             | líquido entre fígado/rim, ponta hepática, base torácica | vá alto e posterior                |
+| HCE             | líquido entre baço/rim e subdiafragmático               | geralmente é mais difícil que HCD  |
+| Pelve           | líquido atrás da bexiga                                 | bexiga cheia ajuda                 |
+| Cardíaca        | derrame pericárdico/atividade                           | se janela ruim, registre limitação |
+| Pleura anterior | deslizamento pleural                                    | compare os lados                   |
 
 FAST negativo não exclui lesão abdominal. Exame limitado deve ser dito como limitado.
 
@@ -76,13 +76,13 @@ Antes de incisar ou puncionar, varra a área em dois eixos. Se houver dúvida en
 
 ## Procedimentos guiados
 
-Regra única para iniciante: **não avance o instrumento se a ponta não está visível**.
+Regra única para iniciante: **não avance punção se a ponta da agulha não está visível**.
 
-| Procedimento | Antes de furar | Durante |
-|---|---|---|
-| Acesso periférico | diferenciar veia/artéria | rastrear ponta da agulha |
-| Drenagem superficial | confirmar coleção e profundidade | evitar vasos e estruturas profundas |
-| Corpo estranho superficial | confirmar localização e profundidade | marcar pele e planejar trajeto |
+| Procedimento               | Antes de puncionar                   | Durante                             |
+| -------------------------- | ------------------------------------ | ----------------------------------- |
+| Acesso periférico          | diferenciar veia/artéria             | rastrear ponta da agulha            |
+| Drenagem superficial       | confirmar coleção e profundidade     | evitar vasos e estruturas profundas |
+| Corpo estranho superficial | confirmar localização e profundidade | marcar pele e planejar trajeto      |
 
 ## Acesso vascular
 
@@ -99,4 +99,4 @@ Regra única para iniciante: **não avance o instrumento se a ponta não está v
 - Limitação do exame.
 - Conduta que mudou ou não mudou.
 
-Frase segura: “POCUS realizado para pergunta focada. Achados interpretados no contexto clínico. Exame limitado por janela/tempo/colaboração quando aplicável.”
+Frase segura: “POCUS realizado para pergunta direcionada. Achados interpretados no contexto clínico. Exame limitado por janela/tempo/colaboração quando aplicável.”

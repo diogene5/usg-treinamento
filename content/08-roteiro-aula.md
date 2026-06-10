@@ -13,7 +13,7 @@
 | 125-160 min | Protocolos prioritários: eFAST, pulmão, bexiga/rim, partes moles e acesso vascular |
 | 160-180 min | Armadilhas, checklist final e plano de prática supervisionada |
 
-## Promessa pedagógica
+
 
 Ao final, a pessoa não precisa “saber ultrassom”. Ela precisa conseguir:
 

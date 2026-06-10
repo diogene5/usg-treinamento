@@ -28,7 +28,9 @@ POCUS é ultrassom feito à beira-leito por quem está cuidando do paciente, com
 
 - Baixe o app **My USG**.
 - Leve o celular ou tablet com bateria.
+- Anote a senha do Wi-Fi da sonda desta unidade: **`uxccgdh397`** (iPhone, iPad e Android).
 - Se puder, abra o app uma vez antes do treinamento.
+- Consulte o [manual oficial C10RL + My USG](../references/c10rl-pro-myusg-quick-user-manual-v1-1.pdf) se quiser ler antes.
 - Não precisa decorar protocolos antes da primeira prática.
 
 ## Regras simples de segurança

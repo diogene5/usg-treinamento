@@ -2,7 +2,7 @@
 
 Não tente fazer uma imagem perfeita. Primeiro faça uma imagem útil para responder a pergunta clínica.
 
-## Modelo mental rápido
+## Princípios da ultrassonografia
 
 O transdutor emite som, recebe ecos e transforma o retorno em pontos na tela. Eco forte fica branco; eco fraco fica cinza; líquido costuma ficar preto.
 
@@ -41,17 +41,17 @@ Regra prática: **líquido é preto, osso/agulha são brancos, ar atrapalha**. P
 
 ## Movimentos da sonda
 
-| Movimento | Para que serve |
-|---|---|
-| Deslizar | procurar a melhor janela |
-| Inclinar/fanar | varrer o órgão sem perder o ponto de contato |
-| Rotacionar | mudar eixo curto para eixo longo |
-| Bascular | centralizar o alvo |
-| Comprimir | diferenciar veia de artéria, testar partes moles |
+| Movimento  | Para que serve                                   |
+| ---------- | ------------------------------------------------ |
+| Deslizar   | procurar a melhor janela                         |
+| Inclinar   | varrer o órgão sem perder o ponto de contato     |
+| Rotacionar | mudar eixo curto para eixo longo                 |
+| Bascular   | centralizar o alvo                               |
+| Comprimir  | diferenciar veia de artéria, testar partes moles |
 
 ## Orientação
 
-O marcador físico da sonda precisa corresponder ao marcador da tela. Se estiver em dúvida, faça o “teste do balanço”: mexa uma ponta da sonda e veja qual lado da tela se mexe.
+O marcador físico da sonda precisa corresponder ao marcador da tela. Se estiver em dúvida, faça o “teste do dedo”: coloque um dedo em uma das extremidaddes do transdutor e veja qual lado da tela se mexe.
 
 ## Erro comum
 

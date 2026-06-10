@@ -2,7 +2,7 @@
 
 O material local identifica o aparelho como **Konted C10RL**, sonda dupla com cabeça **convexa/cardíaca** e **linear**, conectada ao app **My USG**.
 
-![Componentes internos e externos da sonda](../assets/media/componentes-c10rl.png)
+![[image.png | 300]]
 
 ## Componentes que a equipe deve reconhecer
 
@@ -16,15 +16,15 @@ O material local identifica o aparelho como **Konted C10RL**, sonda dupla com ca
 
 ## Especificações úteis para aula
 
-| Item | Informação prática |
-|---|---|
-| Conexão | Wi-Fi e USB/Type-C conforme dispositivo e cabo compatível |
-| App | My USG |
-| Modos | B, B/M, Color, PDI, PW e combinações conforme preset/cabeça |
-| Linear | 7,5/10 MHz; profundidades superficiais, como 20 a 100 mm nos PDFs locais |
-| Convexa/cardíaca | baixa frequência; profundidades maiores, como 90 a 305 mm nos PDFs locais |
-| Bateria | bateria interna; PDFs locais citam cerca de 2800 mAh e uso em torno de 3 horas |
-| Idioma | há suporte a português do Brasil nos PDFs comerciais locais |
+| Item             | Informação prática                                                             |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Conexão          | Wi-Fi e USB/Type-C conforme dispositivo e cabo compatível                      |
+| App              | My USG                                                                         |
+| Modos            | B, B/M, PW e combinações conforme preset                                       |
+| Linear           | 7,5/10 MHz; profundidades superficiais, como 20 a 100 mm nos PDFs locais       |
+| Convexa/cardíaca | baixa frequência; profundidades maiores, como 90 a 305 mm nos PDFs locais      |
+| Bateria          | bateria interna; PDFs locais citam cerca de 2800 mAh e uso em torno de 3 horas |
+|                  |                                                                                |
 
 ## Botão físico
 

@@ -4,29 +4,100 @@ from __future__ import annotations
 import html
 import re
 import unicodedata
+from dataclasses import dataclass
 from pathlib import Path
-
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
 OUTPUT = ROOT / "index.html"
+SITE_TITLE = "Treinamento POCUS UPA"
+SITE_DESCRIPTION = (
+    "Trilha de aprendizado de POCUS para médicos e enfermeiros da UPA: "
+    "cuidados com o Konted C10RL, conexão My USG, primeira imagem útil, "
+    "acesso central supervisionado, checklists e fontes FOAM."
+)
+UPDATED_AT = "10/06/2026"
+WIFI_PASSWORD = "uxccgdh397"
+APP_PASSWORD = "123456"
+MANUAL_OFFICIAL = "references/c10rl-pro-myusg-quick-user-manual-v1-1.pdf"
 
-# Only these pages are published to the team-facing site. Other Markdown files
-# stay in the vault as internal support material for preparing the training.
-PUBLIC_PAGES = [
-    "00-inicio.md",
-    "01-baixar-app.md",
-    "02-conexao-my-usg.md",
-    "03-cuidados-limpeza.md",
-    "04-controles-imagem.md",
-    "05-o-que-vamos-treinar.md",
-    "05-protocolos-pocus.md",
-    "07-acesso-vascular.md",
-    "06-armadilhas.md",
-    "08-roteiro-aula.md",
-    "09-checklists.md",
-    "08-fontes-foam.md",
-]
+@dataclass(frozen=True)
+class ModuleSpec:
+    file: str
+    slug: str
+    title: str
+    description: str
+    time: str
+    badge: str = ""
+    badge_kind: str = ""
+    wide: bool = False
+    open_by_default: bool = False
+
+@dataclass(frozen=True)
+class StageSpec:
+    slug: str
+    number: str
+    kicker: str
+    title: str
+    lede: str
+    tint: str
+    modules: tuple[ModuleSpec, ...]
+
+STAGES: tuple[StageSpec, ...] = (
+    StageSpec(
+        slug="etapa-1",
+        number="01",
+        kicker="Etapa 1 · antes da aula · ~10 min",
+        title="Chegue com o app no bolso e as regras na cabeça",
+        lede="O início é deliberadamente simples: entender o uso focado do POCUS, instalar o My USG e memorizar as regras que evitam falsa segurança.",
+        tint="",
+        modules=(
+            ModuleSpec("00-inicio.md", "mod-inicio", "O que é POCUS — e o que não é", "Ultrassom à beira-leito com pergunta clínica limitada e imediata. A fronteira do método é parte da segurança.", "leitura · 4 min"),
+            ModuleSpec("01-baixar-app.md", "mod-app", "Baixar o app My USG", "Instale antes da aula para sobrar tempo de prática: iPhone por Wi-Fi; Android por Wi-Fi ou cabo compatível.", "2 min + download"),
+        ),
+    ),
+    StageSpec(
+        slug="etapa-2",
+        number="02",
+        kicker="Etapa 2 · operar o aparelho · ~30 min",
+        title="Ligue, conecte e gere imagem sem travar",
+        lede="A parte que destrava todo o resto: ordem de conexão, senha certa, controles básicos, limpeza e troubleshooting de plantão.",
+        tint="stage--alt",
+        modules=(
+            ModuleSpec("02-conexao-my-usg.md", "mod-conexao", "Conexão My USG", "Sempre na mesma ordem: ligar a sonda, entrar no Wi-Fi dela, abrir o app. O erro número 1 é confundir as senhas.", "leitura · 10 min", "duas senhas", "core"),
+            ModuleSpec("03-cuidados-limpeza.md", "mod-cuidados", "Cuidados e limpeza", "Conferir antes, proteger durante, limpar depois. O aparelho precisa continuar funcionando para toda a equipe.", "leitura · 6 min"),
+            ModuleSpec("04-controles-imagem.md", "mod-controles", "Controles de imagem", "Não procure uma imagem perfeita: procure uma imagem útil. Profundidade, ganho, preset, marcador e freeze/live.", "leitura · 10 min"),
+        ),
+    ),
+    StageSpec(
+        slug="etapa-3",
+        number="03",
+        kicker="Etapa 3 · na prática · ~90 min",
+        title="Mão na sonda: a sequência da primeira prática",
+        lede="A competência mínima é operacional. Acesso central é o núcleo supervisionado; pulmão, eFAST e eco básico entram como demonstrações, não como obrigação inicial.",
+        tint="stage--tint",
+        modules=(
+            ModuleSpec("05-o-que-vamos-treinar.md", "mod-treinar", "O que vamos treinar", "A primeira prática é uma sequência repetível: conectar, gerar imagem, ajustar, salvar, limpar e verbalizar limitações.", "leitura · 8 min"),
+            ModuleSpec("07-acesso-vascular.md", "mod-acesso-central", "Acesso central guiado por ultrassom", "Pré-scan, veia vs. artéria, jugular interna, profundidade e regra da ponta. Procedimento real exige supervisão direta.", "20 min + prática", "núcleo obrigatório", "core", True),
+            ModuleSpec("05-protocolos-pocus.md", "mod-protocolos", "Pulmão, eFAST e eco básico", "Protocolos demonstrativos para reconhecer perguntas úteis e limites do método. Não são competência mínima da primeira aula.", "demonstração · 15 min", "demonstração", "demo"),
+        ),
+    ),
+    StageSpec(
+        slug="etapa-4",
+        number="04",
+        kicker="Etapa 4 · depois da aula · consulta contínua",
+        title="Fixe o que importa e saiba onde estudar",
+        lede="Referência pós-aula: armadilhas, checklist de plantão e fontes FOAM. Use no celular quando o aparelho ou a imagem não colaborarem.",
+        tint="stage--alt",
+        modules=(
+            ModuleSpec("06-armadilhas.md", "mod-armadilhas", "Armadilhas e falsas seguranças", "Situações em que o exame engana quem está começando: conexão, imagem, protocolos e procedimentos.", "revisão · 10 min", "revisão", "demo", True),
+            ModuleSpec("09-checklists.md", "mod-checklists", "Checklists rápidos", "Antes da aula, conexão, limpeza pós-uso e entrega mínima do aluno. Feito para consulta no plantão.", "consulta rápida", "uso no plantão", "core", True),
+            ModuleSpec("08-fontes-foam.md", "mod-fontes", "Fontes para estudar depois", "Links abertos para revisar depois da aula: vídeos, atlas, podcasts e manuais.", "consulta contínua"),
+        ),
+    ),
+)
+
+PUBLIC_FILES = [module.file for stage in STAGES for module in stage.modules]
 
 
 def slugify(text: str) -> str:
@@ -41,15 +112,15 @@ def normalize_href(href: str) -> str:
     if href.startswith("../"):
         href = href[3:]
     if href.endswith(".md") and not href.startswith(("http://", "https://")):
-        return "#fontes" if "fontes" in href.lower() else href
+        return "#mod-fontes" if "fontes" in href.lower() else href
     return href
 
 
 def render_link(label: str, href: str) -> str:
-    escaped_href = html.escape(href, quote=True)
+    escaped_href = html.escape(normalize_href(href), quote=True)
     escaped_label = html.escape(label)
     attrs = ""
-    if href.startswith(("http://", "https://")):
+    if escaped_href.startswith(("http://", "https://")):
         attrs = ' target="_blank" rel="noopener"'
     return f'<a href="{escaped_href}"{attrs}>{escaped_label}</a>'
 
@@ -64,43 +135,34 @@ def inline(text: str) -> str:
     text = re.sub(
         r"!\[([^\]]*)\]\(([^)]+)\)",
         lambda m: stash(
-            f'<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" '
+            '<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" '
             f'src="{html.escape(normalize_href(m.group(2)), quote=True)}" '
             f'alt="{html.escape(m.group(1), quote=True)}"></div><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
         ),
         text,
     )
-    text = re.sub(
-        r"\[([^\]]+)\]\(([^)]+)\)",
-        lambda m: stash(render_link(m.group(1), normalize_href(m.group(2)))),
-        text,
-    )
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: stash(render_link(m.group(1), m.group(2))), text)
     text = re.sub(r"`([^`]+)`", lambda m: stash(f"<code>{html.escape(m.group(1))}</code>"), text)
-
     rendered = html.escape(text)
     rendered = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", rendered)
-
+    rendered = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", rendered)
     for idx, value in enumerate(tokens):
         rendered = rendered.replace(f"\u0000{idx}\u0000", value)
     return rendered
 
 
 def render_table(lines: list[str]) -> str:
-    rows = []
-    for line in lines:
-        cells = [inline(cell.strip()) for cell in line.strip().strip("|").split("|")]
-        rows.append(cells)
-
+    rows = [[inline(cell.strip()) for cell in line.strip().strip("|").split("|")] for line in lines]
     header = rows[0]
     body = rows[2:]
-    out = ['<div class="table-wrap"><table><thead><tr>']
+    out = ['<div class="table-scroll"><div class="table-wrap"><table><thead><tr>']
     out.extend(f"<th>{cell}</th>" for cell in header)
     out.append("</tr></thead><tbody>")
     for row in body:
         out.append("<tr>")
         out.extend(f"<td>{cell}</td>" for cell in row)
         out.append("</tr>")
-    out.append("</tbody></table></div>")
+    out.append("</tbody></table></div></div>")
     return "".join(out)
 
 
@@ -121,7 +183,6 @@ def render_markdown(markdown: str) -> str:
     while i < len(lines):
         line = lines[i]
         stripped = line.strip()
-
         if stripped.startswith("```"):
             if in_code:
                 out.append("<pre><code>" + html.escape("\n".join(code_lines)) + "</code></pre>")
@@ -132,17 +193,12 @@ def render_markdown(markdown: str) -> str:
                 in_code = True
             i += 1
             continue
-
         if in_code:
             code_lines.append(line)
             i += 1
             continue
-
         if not stripped:
-            close_list()
-            i += 1
-            continue
-
+            close_list(); i += 1; continue
         if stripped.startswith("|") and i + 1 < len(lines) and re.match(r"^\s*\|?\s*:?-{3,}", lines[i + 1]):
             close_list()
             table_lines = [stripped, lines[i + 1].strip()]
@@ -152,7 +208,6 @@ def render_markdown(markdown: str) -> str:
                 i += 1
             out.append(render_table(table_lines))
             continue
-
         heading = re.match(r"^(#{1,4})\s+(.+)$", stripped)
         if heading:
             close_list()
@@ -161,7 +216,6 @@ def render_markdown(markdown: str) -> str:
             out.append(f'<h{level} id="h-{slugify(text)}">{inline(text)}</h{level}>')
             i += 1
             continue
-
         video = re.match(r"^\{\{video:([^|}]+)(?:\|([^|}]*))?(?:\|([^|}]*))?\}\}$", stripped)
         if video:
             close_list()
@@ -170,33 +224,20 @@ def render_markdown(markdown: str) -> str:
             poster = normalize_href(video.group(3)) if video.group(3) else ""
             poster_attr = f' poster="{html.escape(poster, quote=True)}"' if poster else ""
             out.append(
-                '<figure class="figure video-figure">'
-                '<div class="figure-shell">'
+                '<figure class="figure video-figure"><div class="figure-shell">'
                 f'<video controls preload="metadata" src="{html.escape(src, quote=True)}"{poster_attr}></video>'
-                '</div>'
-                f'<figcaption>{html.escape(caption)}</figcaption></figure>'
+                f'</div><figcaption>{html.escape(caption)}</figcaption></figure>'
             )
             i += 1
             continue
-
         if re.match(r"^!\[[^\]]*\]\([^)]+\)$", stripped):
-            close_list()
-            out.append(inline(stripped))
-            i += 1
-            continue
-
+            close_list(); out.append(inline(stripped)); i += 1; continue
         if stripped.startswith(">"):
-            close_list()
-            out.append(f'<blockquote>{inline(stripped.lstrip("> ").strip())}</blockquote>')
-            i += 1
-            continue
-
+            close_list(); out.append(f'<blockquote>{inline(stripped.lstrip("> ").strip())}</blockquote>'); i += 1; continue
         unordered = re.match(r"^[-*]\s+(.+)$", stripped)
         if unordered:
             if list_type != "ul":
-                close_list()
-                out.append("<ul>")
-                list_type = "ul"
+                close_list(); out.append("<ul>"); list_type = "ul"
             item = unordered.group(1)
             checked = re.match(r"^\[( |x|X)\]\s+(.+)$", item)
             if checked:
@@ -206,801 +247,331 @@ def render_markdown(markdown: str) -> str:
                 out.append(f"<li>{inline(item)}</li>")
             i += 1
             continue
-
         ordered = re.match(r"^\d+\.\s+(.+)$", stripped)
         if ordered:
             if list_type != "ol":
-                close_list()
-                out.append("<ol>")
-                list_type = "ol"
+                close_list(); out.append("<ol>"); list_type = "ol"
             out.append(f"<li>{inline(ordered.group(1))}</li>")
             i += 1
             continue
-
         close_list()
         out.append(f"<p>{inline(stripped)}</p>")
         i += 1
-
     close_list()
     if in_code:
         out.append("<pre><code>" + html.escape("\n".join(code_lines)) + "</code></pre>")
     return "\n".join(out)
 
 
-def read_pages() -> list[dict[str, str]]:
-    pages = []
-    for filename in PUBLIC_PAGES:
+def strip_first_heading(rendered: str) -> str:
+    return re.sub(r"^\s*<h2[^>]*>.*?</h2>\s*", "", rendered, count=1, flags=re.S)
+
+
+def read_pages() -> dict[str, dict[str, str]]:
+    pages: dict[str, dict[str, str]] = {}
+    for filename in PUBLIC_FILES:
         path = CONTENT_DIR / filename
         if not path.exists():
             raise SystemExit(f"Pagina publica nao encontrada: {path}")
         text = path.read_text(encoding="utf-8")
         first_heading = re.search(r"^#\s+(.+)$", text, flags=re.MULTILINE)
         title = first_heading.group(1).strip() if first_heading else path.stem
-        pages.append(
-            {
-                "title": title,
-                "slug": slugify(title),
-                "path": str(path.relative_to(ROOT)),
-                "html": render_markdown(text),
-            }
-        )
+        pages[filename] = {"title": title, "path": str(path.relative_to(ROOT)), "html": render_markdown(text)}
     return pages
 
 
-def render_hero_panel() -> str:
-    return """
-<aside class="hero-panel" aria-label="Resumo operacional do treinamento">
-  <div class="hero-panel-inner">
-    <p class="panel-kicker">Aparelho da aula</p>
-    <figure class="hero-device">
-      <img src="assets/media/componentes-c10rl-hero.jpg" width="860" height="645" loading="eager" decoding="async" alt="Diagrama técnico do aparelho Konted C10RL com bateria, módulo sem fio, botão de energia e transdutor">
-    </figure>
-    <div class="proof-grid" aria-label="Contexto do treinamento">
-      <div><strong>Konted C10RL</strong><span>sonda sem fio</span></div>
-      <div><strong>My USG</strong><span>app da prática</span></div>
-      <div><strong>UPA</strong><span>uso à beira-leito</span></div>
-      <div><strong>Central</strong><span>foco inicial</span></div>
+def wave() -> str:
+    return '''<div class="wave-sep" aria-hidden="true"><svg viewBox="0 0 1200 36" preserveAspectRatio="none" focusable="false"><path d="M0 18 q 15 -14 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>'''
+
+
+def badge_html(module: ModuleSpec) -> str:
+    if not module.badge:
+        return ""
+    cls = "badge badge--core" if module.badge_kind == "core" else "badge"
+    return f'<span class="{cls}">{html.escape(module.badge)}</span>'
+
+
+def render_module(module: ModuleSpec, idx: int, total: int, pages: dict[str, dict[str, str]]) -> str:
+    page = pages[module.file]
+    body = strip_first_heading(page["html"])
+    all_modules = [m for s in STAGES for m in s.modules]
+    if idx < total:
+        next_mod = all_modules[idx]
+        next_link = f'<a class="next-link" href="#{next_mod.slug}">Próximo: {html.escape(next_mod.title)} →</a>'
+    else:
+        next_link = '<a class="next-link" href="#topo">Voltar ao topo ↑</a>'
+    open_attr = " open" if module.open_by_default else ""
+    wide_attr = " module--wide" if module.wide else ""
+    return f'''
+        <details class="module{wide_attr}" id="{module.slug}" data-module data-stage-module{open_attr}>
+          <summary>
+            <span class="module-expand" aria-hidden="true">+</span>
+            <span class="module-top"><span class="module-no">Módulo {idx:02d}</span>{badge_html(module)}<span class="chip">{html.escape(module.time)}</span></span>
+            <h3 class="module-title">{html.escape(module.title)}</h3>
+            <span class="module-desc">{html.escape(module.description)}</span>
+            <span class="done-chip">concluído</span>
+          </summary>
+          <div class="module-body">
+            {body}
+            <div class="module-foot">
+              <button type="button" class="complete-btn" data-complete="{module.slug}" aria-pressed="false"><span class="cb-box" aria-hidden="true"></span><span class="cb-label">Marcar como concluído</span></button>
+              {next_link}
+              <span class="source-path">{html.escape(page['path'])}</span>
+            </div>
+          </div>
+        </details>'''
+
+
+def render_stage(stage: StageSpec, start_idx: int, total: int, pages: dict[str, dict[str, str]]) -> str:
+    modules_html = []
+    for offset, module in enumerate(stage.modules):
+        modules_html.append(render_module(module, start_idx + offset, total, pages))
+    tint = f" {stage.tint}" if stage.tint else ""
+    return f'''
+  <section class="stage{tint}" id="{stage.slug}" aria-labelledby="t-{stage.slug}">
+    <div class="stage-inner">
+      <header class="stage-head">
+        <span class="stage-num" aria-hidden="true">{stage.number}</span>
+        <p class="stage-kicker">{html.escape(stage.kicker)}</p>
+        <h2 id="t-{stage.slug}">{html.escape(stage.title)}</h2>
+        <p class="stage-lede">{html.escape(stage.lede)}</p>
+        <p class="stage-progress"><span data-stage-count>0/{len(stage.modules)}</span> módulos concluídos</p>
+      </header>
+      <div class="modules">
+        {''.join(modules_html)}
+      </div>
     </div>
-    <ol class="hero-steps" aria-label="Sequência mínima antes da prática">
-      <li><span>01</span><strong>Ligar e conectar</strong><em>Wi-Fi da sonda, app correto, bateria.</em></li>
-      <li><span>02</span><strong>Ajustar imagem</strong><em>profundidade, ganho, preset e marcador.</em></li>
-      <li><span>03</span><strong>Fazer pré-scan</strong><em>veia, artéria, profundidade e limites.</em></li>
-    </ol>
-  </div>
-</aside>"""
+  </section>'''
 
 
-def build_html(pages: list[dict[str, str]]) -> str:
-    nav = "\n".join(
-        f'<a href="#{page["slug"]}" data-nav-target="{page["slug"]}"><span>{idx:02d}</span>{html.escape(page["title"])}</a>'
-        for idx, page in enumerate(pages, start=1)
+def render_topbar(total: int) -> str:
+    nav = "".join(
+        f'<a href="#{stage.slug}"><b>{stage.number}</b>{html.escape(stage.kicker.split("·")[1].strip())}</a>'
+        for stage in STAGES
     )
-    section_html = []
-    for idx, page in enumerate(pages, start=1):
-        body = page["html"]
-        if idx == 1:
-            marker = '<h3 id="h-o-que-e-pocus">'
-            intro, rest = (body.split(marker, 1) + [""])[:2] if marker in body else (body, "")
-            body = (
-                '<div class="hero-grid">'
-                f'<div class="hero-copy">{intro}</div>'
-                f'{render_hero_panel()}'
-                '</div>'
-                f'<div class="section-rest">{marker if rest else ""}{rest}</div>'
+    mnav_groups: list[str] = []
+    idx = 1
+    for stage in STAGES:
+        items = []
+        for module in stage.modules:
+            items.append(
+                f'<li><a href="#{module.slug}" data-mnav="{module.slug}">'
+                f'<span class="mnav-no">{idx:02d}</span>'
+                f'<span class="mnav-name">{html.escape(module.title)}</span>'
+                f'<span class="mnav-done" aria-hidden="true">✓</span></a></li>'
             )
-        section_html.append(
-            f'<section id="{page["slug"]}" class="section-block reveal" data-search data-section="{idx:02d}">'
-            f'{body}</section>'
+            idx += 1
+        short = stage.kicker.split("·")[1].strip() if "·" in stage.kicker else stage.title
+        mnav_groups.append(
+            f'<section class="mnav-group">'
+            f'<a class="mnav-stage" href="#{stage.slug}"><b>{stage.number}</b>{html.escape(short)}'
+            f'<small>{html.escape(stage.kicker.split("·")[-1].strip())}</small></a>'
+            f'<ul>{"".join(items)}</ul></section>'
         )
-    sections = "\n".join(section_html)
-    return f"""<!doctype html>
+    return f'''
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="#topo">POCUS<b>·</b>UPA <small>trilha</small></a>
+    <nav class="stage-nav" aria-label="Etapas da trilha">{nav}</nav>
+    <div class="search-wrap" role="search">
+      <button type="button" class="icon-btn search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-bar" aria-label="Buscar nos módulos">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="search-bar" id="search-bar">
+        <div class="search-field">
+          <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="search-input" type="search" placeholder="Buscar nos módulos…" aria-label="Buscar nos módulos" autocomplete="off">
+          <button type="button" class="search-clear" id="search-clear" aria-label="Limpar busca" hidden>✕</button>
+        </div>
+        <p class="search-count" id="search-count" aria-live="polite" hidden></p>
+      </div>
+    </div>
+    <button type="button" class="icon-btn theme-toggle" id="theme-toggle" aria-label="Tema: automático (tocar para mudar)">
+      <span class="tt tt-auto" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></span>
+      <span class="tt tt-light" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.4 5.4l1.7 1.7M16.9 16.9l1.7 1.7M18.6 5.4l-1.7 1.7M7.1 16.9l-1.7 1.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="tt tt-dark" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 1 0 11 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+    </button>
+    <a class="plantao-btn" id="plantao-btn" href="#plantao">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2 4.5 13.5H10L9 22l8.5-11.5H12L13 2z" fill="currentColor"/></svg>
+      Plantão
+    </a>
+    <div class="trail-progress" aria-live="polite">
+      <span class="tp-label" id="progress-label">0/{total} módulos</span>
+      <div class="tp-bar" aria-hidden="true"><i id="progress-fill"></i></div>
+    </div>
+    <details class="mnav" id="mnav">
+      <summary aria-label="Abrir menu de etapas e módulos">
+        <span class="mnav-ico" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="sr-only">Menu</span>
+      </summary>
+      <nav class="mnav-panel" aria-label="Etapas e módulos da trilha">
+        <p class="mnav-progress"><span id="mnav-progress-label">0/{total} módulos concluídos</span></p>
+        {"".join(mnav_groups)}
+      </nav>
+    </details>
+  </div>
+</header>'''
+
+
+def render_plantao_dialog() -> str:
+    wifi = html.escape(WIFI_PASSWORD)
+    app = html.escape(APP_PASSWORD)
+    manual = html.escape(MANUAL_OFFICIAL, quote=True)
+    return f'''
+<dialog class="plantao" id="plantao" aria-labelledby="plantao-title">
+  <header class="plantao-head">
+    <p class="plantao-kicker">Acesso rápido · consulta de plantão</p>
+    <h2 id="plantao-title">Modo plantão</h2>
+    <button type="button" class="plantao-close" aria-label="Fechar painel do plantão">✕</button>
+  </header>
+  <div class="plantao-body">
+    <section aria-labelledby="p-t-senhas">
+      <h3 id="p-t-senhas">As duas senhas</h3>
+      <div class="creds">
+        <div class="cred">
+          <span class="cred-which">1 · Wi-Fi da sonda (iPhone, iPad, Android)</span>
+          <strong class="cred-value">{wifi}</strong>
+          <span class="cred-note">Senha desta sonda da UPA. Digite em <strong>minúsculas</strong>, sem espaços. Em outras unidades, o fabricante usa o número de série (SN) gravado na carcaça — nesta sonda, o valor é <strong>{wifi}</strong>.</span>
+          <button type="button" class="copy-btn" data-copy="{wifi}" aria-label="Copiar senha do Wi-Fi ({wifi})"><span class="copy-label">copiar senha</span></button>
+          <span class="sr-only" aria-live="polite" data-copy-status></span>
+        </div>
+        <div class="cred">
+          <span class="cred-which">2 · App My USG · usuário Administer</span>
+          <strong class="cred-value">{app}</strong>
+          <span class="cred-note">Senha inicial do app, no perfil <strong>Administer</strong>. Se fizer sentido para o plantão, ative o Auto login.</span>
+          <button type="button" class="copy-btn" data-copy="{app}" aria-label="Copiar a senha do app ({app})"><span class="copy-label">copiar senha</span></button>
+          <span class="sr-only" aria-live="polite" data-copy-status></span>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="p-t-manual">
+      <h3 id="p-t-manual">Manual oficial</h3>
+      <p><a class="btn btn--ghost" href="{manual}" target="_blank" rel="noopener">Abrir manual C10RL Pro + My USG (PDF)</a></p>
+      <p class="small-note">PDF local — funciona offline após o primeiro acesso. Outros manuais no módulo <a href="#mod-fontes">Fontes FOAM</a>.</p>
+    </section>
+    <section aria-labelledby="p-t-90s">
+      <h3 id="p-t-90s">Sequência de recuperação em 90 segundos</h3>
+      <ol class="count90">
+        <li>A sonda está ligada?</li>
+        <li>A bateria da sonda está suficiente?</li>
+        <li>O celular está conectado ao Wi-Fi <strong>da sonda</strong>, não ao Wi-Fi da UPA?</li>
+        <li>A senha digitada foi <strong>{wifi}</strong> (minúsculas, sem espaços)?</li>
+        <li>O My USG foi aberto <strong>depois</strong> da conexão Wi-Fi?</li>
+        <li>Há outro celular/tablet conectado à sonda?</li>
+        <li>O app volta a funcionar se fechar e abrir?</li>
+        <li>A imagem aparece se pressionar o botão físico freeze/live?</li>
+      </ol>
+      <p class="small-note">Se falhar depois disso: pare e troque de dispositivo. O passo a passo completo está no módulo <a href="#mod-conexao">Conexão My USG</a>.</p>
+    </section>
+    <section aria-label="Avisos de segurança">
+      <div class="plantao-stop" role="note">
+        <b>SE A PONTA DA AGULHA SUMIU, PARE.</b>
+        <span>Não avance o instrumento sem ver a ponta. Reencontre a ponta antes de avançar; sem confirmação, peça ajuda e não prossiga.</span>
+      </div>
+      <div class="callout callout--warn plantao-confuse"><strong>Não confundir:</strong> senha do Wi-Fi da sonda (<code>{wifi}</code>) ≠ senha do app My USG (<code>{app}</code>).</div>
+    </section>
+    <section class="plantao-links" aria-label="Atalhos">
+      <a class="btn" href="#mod-checklists">Abrir os checklists de plantão</a>
+    </section>
+  </div>
+</dialog>'''
+
+
+def render_footer() -> str:
+    return f'''
+<footer>
+  <svg class="foot-wave" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 18 q 15 -14 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <div class="foot-inner">
+    <div class="foot-grid">
+      <div>
+        <h3>Escopo deste material</h3>
+        <p>Trilha educacional interna para o treinamento de POCUS da equipe da UPA (Konted C10RL + app My USG). Não substitui protocolos institucionais, manuais do fabricante nem julgamento clínico. Procedimentos reais exigem supervisão direta e protocolo local.</p>
+      </div>
+      <div>
+        <h3>Como editar</h3>
+        <p>O conteúdo vive em arquivos Markdown (<code>content/*.md</code>) no vault Obsidian do projeto. Edite os arquivos e rode <code>python3 scripts/build_site.py</code> ou <code>atualizar-site.command</code> para regenerar e publicar no GitHub Pages.</p>
+      </div>
+      <div>
+        <h3>Créditos de imagem</h3>
+        <p>Imagens do módulo de acesso central: <a href="https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education/m3-curriculum/bedside-ultrasonagraphy/venous-access" target="_blank" rel="noopener">SAEM, “Venous access”</a> — cortesia de Sierra Beck, MD, e Bradley Wallace, MD. Usadas com atribuição, para fins educacionais.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot-meta">
+    <span>Material atualizado em {UPDATED_AT} · uso educacional · conteúdo não substitui julgamento clínico · V3.1 trilha + plantão</span>
+    <a href="#topo">Voltar ao topo ↑</a>
+  </div>
+</footer>'''
+
+
+def render_hero() -> str:
+    stage_cards = "".join(
+        f'<li><a href="#{stage.slug}"><span class="hs-num">{stage.number}</span><span class="hs-name">{html.escape(stage.title.split(":")[0])}</span><span class="hs-time">{len(stage.modules)} módulos</span></a></li>'
+        for stage in STAGES
+    )
+    return f'''
+  <section class="hero" id="topo" aria-label="Apresentação da trilha">
+    <div class="hero-text">
+      <p class="eyebrow">UPA · Konted C10RL · app My USG</p>
+      <h1>Do aparelho na caixa à <em>primeira imagem útil</em>.</h1>
+      <p class="lede">Trilha de aprendizado de ultrassom point-of-care para médicos e enfermeiros <strong>sem contato prévio</strong> com ultrassom: ligar, conectar, gerar uma imagem básica, reconhecer limitações e pedir ajuda cedo.</p>
+      <p class="hero-note">O aparelho é da equipe. Quem trabalha na UPA precisa saber conectar, cuidar e usar com responsabilidade. O objetivo não é formar especialista: é não travar na frente do paciente.</p>
+      <div class="hero-actions"><a class="btn" href="#etapa-1">Começar a etapa 1</a><a class="btn btn--ghost" href="#mod-checklists">Checklists de plantão</a></div>
+      <ul class="hero-stages">{stage_cards}</ul>
+    </div>
+    <figure class="hero-figure">
+      <img src="assets/media/componentes-c10rl-hero.jpg" alt="Componentes do aparelho Konted C10RL: sonda sem fio de duas faces, cabo de carregamento e acessórios" width="800" height="770">
+      <figcaption>Konted C10RL — sonda sem fio com face convexa e linear</figcaption>
+    </figure>
+  </section>'''
+
+
+def render_html(pages: dict[str, dict[str, str]]) -> str:
+    all_modules = [module for stage in STAGES for module in stage.modules]
+    total = len(all_modules)
+    stage_html = []
+    idx = 1
+    for stage in STAGES:
+        stage_html.append(render_stage(stage, idx, total, pages))
+        idx += len(stage.modules)
+        stage_html.append(wave())
+    stages = "\n".join(stage_html[:-1])
+    return f'''<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Treinamento USG point-of-care | UPA</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23152123'/%3E%3Cpath d='M16 38c6 5 26 5 32 0' stroke='%23d79043' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ctext x='32' y='31' font-size='19' text-anchor='middle' fill='%23f6f1e9' font-family='system-ui,sans-serif' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
-  <script>document.documentElement.classList.add('js');</script>
-  <style>
-    :root {{
-      --bg: #f3f6f2;
-      --paper: #fbfaf4;
-      --surface: #fffdf7;
-      --surface-quiet: #eef4ef;
-      --surface-strong: #e2ece7;
-      --ink: #152123;
-      --ink-soft: #263636;
-      --muted: #5f6c67;
-      --rail: #101b1c;
-      --rail-2: #172526;
-      --rail-muted: #a9b7b1;
-      --line: rgba(21, 33, 35, .14);
-      --line-strong: rgba(21, 33, 35, .22);
-      --accent: #126e68;
-      --accent-dark: #0d514d;
-      --accent-soft: #dfeee9;
-      --amber: #b36b27;
-      --amber-soft: #f6e4c9;
-      --danger: #8f3c2e;
-      --max: 1130px;
-      --sidebar: 304px;
-      --radius: 22px;
-      --ease: cubic-bezier(.16, 1, .3, 1);
-      --sans: "Plus Jakarta Sans", "Satoshi", "Geist", "Aptos", system-ui, sans-serif;
-      --mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
-      color-scheme: light;
-    }}
-    * {{ box-sizing: border-box; }}
-    html {{ scroll-behavior: smooth; }}
-    body {{
-      margin: 0;
-      font-family: var(--sans);
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.62;
-      text-rendering: optimizeLegibility;
-    }}
-    body::before {{
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 5;
-      opacity: .035;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-    }}
-    a {{ color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }}
-    a:hover {{ color: var(--accent-dark); }}
-    a:focus-visible, button:focus-visible, input:focus-visible {{
-      outline: 3px solid rgba(179, 107, 39, .32);
-      outline-offset: 3px;
-    }}
-    .layout {{
-      display: grid;
-      grid-template-columns: var(--sidebar) minmax(0, 1fr);
-      min-height: 100dvh;
-    }}
-    aside {{
-      position: sticky;
-      top: 0;
-      height: 100dvh;
-      overflow: auto;
-      padding: 28px 18px;
-      background: var(--rail);
-      color: var(--rail-muted);
-      box-shadow: inset -1px 0 0 rgba(246, 241, 233, .08);
-    }}
-    .brand {{
-      position: relative;
-      padding: 4px 8px 24px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid rgba(246, 241, 233, .11);
-    }}
-    .brand::before {{
-      content: "";
-      display: block;
-      width: 42px;
-      height: 4px;
-      border-radius: 999px;
-      background: var(--amber);
-      margin-bottom: 18px;
-    }}
-    .brand strong {{
-      display: block;
-      max-width: 9ch;
-      color: #f6f1e9;
-      font-size: 32px;
-      font-weight: 760;
-      letter-spacing: 0;
-      line-height: .96;
-    }}
-    .brand span {{
-      display: block;
-      max-width: 22ch;
-      color: var(--rail-muted);
-      font-size: 13px;
-      line-height: 1.45;
-      margin-top: 12px;
-    }}
-    nav {{
-      display: grid;
-      gap: 3px;
-    }}
-    nav a {{
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      align-items: center;
-      min-height: 42px;
-      gap: 10px;
-      padding: 8px 10px 8px 6px;
-      border-radius: 14px;
-      color: #dbe5df;
-      text-decoration: none;
-      font-size: 14px;
-      line-height: 1.24;
-      transition: background-color .42s var(--ease), color .42s var(--ease), transform .42s var(--ease);
-    }}
-    nav a span {{
-      font-family: var(--mono);
-      color: var(--amber-soft);
-      font-size: 11px;
-      text-align: center;
-      opacity: .8;
-    }}
-    nav a:hover {{
-      background: rgba(246, 241, 233, .08);
-      color: #fffdf7;
-      transform: translateX(4px);
-    }}
-    nav a[aria-current="true"] {{
-      background: rgba(246, 241, 233, .12);
-      color: #fffdf7;
-      box-shadow: inset 3px 0 0 var(--amber);
-    }}
-    nav a[aria-current="true"] span {{
-      color: #fffdf7;
-      opacity: 1;
-    }}
-    .topbar {{
-      position: sticky;
-      top: 18px;
-      z-index: 4;
-      max-width: calc(var(--max) + 56px);
-      margin: 18px auto 0;
-      padding: 7px;
-      border-radius: 28px;
-      background: rgba(251, 250, 244, .84);
-      border: 1px solid rgba(21, 33, 35, .10);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 24px 60px -44px rgba(15, 28, 29, .42), inset 0 1px 0 rgba(255, 253, 247, .74);
-    }}
-    .topbar-inner {{
-      max-width: var(--max);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(260px, 1fr) auto;
-      gap: 10px;
-      align-items: center;
-    }}
-    input[type="search"] {{
-      width: 100%;
-      min-height: 46px;
-      border: 0;
-      border-radius: 22px;
-      padding: 12px 16px;
-      font: inherit;
-      font-size: 15px;
-      background: var(--surface);
-      color: var(--ink);
-      box-shadow: inset 0 0 0 1px rgba(21, 33, 35, .11);
-    }}
-    input[type="search"]::placeholder {{ color: #6f7c78; }}
-    .actions {{
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }}
-    .actions a, .actions button {{
-      min-height: 46px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--rail);
-      color: #f6f1e9;
-      padding: 12px 16px;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 760;
-      text-decoration: none;
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .10);
-      transition: background-color .42s var(--ease), color .42s var(--ease), transform .42s var(--ease);
-    }}
-    .actions a:nth-child(2) {{ background: var(--accent-dark); }}
-    .actions button {{ background: var(--amber); color: #20160d; }}
-    .actions a:hover, .actions button:hover {{
-      transform: translateY(-1px);
-    }}
-    .actions a:active, .actions button:active {{ transform: translateY(1px) scale(.99); }}
-    main {{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 34px 30px 88px;
-    }}
-    .empty-state {{
-      max-width: 760px;
-      margin: 26px 0;
-      padding: 18px 20px;
-      border-radius: 20px;
-      background: var(--surface);
-      box-shadow: inset 0 0 0 1px var(--line);
-      color: var(--muted);
-    }}
-    .section-block {{
-      position: relative;
-      display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
-      column-gap: 34px;
-      scroll-margin-top: 104px;
-      border-bottom: 1px solid var(--line);
-      padding: 70px 0;
-    }}
-    .section-block::before {{
-      content: attr(data-section);
-      grid-column: 1;
-      grid-row: 1 / span 80;
-      align-self: start;
-      position: sticky;
-      top: 112px;
-      width: 56px;
-      padding-top: 12px;
-      border-top: 2px solid var(--amber);
-      color: var(--amber);
-      font-family: var(--mono);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }}
-    .section-block > * {{ grid-column: 2; }}
-    .section-block:first-of-type {{
-      grid-template-columns: minmax(0, 1fr);
-      padding-top: 34px;
-    }}
-    .section-block:first-of-type::before {{ display: none; }}
-    .section-block:first-of-type > * {{ grid-column: 1; }}
-    .hero-grid {{
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 380px;
-      gap: 46px;
-      align-items: start;
-    }}
-    .hero-copy {{
-      min-width: 0;
-    }}
-    .section-rest {{
-      margin-top: 44px;
-    }}
-    .hero-panel {{
-      position: sticky;
-      top: 108px;
-      margin-top: 8px;
-      padding: 7px;
-      border-radius: 28px;
-      background: rgba(16, 27, 28, .08);
-      border: 1px solid rgba(21, 33, 35, .10);
-      box-shadow: 0 30px 74px -56px rgba(15, 28, 29, .55), inset 0 1px 0 rgba(255, 253, 247, .84);
-    }}
-    .hero-panel-inner {{
-      border-radius: 21px;
-      padding: 20px;
-      background: var(--rail);
-      color: #f6f1e9;
-      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .10);
-    }}
-    .panel-kicker {{
-      margin: 0 0 12px;
-      color: var(--amber-soft);
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-    }}
-    .hero-device {{
-      display: grid;
-      place-items: center;
-      aspect-ratio: 4 / 3;
-      margin: 0;
-      overflow: hidden;
-      border-radius: 16px;
-      background: #f6f1e9;
-    }}
-    .hero-device img {{
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }}
-    .proof-grid {{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin-top: 16px;
-      border-top: 1px solid rgba(246, 241, 233, .14);
-      border-left: 1px solid rgba(246, 241, 233, .14);
-    }}
-    .proof-grid > div {{
-      padding: 12px 10px;
-      border-right: 1px solid rgba(246, 241, 233, .14);
-      border-bottom: 1px solid rgba(246, 241, 233, .14);
-    }}
-    .proof-grid strong {{
-      display: block;
-      color: #fffdf7;
-      font-size: 13px;
-      line-height: 1.2;
-    }}
-    .proof-grid span {{
-      display: block;
-      margin-top: 3px;
-      color: var(--rail-muted);
-      font-size: 12px;
-      line-height: 1.3;
-    }}
-    .hero-steps {{
-      list-style: none;
-      margin: 16px 0 0;
-      padding: 0;
-      border-top: 1px solid rgba(246, 241, 233, .14);
-    }}
-    .hero-steps li {{
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 10px;
-      margin: 0;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(246, 241, 233, .14);
-    }}
-    .hero-steps li:last-child {{ border-bottom: 0; padding-bottom: 0; }}
-    .hero-steps li > span {{
-      color: var(--amber-soft);
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      line-height: 1.5;
-    }}
-    .hero-steps strong {{
-      display: block;
-      color: #fffdf7;
-      font-size: 14px;
-      line-height: 1.25;
-    }}
-    .hero-steps em {{
-      display: block;
-      margin-top: 3px;
-      color: var(--rail-muted);
-      font-size: 12px;
-      font-style: normal;
-      line-height: 1.4;
-    }}
-    h1, h2, h3, h4, h5 {{
-      margin: 0 0 14px;
-      line-height: 1.08;
-      letter-spacing: 0;
-      color: var(--ink);
-    }}
-    h2 {{
-      max-width: 18ch;
-      font-size: 38px;
-      font-weight: 780;
-    }}
-    .section-block:first-of-type > h2:first-child {{
-      max-width: 13ch;
-      font-size: 52px;
-      font-weight: 820;
-      letter-spacing: 0;
-    }}
-    .section-block:first-of-type > h2:first-child::before {{
-      content: "UPA / POCUS / Konted C10RL";
-      display: block;
-      width: max-content;
-      max-width: 100%;
-      margin-bottom: 18px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: var(--rail);
-      color: var(--amber-soft);
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .10em;
-    }}
-    .section-block:first-of-type > p:first-of-type {{
-      max-width: 760px;
-      font-size: 19px;
-      color: var(--ink-soft);
-    }}
-    h3 {{
-      max-width: 24ch;
-      margin-top: 40px;
-      font-size: 25px;
-      font-weight: 760;
-    }}
-    h3::before {{
-      content: "";
-      display: block;
-      width: 30px;
-      height: 3px;
-      border-radius: 999px;
-      background: var(--accent);
-      margin-bottom: 12px;
-    }}
-    h4 {{
-      margin-top: 26px;
-      font-size: 19px;
-      font-weight: 760;
-    }}
-    p {{
-      margin: 0 0 13px;
-      max-width: 74ch;
-    }}
-    ul, ol {{
-      max-width: 74ch;
-      margin: 10px 0 18px;
-      padding-left: 24px;
-    }}
-    li {{ margin: 7px 0; }}
-    blockquote {{
-      max-width: 820px;
-      margin: 22px 0;
-      padding: 18px 20px;
-      border-radius: 20px;
-      background: var(--surface);
-      box-shadow: inset 4px 0 0 var(--accent), inset 0 0 0 1px rgba(18, 110, 104, .16);
-      color: var(--ink-soft);
-      font-weight: 650;
-    }}
-    code {{
-      background: var(--surface-strong);
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 2px 6px;
-      font-size: .92em;
-    }}
-    pre code {{
-      display: block;
-      padding: 16px;
-      overflow: auto;
-    }}
-    .figure {{
-      width: min(100%, 700px);
-      margin: 28px 0 20px;
-      padding: 7px;
-      border-radius: 24px;
-      background: rgba(255, 253, 247, .74);
-      border: 1px solid rgba(21, 33, 35, .10);
-      box-shadow: 0 28px 70px -52px rgba(15, 28, 29, .48), inset 0 1px 0 rgba(255, 253, 247, .84);
-    }}
-    .figure-shell {{
-      display: grid;
-      place-items: center;
-      min-height: 180px;
-      overflow: hidden;
-      border-radius: 17px;
-      background: #182526;
-      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .12), inset 0 0 0 1px rgba(246, 241, 233, .08);
-    }}
-    .figure img {{
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 380px;
-      object-fit: contain;
-      background: #182526;
-    }}
-    .video-figure {{ width: min(100%, 620px); }}
-    .figure video {{
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 420px;
-      background: #182526;
-    }}
-    figcaption {{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-      margin: 9px 4px 1px;
-    }}
-    .table-wrap {{
-      width: min(100%, 880px);
-      overflow-x: auto;
-      margin: 18px 0 24px;
-      padding: 5px;
-      border-radius: 20px;
-      background: rgba(255, 253, 247, .78);
-      border: 1px solid rgba(21, 33, 35, .10);
-      box-shadow: 0 24px 62px -52px rgba(15, 28, 29, .38);
-    }}
-    table {{
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      overflow: hidden;
-      border-radius: 15px;
-      font-size: 14px;
-      background: var(--surface);
-    }}
-    th, td {{
-      border-bottom: 1px solid var(--line);
-      border-right: 1px solid var(--line);
-      padding: 12px 13px;
-      vertical-align: top;
-      text-align: left;
-    }}
-    th:last-child, td:last-child {{ border-right: 0; }}
-    tbody tr:last-child td {{ border-bottom: 0; }}
-    th {{
-      background: var(--surface-strong);
-      color: var(--ink);
-      font-weight: 760;
-    }}
-    tbody tr:nth-child(even) td {{ background: #f8faf5; }}
-    .task input {{ margin-right: 8px; }}
-    .hidden-by-search {{ display: none !important; }}
-    .js .reveal, .js .figure, .js .table-wrap {{
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .72s var(--ease), transform .72s var(--ease);
-    }}
-    .js .is-visible {{
-      opacity: 1;
-      transform: translateY(0);
-    }}
-    @media (max-width: 900px) {{
-      .layout {{ grid-template-columns: 1fr; }}
-      aside {{
-        position: static;
-        height: auto;
-        padding: 22px 16px;
-      }}
-      .brand strong {{ max-width: none; font-size: 28px; }}
-      .brand span {{ max-width: none; }}
-      nav {{ grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 5px; }}
-      nav a {{ min-height: 44px; }}
-      .topbar {{
-        position: static;
-        margin: 14px 14px 0;
-      }}
-      .topbar-inner {{
-        grid-template-columns: 1fr;
-      }}
-      .actions {{ justify-content: stretch; }}
-      .actions a, .actions button {{ flex: 1 1 auto; text-align: center; }}
-      main {{ padding: 24px 16px 62px; }}
-      .section-block {{
-        display: block;
-        padding: 48px 0;
-        scroll-margin-top: 18px;
-      }}
-      .section-block::before {{
-        position: static;
-        display: block;
-        margin-bottom: 16px;
-      }}
-      .section-block:first-of-type {{ padding-top: 28px; }}
-      .hero-grid {{ grid-template-columns: 1fr; gap: 24px; }}
-      .hero-panel {{ position: static; max-width: 520px; }}
-      .section-rest {{ margin-top: 34px; }}
-      h2, .section-block:first-of-type > h2:first-child {{ font-size: 34px; max-width: 16ch; }}
-      h3 {{ font-size: 22px; }}
-      p, ul, ol {{ max-width: 100%; }}
-      .figure {{ width: 100%; border-radius: 20px; }}
-      .figure-shell {{ min-height: 140px; border-radius: 14px; }}
-      .figure img {{ max-height: 310px; }}
-    }}
-    @media (prefers-reduced-motion: reduce) {{
-      html {{ scroll-behavior: auto; }}
-      *, *::before, *::after {{
-        transition-duration: .01ms !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-      }}
-      .js .reveal, .js .figure, .js .table-wrap {{
-        opacity: 1;
-        transform: none;
-      }}
-    }}
-    @media print {{
-      body {{ background: #fffdf7; }}
-      body::before, aside, .topbar {{ display: none; }}
-      .layout {{ display: block; }}
-      main {{ max-width: none; padding: 0; }}
-      .section-block {{ display: block; padding: 24px 0; page-break-inside: avoid; }}
-      .section-block::before {{ display: none; }}
-      .figure, .table-wrap {{ box-shadow: none; }}
-    }}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{SITE_TITLE}</title>
+<meta name="description" content="{html.escape(SITE_DESCRIPTION, quote=True)}">
+<meta name="theme-color" content="#faf7f1" id="meta-theme">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23faf7f1'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='12.5' fill='none' stroke='%230f6e66' stroke-width='3'/%3E%3Cpath d='M10 38 q 5.5 -13 11 0 t 11 0 t 11 0 t 11 0' stroke='%230f6e66' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='18' r='4.5' fill='%23c98a3d'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');</script>
+<script>(function(){{try{{var s=localStorage.getItem('pocusV31.theme');var t=(s==='light'||s==='dark'||s==='auto')?s:'auto';document.documentElement.setAttribute('data-theme',t);}}catch(e){{document.documentElement.setAttribute('data-theme','auto')}}}})();</script>
 </head>
 <body>
-  <div class="layout">
-    <aside>
-      <div class="brand">
-        <strong>POCUS UPA</strong>
-        <span>Guia rápido para uso na UPA</span>
-      </div>
-      <nav aria-label="Navegação">
-        {nav}
-      </nav>
-    </aside>
-    <div>
-      <header class="topbar">
-        <div class="topbar-inner">
-          <input id="searchInput" type="search" placeholder="Buscar no material: conexão, ganho, pneumotórax, acesso...">
-          <div class="actions">
-            <a href="https://apps.apple.com/br/app/my-usg/id1606311898" target="_blank" rel="noopener">App Store</a>
-            <a href="https://play.google.com/store/apps/details?id=com.konted.wirelesskus" target="_blank" rel="noopener">Google Play</a>
-            <button type="button" onclick="window.print()">Imprimir</button>
-          </div>
-        </div>
-      </header>
-      <main>
-        <p id="emptyState" class="empty-state" hidden>Nenhuma seção encontrada para essa busca. Tente termos como conexão, acesso, ganho, limpeza ou FOAM.</p>
-        {sections}
-      </main>
-    </div>
-  </div>
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const emptyState = document.getElementById('emptyState');
-    const sections = Array.from(document.querySelectorAll('[data-search]'));
-    const applySearch = () => {{
-      const term = searchInput.value.trim().toLowerCase();
-      let visibleCount = 0;
-      sections.forEach((section) => {{
-        const text = section.innerText.toLowerCase();
-        const hidden = term.length > 1 && !text.includes(term);
-        section.classList.toggle('hidden-by-search', hidden);
-        if (!hidden) visibleCount += 1;
-      }});
-      emptyState.hidden = term.length <= 1 || visibleCount > 0;
-    }};
-    searchInput.addEventListener('input', applySearch);
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {{
-      link.addEventListener('click', () => {{
-        searchInput.value = '';
-        sections.forEach((section) => section.classList.remove('hidden-by-search'));
-        emptyState.hidden = true;
-      }});
-    }});
-    const navLinks = Array.from(document.querySelectorAll('[data-nav-target]'));
-    const navBySection = new Map(navLinks.map((link) => [link.dataset.navTarget, link]));
-    const setActiveSection = (sectionId) => {{
-      navLinks.forEach((link) => link.removeAttribute('aria-current'));
-      const activeLink = navBySection.get(sectionId);
-      if (activeLink) activeLink.setAttribute('aria-current', 'true');
-    }};
-    setActiveSection(sections[0]?.id);
-    const revealTargets = Array.from(document.querySelectorAll('.reveal, .figure, .table-wrap'));
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion && 'IntersectionObserver' in window) {{
-      const observer = new IntersectionObserver((entries) => {{
-        entries.forEach((entry) => {{
-          if (entry.isIntersecting) {{
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }}
-        }});
-      }}, {{ threshold: 0.08, rootMargin: '0px 0px -8% 0px' }});
-      revealTargets.forEach((target, index) => {{
-        target.style.transitionDelay = `${{Math.min(index * 18, 140)}}ms`;
-        observer.observe(target);
-      }});
-    }} else {{
-      revealTargets.forEach((target) => target.classList.add('is-visible'));
-    }}
-    if ('IntersectionObserver' in window) {{
-      const navObserver = new IntersectionObserver((entries) => {{
-        entries.forEach((entry) => {{
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        }});
-      }}, {{ rootMargin: '-34% 0px -55% 0px', threshold: 0.01 }});
-      sections.forEach((section) => navObserver.observe(section));
-    }}
-  </script>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+{render_topbar(total)}
+<main id="conteudo" tabindex="-1">
+  {render_hero()}
+  {wave()}
+  {stages}
+</main>
+{render_plantao_dialog()}
+{render_footer()}
+<script src="assets/site.js"></script>
 </body>
 </html>
-"""
+'''
 
 
 def main() -> None:
     pages = read_pages()
-    if not pages:
-        raise SystemExit("Nenhum arquivo Markdown encontrado em content/.")
-    OUTPUT.write_text(build_html(pages), encoding="utf-8")
+    OUTPUT.write_text(render_html(pages), encoding="utf-8")
     print(f"Site atualizado: {OUTPUT}")
     print(f"Paginas fonte: {len(pages)}")
-
 
 if __name__ == "__main__":
     main()

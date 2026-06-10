@@ -6,17 +6,17 @@ Competência mínima: reconhecer veia, artéria, profundidade, relação anatôm
 
 ## Foco da aula
 
-| Item | Decisão |
-|---|---|
-| Sítio principal | jugular interna |
-| Sítio secundário | femoral |
-| Subclávia/axilar | apenas menção conceitual |
-| Acesso periférico | apêndice, não centro da aula |
-| Volume vesical | menção básica, não módulo principal |
+| Item              | Decisão                             |
+| ----------------- | ----------------------------------- |
+| Sítio principal   | jugular interna                     |
+| Sítio secundário  | femoral                             |
+| Subclávia/axilar  | apenas menção conceitual            |
+| Acesso periférico | mencionar princípios                |
+| Volume vesical    | menção básica, não módulo principal |
 
-## Pré-scan obrigatório
+## Pré-avaliação obrigatório
 
-Antes de qualquer preparo procedural, faça o pré-scan:
+Antes de iniciar qualquer procedimento, avalie antes com o usg:
 
 1. Confirme que a veia está presente.
 2. Avalie compressibilidade.
@@ -29,7 +29,6 @@ Antes de qualquer preparo procedural, faça o pré-scan:
 
 ![Anatomia do pescoço para acesso jugular: veia jugular interna, artéria carótida comum e esternocleidomastoideo](../assets/visuals/acesso-central/saem-anatomia-pescoco-ijv-cca.png)
 
-Fonte da imagem: SAEM, página “Venous access”, imagem de anatomia do pescoço cortesia de Sierra Beck, MD. Use como referência visual; a anatomia real muda com rotação da cabeça, volemia e pressão da sonda.
 
 ## Primeiro: artéria ou veia?
 
@@ -41,11 +40,9 @@ Fonte da imagem: SAEM, página “Venous access”, imagem de anatomia do pesco�
 | Doppler | fluxo venoso | fluxo pulsátil |
 | Profundidade | varia com volemia/posição | geralmente mais estável |
 
-Mnemônico: **veia espreme, artéria pulsa**.
 
 ![Imagem ultrassonográfica comparando parede de artéria e veias](../assets/visuals/acesso-central/saem-veia-arteria-parede.png)
 
-Fonte da imagem: SAEM, página “Venous access”, imagem cortesia de Sierra Beck, MD e Bradley Wallace, MD.
 
 ## Eixo curto e eixo longo
 
@@ -58,21 +55,20 @@ Use ambos como linguagem visual. Não transforme um deles em regra universal. Pa
 
 ![Armadilha do eixo curto: a mesma agulha pode parecer em posições diferentes conforme a posição da sonda](../assets/visuals/acesso-central/saem-eixo-curto-armadilha-ponta.png)
 
-Fonte da imagem: SAEM, página “Venous access”. Esta figura é útil para mostrar por que ver “um ponto branco” não basta; é preciso rastrear a ponta dinamicamente.
 
 ## Jugular interna
 
-O pré-scan da jugular deve responder:
+A avaliação prévia da jugular deve responder:
 
 - A veia é visível?
 - A veia colaba com compressão leve?
 - A carótida está medial, posterior ou parcialmente sobreposta?
 - A veia está grande o suficiente?
 - Há trombo?
-- A profundidade permite controle seguro?
+- A profundidade permite avançar com segurança?
 - O melhor ponto muda ao varrer proximal/distal?
 
-Se a jugular estiver pequena, colabada, trombosada, sobreposta à carótida ou difícil de manter na imagem, não force. Reavalie lado/sítio e peça supervisão.
+Se a jugular estiver pequena, colabada, trombosada, sobreposta à carótida ou difícil de manter na imagem, não force. Reavalie lado e peça ajuda.
 
 ## Femoral
 
@@ -92,20 +88,19 @@ Durante prática supervisionada:
 
 ![Confirmação ultrassonográfica de estrutura hiperecoica no interior da jugular interna](../assets/visuals/acesso-central/saem-guia-fio-ijv.png)
 
-Fonte da imagem: SAEM, página “Venous access”, imagem cortesia de Sierra Beck, MD e Bradley Wallace, MD.
 
-## Acesso periférico como apêndice
+## Acesso periférico 
 
 O acesso periférico guiado por USG será apenas mencionado nesta etapa:
 
 - identificar veia e artéria;
 - confirmar compressibilidade;
-- praticar coordenação mão-sonda-agulha em phantom;
+- praticar coordenação mão-sonda-agulha;
 - não avançar sem ponta visível.
 
-Não é o centro do treinamento inicial.
 
-## Volume vesical como menção
+
+## Volume vesical 
 
 Volume vesical entra como demonstração simples:
 

@@ -14,7 +14,6 @@ Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para t
 
 ## Durante o uso
 
-- Não puxar pelo cabo.
 - Não deixar cair.
 - Não apoiar a face da sonda em superfície suja.
 - Não guardar com gel.
@@ -34,8 +33,6 @@ Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para t
 
 - Use gel próprio para ultrassom.
 - Evite frasco encostando em pele não limpa ou ferida.
-- Não reponha gel de forma improvisada sem política local.
-- Descarte sachê aberto conforme rotina da unidade.
 
 ## Quando tirar de uso
 
@@ -50,12 +47,3 @@ Não insista no aparelho se houver:
 - queda importante;
 - contato biológico sem limpeza adequada.
 
-Nesses casos, separe o aparelho, avise o responsável e registre o problema.
-
-## Quando pedir ajuda
-
-- aparelho não liga mesmo após carregar;
-- app trava repetidamente;
-- imagem fica preta mesmo conectado;
-- transdutor tem dano físico;
-- houve contato com sangue/secreção e você não sabe o protocolo de desinfecção.
