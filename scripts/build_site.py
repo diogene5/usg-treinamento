@@ -366,7 +366,6 @@ def render_module(module: ModuleSpec, idx: int, total: int, pages: dict[str, dic
             <div class="module-foot">
               <button type="button" class="complete-btn" data-complete="{module.slug}" aria-pressed="false"><span class="cb-box" aria-hidden="true"></span><span class="cb-label">Marcar como concluído</span></button>
               {next_link}
-              <span class="source-path">{html.escape(page['path'])}</span>
             </div>
           </div>
         </details>'''
@@ -560,30 +559,28 @@ def render_plantao_dialog(meta: dict[str, str]) -> str:
 </dialog>'''
 
 
-def render_footer() -> str:
+def render_footer(meta: dict[str, str]) -> str:
+    escopo = meta_get(
+        meta,
+        "rodape_escopo",
+        "Trilha educacional de POCUS para a equipe da UPA. Não substitui protocolos institucionais nem julgamento clínico.",
+    )
+    creditos = meta_get(
+        meta,
+        "rodape_creditos",
+        "Imagens de acesso central: SAEM, Venous access — Sierra Beck, MD, e Bradley Wallace, MD.",
+    )
     return f'''
 <footer>
   <svg class="foot-wave" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M0 18 q 15 -14 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   </svg>
   <div class="foot-inner">
-    <div class="foot-grid">
-      <div>
-        <h3>Escopo deste material</h3>
-        <p>Trilha educacional interna para o treinamento de POCUS da equipe da UPA (Konted C10RL + app My USG). Não substitui protocolos institucionais, manuais do fabricante nem julgamento clínico. Procedimentos reais exigem supervisão direta e protocolo local.</p>
-      </div>
-      <div>
-        <h3>Como editar</h3>
-        <p>O conteúdo vive em arquivos Markdown (<code>content/*.md</code>) no vault Obsidian. Títulos das etapas, imagem do topo e senhas: edite <code>content/site.md</code>. Depois rode <code>python3 scripts/build_site.py</code> ou <code>atualizar-site.command</code>.</p>
-      </div>
-      <div>
-        <h3>Créditos de imagem</h3>
-        <p>Imagens do módulo de acesso central: <a href="https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education/m3-curriculum/bedside-ultrasonagraphy/venous-access" target="_blank" rel="noopener">SAEM, “Venous access”</a> — cortesia de Sierra Beck, MD, e Bradley Wallace, MD. Usadas com atribuição, para fins educacionais.</p>
-      </div>
-    </div>
+    <p class="foot-note">{html.escape(escopo)}</p>
+    <p class="foot-note foot-note--muted">{html.escape(creditos)} · <a href="https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education/m3-curriculum/bedside-ultrasonagraphy/venous-access" target="_blank" rel="noopener">SAEM</a></p>
   </div>
   <div class="foot-meta">
-    <span>Material atualizado em {UPDATED_AT} · uso educacional · conteúdo não substitui julgamento clínico · V3.1 trilha + plantão</span>
+    <span>Atualizado em {UPDATED_AT} · uso educacional</span>
     <a href="#topo">Voltar ao topo ↑</a>
   </div>
 </footer>'''
@@ -652,7 +649,7 @@ def render_html(pages: dict[str, dict[str, str]], meta: dict[str, str]) -> str:
   {stages}
 </main>
 {render_plantao_dialog(meta)}
-{render_footer()}
+{render_footer(meta)}
 <script src="assets/site.js"></script>
 </body>
 </html>

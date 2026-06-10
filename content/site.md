@@ -31,6 +31,9 @@ senha_app: "123456"
 # Links do app
 link_app_ios: https://apps.apple.com/br/app/my-usg/id1606311898
 link_app_android: https://play.google.com/store/apps/details?id=com.konted.wirelesskus
+
+# Rodapé (texto público)
+rodape_escopo: Trilha educacional de POCUS para a equipe da UPA (Konted C10RL + app My USG). Não substitui protocolos institucionais, manuais do fabricante nem julgamento clínico. Procedimentos reais exigem supervisão direta.
 ---
 
 Arquivo de configuração do site. **Não entra como módulo da trilha.**
