@@ -27,7 +27,11 @@ Esta página é para usar na hora da aula, no início do plantão ou quando o ap
 8. Ajustar profundidade e ganho.
 9. Congelar e salvar uma imagem.
 
+> ![Imagem linda!](../assets/figurinhas/figurinha-imagem-linda.webp) Passou no teste? Siga para a prática.
+
 ## Imagem ruim
+
+![Cadê a janela?](../assets/figurinhas/figurinha-cade-a-janela.webp)
 
 | Checar | Correção rápida |
 |---|---|
@@ -57,6 +61,8 @@ Esta página é para usar na hora da aula, no início do plantão ou quando o ap
 6. Guardar no local definido.
 
 ## Entrega mínima do aluno
+
+![Achou! Achou!](../assets/figurinhas/figurinha-achou-achou.webp)
 
 Ao fim da prática, cada participante deve demonstrar:
 

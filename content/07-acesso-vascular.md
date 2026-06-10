@@ -40,6 +40,7 @@ Antes de iniciar qualquer procedimento, avalie antes com o usg:
 | Doppler | fluxo venoso | fluxo pulsátil |
 | Profundidade | varia com volemia/posição | geralmente mais estável |
 
+> ![Achou! Achou!](../assets/figurinhas/figurinha-achou-achou.webp) Compressão primeiro. Na dúvida: ![Hora do Doppler!](../assets/figurinhas/figurinha-hora-do-doppler.webp)
 
 ![Imagem ultrassonográfica comparando parede de artéria e veias](../assets/visuals/acesso-central/saem-veia-arteria-parede.png)
 

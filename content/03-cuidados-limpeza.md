@@ -29,6 +29,8 @@ Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para t
 4. Conferir se a sonda ficou íntegra.
 5. Deixar carregando ou guardar no local definido.
 
+> ![Modo amor!](../assets/figurinhas/figurinha-modo-amor.webp) **Cuidar do aparelho** é parte do treinamento: limpar, secar e guardar do mesmo jeito em todo plantão.
+
 ## Gel
 
 - Use gel próprio para ultrassom.

@@ -12,6 +12,8 @@
 
 ## Imagem
 
+![Cadê a janela?](../assets/figurinhas/figurinha-cade-a-janela.webp)
+
 | Armadilha | Solução |
 |---|---|
 | Alvo pequeno | reduzir profundidade |

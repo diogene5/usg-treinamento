@@ -175,6 +175,41 @@ def render_link(label: str, href: str) -> str:
     return f'<a href="{escaped_href}"{attrs}>{escaped_label}</a>'
 
 
+def is_figurinha_src(src: str) -> bool:
+    norm = normalize_href(src)
+    return "/figurinhas/" in norm or norm.startswith("assets/figurinhas/")
+
+
+def render_figurinha(alt: str, src: str, *, block: bool = False) -> str:
+    alt_e = html.escape(alt, quote=True)
+    src_e = html.escape(normalize_href(src), quote=True)
+    img = (
+        f'<img class="figurinha-inline" loading="lazy" decoding="async" '
+        f'src="{src_e}" alt="{alt_e}">'
+    )
+    if block:
+        return f'<figure class="figure figure--figurinha">{img}</figure>'
+    return img
+
+
+def render_image(alt: str, src: str, *, block: bool = False) -> str:
+    if is_figurinha_src(src):
+        return render_figurinha(alt, src, block=block)
+    alt_e = html.escape(alt, quote=True)
+    src_e = html.escape(normalize_href(src), quote=True)
+    if block:
+        return (
+            '<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" '
+            f'src="{src_e}" alt="{alt_e}"></div>'
+            f'<figcaption>{alt_e}</figcaption></figure>'
+        )
+    return (
+        '<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" '
+        f'src="{src_e}" alt="{alt_e}"></div>'
+        f'<figcaption>{alt_e}</figcaption></figure>'
+    )
+
+
 def inline(text: str) -> str:
     tokens: list[str] = []
 
@@ -184,11 +219,7 @@ def inline(text: str) -> str:
 
     text = re.sub(
         r"!\[([^\]]*)\]\(([^)]+)\)",
-        lambda m: stash(
-            '<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" '
-            f'src="{html.escape(normalize_href(m.group(2)), quote=True)}" '
-            f'alt="{html.escape(m.group(1), quote=True)}"></div><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
-        ),
+        lambda m: stash(render_image(m.group(1), m.group(2))),
         text,
     )
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: stash(render_link(m.group(1), m.group(2))), text)
@@ -280,8 +311,12 @@ def render_markdown(markdown: str) -> str:
             )
             i += 1
             continue
-        if re.match(r"^!\[[^\]]*\]\([^)]+\)$", stripped):
-            close_list(); out.append(inline(stripped)); i += 1; continue
+        image_line = re.match(r"^!\[([^\]]*)\]\(([^)]+)\)$", stripped)
+        if image_line:
+            close_list()
+            out.append(render_image(image_line.group(1), image_line.group(2), block=True))
+            i += 1
+            continue
         if stripped.startswith(">"):
             close_list(); out.append(f'<blockquote>{inline(stripped.lstrip("> ").strip())}</blockquote>'); i += 1; continue
         unordered = re.match(r"^[-*]\s+(.+)$", stripped)
@@ -545,6 +580,15 @@ def render_plantao_dialog(meta: dict[str, str]) -> str:
       </ol>
       <p class="small-note">Se falhar depois disso: pare e troque de dispositivo. O passo a passo completo está no módulo <a href="#mod-conexao">Conexão My USG</a>.</p>
     </section>
+    <section aria-labelledby="p-t-dicas">
+      <h3 id="p-t-dicas">Imagem no plantão</h3>
+      <ul class="plantao-figurinhas">
+        <li><img class="figurinha-inline" src="assets/figurinhas/figurinha-cade-a-janela.webp" alt="Cadê a janela?" width="120" height="120" loading="lazy" decoding="async"><span>Sem janela? Deslize, incline e troque preset antes de subir o ganho.</span></li>
+        <li><img class="figurinha-inline" src="assets/figurinhas/figurinha-imagem-linda.webp" alt="Imagem linda!" width="120" height="120" loading="lazy" decoding="async"><span>Respondeu a pergunta? Congele, salve e siga.</span></li>
+        <li><img class="figurinha-inline" src="assets/figurinhas/figurinha-hora-do-doppler.webp" alt="Hora do Doppler!" width="120" height="120" loading="lazy" decoding="async"><span>Veia ou artéria? Compressão primeiro; Doppler se ainda houver dúvida.</span></li>
+        <li><img class="figurinha-inline" src="assets/figurinhas/figurinha-olhe-explore.webp" alt="Olhe, explore!" width="120" height="120" loading="lazy" decoding="async"><span>Antes de puncionar ou drenar: varra em dois eixos e confirme o alvo.</span></li>
+      </ul>
+    </section>
     <section aria-label="Avisos de segurança">
       <div class="plantao-stop" role="note">
         <b>SE A PONTA DA AGULHA SUMIU, PARE.</b>
@@ -576,6 +620,7 @@ def render_footer(meta: dict[str, str]) -> str:
     <path d="M0 18 q 15 -14 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   </svg>
   <div class="foot-inner">
+    <p class="foot-brand"><img class="figurinha-inline figurinha-inline--foot" src="assets/figurinhas/figurinha-satelite-icone.webp" alt="" width="40" height="40" loading="lazy" decoding="async" aria-hidden="true"><span>UPA Satélite · Treinamento POCUS</span></p>
     <p class="foot-note">{html.escape(escopo)}</p>
     <p class="foot-note foot-note--muted">{html.escape(creditos)} · <a href="https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education/m3-curriculum/bedside-ultrasonagraphy/venous-access" target="_blank" rel="noopener">SAEM</a></p>
   </div>
@@ -608,7 +653,7 @@ def render_hero(meta: dict[str, str]) -> str:
     return f'''
   <section class="hero" id="topo" aria-label="Apresentação da trilha">
     <div class="hero-text">
-      <p class="eyebrow">UPA · Konted C10RL · app My USG</p>
+      <p class="eyebrow"><img class="figurinha-inline figurinha-inline--hero" src="assets/figurinhas/figurinha-satelite-icone.webp" alt="" width="28" height="28" loading="eager" decoding="async" aria-hidden="true"><span>UPA · Konted C10RL · app My USG</span></p>
       <h1>{html.escape(hero_title)} · <em>{html.escape(hero_highlight)}</em></h1>
       <p class="lede">{html.escape(hero_intro)}</p>
       <div class="hero-actions"><a class="btn" href="#etapa-1">Começar</a><a class="btn btn--ghost" href="#acesso-rapido">Senhas e app</a></div>

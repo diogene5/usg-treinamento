@@ -27,6 +27,8 @@ Regra prática: **líquido é preto, osso/agulha são brancos, ar atrapalha**. P
 7. Ajuste foco se necessário.
 8. Congele e salve quando a imagem responder a pergunta.
 
+> ![Imagem linda!](../assets/figurinhas/figurinha-imagem-linda.webp) **Imagem útil** — não precisa ser perfeita; precisa responder a pergunta.
+
 ## Controles mais usados
 
 | Controle | Para que serve |
@@ -48,6 +50,8 @@ Regra prática: **líquido é preto, osso/agulha são brancos, ar atrapalha**. P
 | Rotacionar | mudar eixo curto para eixo longo                 |
 | Bascular   | centralizar o alvo                               |
 | Comprimir  | diferenciar veia de artéria, testar partes moles |
+
+> ![Cadê a janela?](../assets/figurinhas/figurinha-cade-a-janela.webp) **Janela** = ponto em que o ultrassom enxerga bem. Deslizar é procurar essa janela.
 
 ## Orientação
 

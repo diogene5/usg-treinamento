@@ -15,6 +15,8 @@ O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo
 
 ## O que é POCUS
 
+![Dr. Pocus — mascote da trilha](../assets/figurinhas/figurinha-probe-celebracao.webp)
+
 POCUS é ultrassom feito à beira-leito por quem está cuidando do paciente, com uma pergunta clínica limitada e imediata.
 
 | Não é | É |

@@ -74,6 +74,8 @@ Use convexa. Comece pela bexiga se a queixa é retenção, anúria, dor hipogás
 
 Antes de incisar ou puncionar, varra a área em dois eixos. Se houver dúvida entre coleção e vaso, use compressão e Doppler quando disponível.
 
+> ![Olhe, explore!](../assets/figurinhas/figurinha-olhe-explore.webp) **Antes de furar:** olhe em dois eixos, explore ao redor e confirme que não é vaso.
+
 ## Procedimentos guiados
 
 Regra única para iniciante: **não avance punção se a ponta da agulha não está visível**.
