@@ -6,6 +6,8 @@ Não tente fazer uma imagem perfeita. Primeiro faça uma imagem útil para respo
 
 O transdutor emite som, recebe ecos e transforma o retorno em pontos na tela. Eco forte fica branco; eco fraco fica cinza; líquido costuma ficar preto.
 
+![Esquema mostrando reflexão do ultrassom: quando a agulha fica em ângulo ruim, o eco pode voltar para longe da sonda](../assets/media/slides/03-fundamentos/ultrasound-wave-reflection-diagram.png)
+
 | Termo | Como aparece | Exemplos |
 |---|---|---|
 | Anecoico | preto | sangue, urina, cisto, derrame |
@@ -41,6 +43,8 @@ Regra prática: **líquido é preto, osso/agulha são brancos, ar atrapalha**. P
 | Freeze/Live | congelar ou voltar ao vivo |
 | Save image/video | registrar imagem ou clipe |
 
+![Cheatsheet dos modos de ultrassom no POCUS: modo B, modo M, Doppler colorido, power Doppler, Doppler pulsado e Doppler contínuo](../assets/media/slides/07-geradas/modos-usg-pocus-cheatsheet.png)
+
 ## Movimentos da sonda
 
 | Movimento  | Para que serve                                   |
@@ -53,9 +57,13 @@ Regra prática: **líquido é preto, osso/agulha são brancos, ar atrapalha**. P
 
 > ![Cadê a janela?](../assets/figurinhas/figurinha-cade-a-janela.webp) **Janela** = ponto em que o ultrassom enxerga bem. Deslizar é procurar essa janela.
 
+![Guia visual de posição da sonda, marcador, cortes transversal e longitudinal, pulmão e movimentos básicos](../assets/media/slides/07-geradas/pocus-guia-visual.png)
+
 ## Orientação
 
-O marcador físico da sonda precisa corresponder ao marcador da tela. Se estiver em dúvida, faça o “teste do dedo”: coloque um dedo em uma das extremidaddes do transdutor e veja qual lado da tela se mexe.
+O marcador físico da sonda precisa corresponder ao marcador da tela. Se estiver em dúvida, faça o “teste do dedo”: coloque um dedo em uma das extremidades do transdutor e veja qual lado da tela se mexe.
+
+![Marcador físico da sonda linear: referência para alinhar o lado da sonda com o marcador da tela](../assets/media/slides/05-acesso-vascular/probe-orientation-marker.jpeg)
 
 ## Erro comum
 

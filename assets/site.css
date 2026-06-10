@@ -466,6 +466,10 @@
   tbody td,tbody th{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
   .table-wrap{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+  @media (max-width:640px){
+    table{table-layout:fixed}
+    thead th,tbody td,tbody th{overflow-wrap:anywhere}
+  }
 
   /* não-é / é */
   .isnt-is{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -577,6 +581,17 @@
     border:1px solid var(--line-strong);border-radius:var(--r-md);
     background:#0b0e0d;box-shadow:var(--shadow-card);
   }
+  .figure img[src*="assets/media/slides/"]{
+    width:auto;max-width:100%;
+    background:var(--card);object-fit:contain;
+  }
+  .figure img[src*="assets/media/slides/07-geradas/"]{max-width:min(520px,100%)}
+  .figure img[src*="lung-ultrasound-cheatsheet"]{max-width:min(560px,100%)}
+  .figure img[src*="vascular-access-phantom-probe"],
+  .figure img[src*="probe-orientation-marker"],
+  .figure img[src*="linear-probe-vascular-position"],
+  .figure img[src*="cvc-bedside-setup"]{max-width:min(360px,100%)}
+  .figure img[src*="ijv-carotid-short-axis-review"]{max-width:min(680px,100%)}
   .figure figcaption{font-size:13px;color:var(--muted);margin-top:9px;max-width:68ch}
   .figure-shell{max-width:680px}
   .video-figure .figure-shell{

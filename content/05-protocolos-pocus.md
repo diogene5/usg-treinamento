@@ -26,6 +26,8 @@ Perguntas úteis na UPA:
 
 Procure primeiro a linha pleural entre duas sombras de costelas. Ajuste a profundidade para não deixar metade da tela mostrando imagem que não é do nosso interesse.
 
+![Cheatsheet de ultrassom pulmonar com linhas A, linhas B, modo M, pneumotórax, ARDS e consolidação](../assets/media/slides/07-geradas/lung-ultrasound-cheatsheet.png)
+
 | Achado           | Interpretação prática                 | Armadilha                                                            |
 | ---------------- | ------------------------------------- | -------------------------------------------------------------------- |
 | Sliding presente | ausência de pneumotórax naquele ponto | não avalia o pulmão inteiro                                          |
