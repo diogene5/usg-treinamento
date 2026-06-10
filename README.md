@@ -28,6 +28,7 @@ Site público atual: [https://diogene5.github.io/usg-treinamento/](https://dioge
 - [content/](content): páginas principais do site, pensadas para edição no Obsidian.
 - [docs/](docs): roteiro, checklists, armadilhas, fontes e evidências dos arquivos originais.
 - [assets/media/](assets/media): imagens e vídeo didáticos preservados para aprovação/revisão.
+- [assets/media/componentes-c10rl-hero.jpg](assets/media/componentes-c10rl-hero.jpg): cópia otimizada usada no painel inicial do site.
 - [assets/diagrams/](assets/diagrams): diagramas SVG preservados para aprovação/revisão.
 - [assets/visuals/](assets/visuals): imagens reais selecionadas para referência visual no site, com atribuição.
 - [references/](references): cópias dos PDFs originais do aparelho e do app.

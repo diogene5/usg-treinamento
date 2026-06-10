@@ -16,3 +16,4 @@
 - [x] Publicar também protocolos POCUS, roteiro de aula e checklists rápidos.
 - [x] Revisar layout do HTML estático para leitura melhor em desktop/mobile.
 - [x] Aplicar rodada de polimento visual com imagens reais menores, seções numeradas e navegação menos estéril.
+- [x] Instalar e aplicar `MengToFrontend` como auditoria anti-slop do site.

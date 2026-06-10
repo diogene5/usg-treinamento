@@ -1,6 +1,6 @@
 # Treinamento de USG point-of-care
 
-Material de consulta para a equipe da **UPA** começar a usar o ultrassom point-of-care da unidade com segurança.
+Material de consulta para a equipe da **UPA** usar o **Konted C10RL** com o app **My USG**: ligar, conectar, gerar uma imagem básica, reconhecer limitações e pedir ajuda cedo.
 
 O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo conseguir:
 

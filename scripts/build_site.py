@@ -247,16 +247,52 @@ def read_pages() -> list[dict[str, str]]:
     return pages
 
 
+def render_hero_panel() -> str:
+    return """
+<aside class="hero-panel" aria-label="Resumo operacional do treinamento">
+  <div class="hero-panel-inner">
+    <p class="panel-kicker">Aparelho da aula</p>
+    <figure class="hero-device">
+      <img src="assets/media/componentes-c10rl-hero.jpg" width="860" height="645" loading="eager" decoding="async" alt="Diagrama técnico do aparelho Konted C10RL com bateria, módulo sem fio, botão de energia e transdutor">
+    </figure>
+    <div class="proof-grid" aria-label="Contexto do treinamento">
+      <div><strong>Konted C10RL</strong><span>sonda sem fio</span></div>
+      <div><strong>My USG</strong><span>app da prática</span></div>
+      <div><strong>UPA</strong><span>uso à beira-leito</span></div>
+      <div><strong>Central</strong><span>foco inicial</span></div>
+    </div>
+    <ol class="hero-steps" aria-label="Sequência mínima antes da prática">
+      <li><span>01</span><strong>Ligar e conectar</strong><em>Wi-Fi da sonda, app correto, bateria.</em></li>
+      <li><span>02</span><strong>Ajustar imagem</strong><em>profundidade, ganho, preset e marcador.</em></li>
+      <li><span>03</span><strong>Fazer pré-scan</strong><em>veia, artéria, profundidade e limites.</em></li>
+    </ol>
+  </div>
+</aside>"""
+
+
 def build_html(pages: list[dict[str, str]]) -> str:
     nav = "\n".join(
-        f'<a href="#{page["slug"]}"><span>{idx:02d}</span>{html.escape(page["title"])}</a>'
+        f'<a href="#{page["slug"]}" data-nav-target="{page["slug"]}"><span>{idx:02d}</span>{html.escape(page["title"])}</a>'
         for idx, page in enumerate(pages, start=1)
     )
-    sections = "\n".join(
-        f'<section id="{page["slug"]}" class="section-block reveal" data-search data-section="{idx:02d}">'
-        f'{page["html"]}</section>'
-        for idx, page in enumerate(pages, start=1)
-    )
+    section_html = []
+    for idx, page in enumerate(pages, start=1):
+        body = page["html"]
+        if idx == 1:
+            marker = '<h3 id="h-o-que-e-pocus">'
+            intro, rest = (body.split(marker, 1) + [""])[:2] if marker in body else (body, "")
+            body = (
+                '<div class="hero-grid">'
+                f'<div class="hero-copy">{intro}</div>'
+                f'{render_hero_panel()}'
+                '</div>'
+                f'<div class="section-rest">{marker if rest else ""}{rest}</div>'
+            )
+        section_html.append(
+            f'<section id="{page["slug"]}" class="section-block reveal" data-search data-section="{idx:02d}">'
+            f'{body}</section>'
+        )
+    sections = "\n".join(section_html)
     return f"""<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -396,6 +432,15 @@ def build_html(pages: list[dict[str, str]]) -> str:
       color: #fffdf7;
       transform: translateX(4px);
     }}
+    nav a[aria-current="true"] {{
+      background: rgba(246, 241, 233, .12);
+      color: #fffdf7;
+      box-shadow: inset 3px 0 0 var(--amber);
+    }}
+    nav a[aria-current="true"] span {{
+      color: #fffdf7;
+      opacity: 1;
+    }}
     .topbar {{
       position: sticky;
       top: 18px;
@@ -504,6 +549,120 @@ def build_html(pages: list[dict[str, str]]) -> str:
     }}
     .section-block:first-of-type::before {{ display: none; }}
     .section-block:first-of-type > * {{ grid-column: 1; }}
+    .hero-grid {{
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 46px;
+      align-items: start;
+    }}
+    .hero-copy {{
+      min-width: 0;
+    }}
+    .section-rest {{
+      margin-top: 44px;
+    }}
+    .hero-panel {{
+      position: sticky;
+      top: 108px;
+      margin-top: 8px;
+      padding: 7px;
+      border-radius: 28px;
+      background: rgba(16, 27, 28, .08);
+      border: 1px solid rgba(21, 33, 35, .10);
+      box-shadow: 0 30px 74px -56px rgba(15, 28, 29, .55), inset 0 1px 0 rgba(255, 253, 247, .84);
+    }}
+    .hero-panel-inner {{
+      border-radius: 21px;
+      padding: 20px;
+      background: var(--rail);
+      color: #f6f1e9;
+      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .10);
+    }}
+    .panel-kicker {{
+      margin: 0 0 12px;
+      color: var(--amber-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+    }}
+    .hero-device {{
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 3;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #f6f1e9;
+    }}
+    .hero-device img {{
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }}
+    .proof-grid {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 16px;
+      border-top: 1px solid rgba(246, 241, 233, .14);
+      border-left: 1px solid rgba(246, 241, 233, .14);
+    }}
+    .proof-grid > div {{
+      padding: 12px 10px;
+      border-right: 1px solid rgba(246, 241, 233, .14);
+      border-bottom: 1px solid rgba(246, 241, 233, .14);
+    }}
+    .proof-grid strong {{
+      display: block;
+      color: #fffdf7;
+      font-size: 13px;
+      line-height: 1.2;
+    }}
+    .proof-grid span {{
+      display: block;
+      margin-top: 3px;
+      color: var(--rail-muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }}
+    .hero-steps {{
+      list-style: none;
+      margin: 16px 0 0;
+      padding: 0;
+      border-top: 1px solid rgba(246, 241, 233, .14);
+    }}
+    .hero-steps li {{
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      margin: 0;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(246, 241, 233, .14);
+    }}
+    .hero-steps li:last-child {{ border-bottom: 0; padding-bottom: 0; }}
+    .hero-steps li > span {{
+      color: var(--amber-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.5;
+    }}
+    .hero-steps strong {{
+      display: block;
+      color: #fffdf7;
+      font-size: 14px;
+      line-height: 1.25;
+    }}
+    .hero-steps em {{
+      display: block;
+      margin-top: 3px;
+      color: var(--rail-muted);
+      font-size: 12px;
+      font-style: normal;
+      line-height: 1.4;
+    }}
     h1, h2, h3, h4, h5 {{
       margin: 0 0 14px;
       line-height: 1.08;
@@ -710,6 +869,9 @@ def build_html(pages: list[dict[str, str]]) -> str:
         margin-bottom: 16px;
       }}
       .section-block:first-of-type {{ padding-top: 28px; }}
+      .hero-grid {{ grid-template-columns: 1fr; gap: 24px; }}
+      .hero-panel {{ position: static; max-width: 520px; }}
+      .section-rest {{ margin-top: 34px; }}
       h2, .section-block:first-of-type > h2:first-child {{ font-size: 34px; max-width: 16ch; }}
       h3 {{ font-size: 22px; }}
       p, ul, ol {{ max-width: 100%; }}
@@ -791,6 +953,14 @@ def build_html(pages: list[dict[str, str]]) -> str:
         emptyState.hidden = true;
       }});
     }});
+    const navLinks = Array.from(document.querySelectorAll('[data-nav-target]'));
+    const navBySection = new Map(navLinks.map((link) => [link.dataset.navTarget, link]));
+    const setActiveSection = (sectionId) => {{
+      navLinks.forEach((link) => link.removeAttribute('aria-current'));
+      const activeLink = navBySection.get(sectionId);
+      if (activeLink) activeLink.setAttribute('aria-current', 'true');
+    }};
+    setActiveSection(sections[0]?.id);
     const revealTargets = Array.from(document.querySelectorAll('.reveal, .figure, .table-wrap'));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!reduceMotion && 'IntersectionObserver' in window) {{
@@ -808,6 +978,14 @@ def build_html(pages: list[dict[str, str]]) -> str:
       }});
     }} else {{
       revealTargets.forEach((target) => target.classList.add('is-visible'));
+    }}
+    if ('IntersectionObserver' in window) {{
+      const navObserver = new IntersectionObserver((entries) => {{
+        entries.forEach((entry) => {{
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        }});
+      }}, {{ rootMargin: '-34% 0px -55% 0px', threshold: 0.01 }});
+      sections.forEach((section) => navObserver.observe(section));
     }}
   </script>
 </body>
