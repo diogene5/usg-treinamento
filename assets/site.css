@@ -1083,3 +1083,16 @@
     .stage-head{padding-top:26px;margin-bottom:30px}
     .wave-sep svg{height:22px}
   }
+
+  /* acesso rápido abaixo do título da etapa 1 */
+  .stage-quick{margin:18px 0 22px}
+  .stage-quick .creds{margin:0}
+  .stage-quick-apps{margin-top:14px}
+  .stage-quick .copy-btn{
+    display:inline-flex;align-items:center;margin-top:12px;
+    font:650 13px/1 var(--sans);color:#0c1512;
+    background:#9fd0c9;border:0;border-radius:9px;padding:10px 16px;cursor:pointer;
+  }
+  .stage-quick .copy-btn:hover{filter:brightness(1.05)}
+  .stage-quick .copy-btn.copied{background:var(--amber);color:#241303}
+  html:not(.js) .stage-quick .copy-btn{display:none}
