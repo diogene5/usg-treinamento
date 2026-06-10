@@ -4,40 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Treinamento USG point-of-care | UPA</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308756f'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23152123'/%3E%3Cpath d='M16 38c6 5 26 5 32 0' stroke='%23d79043' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ctext x='32' y='31' font-size='19' text-anchor='middle' fill='%23f6f1e9' font-family='system-ui,sans-serif' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {
-      --bg: #fbfcfc;
-      --surface: #ffffff;
-      --surface-quiet: #f4f7f6;
-      --surface-strong: #e8efed;
-      --ink: #172326;
-      --muted: #5b686b;
-      --line: #d8e1df;
-      --accent: #08756f;
-      --accent-dark: #064f4b;
-      --accent-soft: #dff2ef;
-      --amber: #8a5a12;
-      --amber-soft: #fff6e6;
-      --max: 1160px;
-      --sidebar: 282px;
+      --bg: #f3f6f2;
+      --paper: #fbfaf4;
+      --surface: #fffdf7;
+      --surface-quiet: #eef4ef;
+      --surface-strong: #e2ece7;
+      --ink: #152123;
+      --ink-soft: #263636;
+      --muted: #5f6c67;
+      --rail: #101b1c;
+      --rail-2: #172526;
+      --rail-muted: #a9b7b1;
+      --line: rgba(21, 33, 35, .14);
+      --line-strong: rgba(21, 33, 35, .22);
+      --accent: #126e68;
+      --accent-dark: #0d514d;
+      --accent-soft: #dfeee9;
+      --amber: #b36b27;
+      --amber-soft: #f6e4c9;
+      --danger: #8f3c2e;
+      --max: 1130px;
+      --sidebar: 304px;
+      --radius: 22px;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --sans: "Plus Jakarta Sans", "Satoshi", "Geist", "Aptos", system-ui, sans-serif;
+      --mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
       color-scheme: light;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--sans);
       color: var(--ink);
       background: var(--bg);
-      line-height: 1.58;
+      line-height: 1.62;
       text-rendering: optimizeLegibility;
     }
-    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
     a:hover { color: var(--accent-dark); }
     a:focus-visible, button:focus-visible, input:focus-visible {
-      outline: 3px solid rgba(8,117,111,.24);
-      outline-offset: 2px;
+      outline: 3px solid rgba(179, 107, 39, .32);
+      outline-offset: 3px;
     }
     .layout {
       display: grid;
@@ -49,154 +70,414 @@
       top: 0;
       height: 100dvh;
       overflow: auto;
-      padding: 22px 16px;
-      border-right: 1px solid var(--line);
-      background: #f6faf9;
+      padding: 28px 18px;
+      background: var(--rail);
+      color: var(--rail-muted);
+      box-shadow: inset -1px 0 0 rgba(246, 241, 233, .08);
     }
     .brand {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 18px;
-      margin-bottom: 14px;
+      position: relative;
+      padding: 4px 8px 24px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(246, 241, 233, .11);
     }
-    .brand strong { display: block; font-size: 20px; line-height: 1.12; }
-    .brand span { display: block; color: var(--muted); font-size: 13px; margin-top: 6px; }
-    nav a {
+    .brand::before {
+      content: "";
       display: block;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--ink);
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--amber);
+      margin-bottom: 18px;
+    }
+    .brand strong {
+      display: block;
+      max-width: 9ch;
+      color: #f6f1e9;
+      font-size: 32px;
+      font-weight: 760;
+      letter-spacing: 0;
+      line-height: .96;
+    }
+    .brand span {
+      display: block;
+      max-width: 22ch;
+      color: var(--rail-muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 12px;
+    }
+    nav {
+      display: grid;
+      gap: 3px;
+    }
+    nav a {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      align-items: center;
+      min-height: 42px;
+      gap: 10px;
+      padding: 8px 10px 8px 6px;
+      border-radius: 14px;
+      color: #dbe5df;
       text-decoration: none;
       font-size: 14px;
-      line-height: 1.28;
-      transition: background-color .18s ease, color .18s ease, transform .18s ease;
+      line-height: 1.24;
+      transition: background-color .42s var(--ease), color .42s var(--ease), transform .42s var(--ease);
     }
-    nav a:hover { background: var(--accent-soft); color: var(--accent-dark); transform: translateX(2px); }
+    nav a span {
+      font-family: var(--mono);
+      color: var(--amber-soft);
+      font-size: 11px;
+      text-align: center;
+      opacity: .8;
+    }
+    nav a:hover {
+      background: rgba(246, 241, 233, .08);
+      color: #fffdf7;
+      transform: translateX(4px);
+    }
     .topbar {
       position: sticky;
-      top: 0;
+      top: 18px;
       z-index: 4;
-      border-bottom: 1px solid var(--line);
-      background: rgba(251,252,252,.94);
-      backdrop-filter: blur(12px);
-      padding: 14px 22px;
+      max-width: calc(var(--max) + 56px);
+      margin: 18px auto 0;
+      padding: 7px;
+      border-radius: 28px;
+      background: rgba(251, 250, 244, .84);
+      border: 1px solid rgba(21, 33, 35, .10);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px -44px rgba(15, 28, 29, .42), inset 0 1px 0 rgba(255, 253, 247, .74);
     }
     .topbar-inner {
       max-width: var(--max);
       margin: 0 auto;
-      display: flex;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 10px;
       align-items: center;
     }
     input[type="search"] {
       width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 11px 12px;
+      min-height: 46px;
+      border: 0;
+      border-radius: 22px;
+      padding: 12px 16px;
+      font: inherit;
       font-size: 15px;
       background: var(--surface);
       color: var(--ink);
+      box-shadow: inset 0 0 0 1px rgba(21, 33, 35, .11);
     }
-    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    input[type="search"]::placeholder { color: #6f7c78; }
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
     .actions a, .actions button {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
-      color: var(--ink);
-      padding: 10px 12px;
+      min-height: 46px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--rail);
+      color: #f6f1e9;
+      padding: 12px 16px;
+      font: inherit;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 760;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-color .18s ease, color .18s ease, transform .18s ease;
+      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .10);
+      transition: background-color .42s var(--ease), color .42s var(--ease), transform .42s var(--ease);
     }
-    .actions a:hover, .actions button:hover { border-color: var(--accent); color: var(--accent-dark); }
-    .actions a:active, .actions button:active { transform: translateY(1px); }
+    .actions a:nth-child(2) { background: var(--accent-dark); }
+    .actions button { background: var(--amber); color: #20160d; }
+    .actions a:hover, .actions button:hover {
+      transform: translateY(-1px);
+    }
+    .actions a:active, .actions button:active { transform: translateY(1px) scale(.99); }
     main {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 26px 26px 72px;
+      padding: 34px 30px 88px;
     }
-    section {
-      scroll-margin-top: 86px;
-      border-bottom: 1px solid var(--line);
-      padding: 38px 0;
-    }
-    section:first-of-type {
-      padding-top: 26px;
-    }
-    section:first-of-type h1 {
-      max-width: 920px;
-      font-size: 48px;
-      letter-spacing: 0;
-    }
-    section:first-of-type > p:first-of-type {
+    .empty-state {
       max-width: 760px;
-      font-size: 18px;
+      margin: 26px 0;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: inset 0 0 0 1px var(--line);
       color: var(--muted);
     }
-    h1, h2, h3, h4, h5 { margin: 0 0 12px; line-height: 1.16; letter-spacing: 0; }
-    h1 { font-size: 42px; }
-    h2 { font-size: 32px; margin-top: 8px; }
-    h3 { font-size: 24px; margin-top: 28px; }
-    h4 { font-size: 19px; margin-top: 22px; }
-    p { margin: 0 0 12px; max-width: 78ch; }
-    ul, ol { margin: 8px 0 16px; padding-left: 22px; }
-    li { margin: 6px 0; }
+    .section-block {
+      position: relative;
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      column-gap: 34px;
+      scroll-margin-top: 104px;
+      border-bottom: 1px solid var(--line);
+      padding: 70px 0;
+    }
+    .section-block::before {
+      content: attr(data-section);
+      grid-column: 1;
+      grid-row: 1 / span 80;
+      align-self: start;
+      position: sticky;
+      top: 112px;
+      width: 56px;
+      padding-top: 12px;
+      border-top: 2px solid var(--amber);
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .section-block > * { grid-column: 2; }
+    .section-block:first-of-type {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 34px;
+    }
+    .section-block:first-of-type::before { display: none; }
+    .section-block:first-of-type > * { grid-column: 1; }
+    h1, h2, h3, h4, h5 {
+      margin: 0 0 14px;
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+    h2 {
+      max-width: 18ch;
+      font-size: 38px;
+      font-weight: 780;
+    }
+    .section-block:first-of-type > h2:first-child {
+      max-width: 13ch;
+      font-size: 52px;
+      font-weight: 820;
+      letter-spacing: 0;
+    }
+    .section-block:first-of-type > h2:first-child::before {
+      content: "UPA / POCUS / Konted C10RL";
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--rail);
+      color: var(--amber-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .10em;
+    }
+    .section-block:first-of-type > p:first-of-type {
+      max-width: 760px;
+      font-size: 19px;
+      color: var(--ink-soft);
+    }
+    h3 {
+      max-width: 24ch;
+      margin-top: 40px;
+      font-size: 25px;
+      font-weight: 760;
+    }
+    h3::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--accent);
+      margin-bottom: 12px;
+    }
+    h4 {
+      margin-top: 26px;
+      font-size: 19px;
+      font-weight: 760;
+    }
+    p {
+      margin: 0 0 13px;
+      max-width: 74ch;
+    }
+    ul, ol {
+      max-width: 74ch;
+      margin: 10px 0 18px;
+      padding-left: 24px;
+    }
+    li { margin: 7px 0; }
     blockquote {
-      margin: 16px 0;
-      padding: 14px 16px;
-      border-left: 4px solid var(--accent);
-      background: var(--surface-quiet);
-      border-radius: 0 8px 8px 0;
-      max-width: 84ch;
+      max-width: 820px;
+      margin: 22px 0;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: inset 4px 0 0 var(--accent), inset 0 0 0 1px rgba(18, 110, 104, .16);
+      color: var(--ink-soft);
+      font-weight: 650;
     }
     code {
       background: var(--surface-strong);
       border: 1px solid var(--line);
-      border-radius: 5px;
-      padding: 1px 5px;
+      border-radius: 7px;
+      padding: 2px 6px;
       font-size: .92em;
     }
     pre code {
       display: block;
-      padding: 14px;
+      padding: 16px;
       overflow: auto;
     }
     .figure {
-      margin: 18px 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      padding: 10px;
+      width: min(100%, 700px);
+      margin: 28px 0 20px;
+      padding: 7px;
+      border-radius: 24px;
+      background: rgba(255, 253, 247, .74);
+      border: 1px solid rgba(21, 33, 35, .10);
+      box-shadow: 0 28px 70px -52px rgba(15, 28, 29, .48), inset 0 1px 0 rgba(255, 253, 247, .84);
     }
-    .figure img { display: block; width: 100%; height: auto; }
-    .figure video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #12181a; }
-    figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
-    .table-wrap { overflow-x: auto; margin: 14px 0 18px; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); }
-    th, td { border: 1px solid var(--line); padding: 11px 12px; vertical-align: top; text-align: left; }
-    th { background: var(--surface-strong); color: #263638; }
-    tbody tr:nth-child(even) td { background: #fafcfc; }
+    .figure-shell {
+      display: grid;
+      place-items: center;
+      min-height: 180px;
+      overflow: hidden;
+      border-radius: 17px;
+      background: #182526;
+      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .12), inset 0 0 0 1px rgba(246, 241, 233, .08);
+    }
+    .figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 380px;
+      object-fit: contain;
+      background: #182526;
+    }
+    .video-figure { width: min(100%, 620px); }
+    .figure video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      background: #182526;
+    }
+    figcaption {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 9px 4px 1px;
+    }
+    .table-wrap {
+      width: min(100%, 880px);
+      overflow-x: auto;
+      margin: 18px 0 24px;
+      padding: 5px;
+      border-radius: 20px;
+      background: rgba(255, 253, 247, .78);
+      border: 1px solid rgba(21, 33, 35, .10);
+      box-shadow: 0 24px 62px -52px rgba(15, 28, 29, .38);
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 15px;
+      font-size: 14px;
+      background: var(--surface);
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 12px 13px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th:last-child, td:last-child { border-right: 0; }
+    tbody tr:last-child td { border-bottom: 0; }
+    th {
+      background: var(--surface-strong);
+      color: var(--ink);
+      font-weight: 760;
+    }
+    tbody tr:nth-child(even) td { background: #f8faf5; }
     .task input { margin-right: 8px; }
     .hidden-by-search { display: none !important; }
+    .js .reveal, .js .figure, .js .table-wrap {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .72s var(--ease), transform .72s var(--ease);
+    }
+    .js .is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     @media (max-width: 900px) {
       .layout { grid-template-columns: 1fr; }
-      aside { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
-      nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; }
-      .topbar { position: static; }
-      .topbar-inner { flex-direction: column; align-items: stretch; }
-      main { padding: 22px 16px 56px; }
-      section { padding: 30px 0; scroll-margin-top: 18px; }
-      h1, section:first-of-type h1 { font-size: 34px; }
-      h2 { font-size: 27px; }
+      aside {
+        position: static;
+        height: auto;
+        padding: 22px 16px;
+      }
+      .brand strong { max-width: none; font-size: 28px; }
+      .brand span { max-width: none; }
+      nav { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 5px; }
+      nav a { min-height: 44px; }
+      .topbar {
+        position: static;
+        margin: 14px 14px 0;
+      }
+      .topbar-inner {
+        grid-template-columns: 1fr;
+      }
+      .actions { justify-content: stretch; }
+      .actions a, .actions button { flex: 1 1 auto; text-align: center; }
+      main { padding: 24px 16px 62px; }
+      .section-block {
+        display: block;
+        padding: 48px 0;
+        scroll-margin-top: 18px;
+      }
+      .section-block::before {
+        position: static;
+        display: block;
+        margin-bottom: 16px;
+      }
+      .section-block:first-of-type { padding-top: 28px; }
+      h2, .section-block:first-of-type > h2:first-child { font-size: 34px; max-width: 16ch; }
       h3 { font-size: 22px; }
+      p, ul, ol { max-width: 100%; }
+      .figure { width: 100%; border-radius: 20px; }
+      .figure-shell { min-height: 140px; border-radius: 14px; }
+      .figure img { max-height: 310px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+      .js .reveal, .js .figure, .js .table-wrap {
+        opacity: 1;
+        transform: none;
+      }
     }
     @media print {
-      aside, .topbar { display: none; }
+      body { background: #fffdf7; }
+      body::before, aside, .topbar { display: none; }
       .layout { display: block; }
       main { max-width: none; padding: 0; }
-      section { page-break-inside: avoid; }
+      .section-block { display: block; padding: 24px 0; page-break-inside: avoid; }
+      .section-block::before { display: none; }
+      .figure, .table-wrap { box-shadow: none; }
     }
   </style>
 </head>
@@ -208,18 +489,18 @@
         <span>Guia rápido para uso na UPA</span>
       </div>
       <nav aria-label="Navegação">
-        <a href="#treinamento-de-usg-point-of-care">Treinamento de USG point-of-care</a>
-<a href="#baixar-o-app">Baixar o app</a>
-<a href="#conexao-my-usg">Conexão My USG</a>
-<a href="#cuidados-e-limpeza">Cuidados e limpeza</a>
-<a href="#controles-de-imagem">Controles de imagem</a>
-<a href="#o-que-vamos-treinar">O que vamos treinar</a>
-<a href="#protocolos-pocus-para-upa">Protocolos POCUS para UPA</a>
-<a href="#acesso-central-guiado-por-usg">Acesso central guiado por USG</a>
-<a href="#armadilhas-comuns">Armadilhas comuns</a>
-<a href="#roteiro-da-aula">Roteiro da aula</a>
-<a href="#checklists-rapidos">Checklists rápidos</a>
-<a href="#fontes-foam-e-consulta">Fontes FOAM e consulta</a>
+        <a href="#treinamento-de-usg-point-of-care"><span>01</span>Treinamento de USG point-of-care</a>
+<a href="#baixar-o-app"><span>02</span>Baixar o app</a>
+<a href="#conexao-my-usg"><span>03</span>Conexão My USG</a>
+<a href="#cuidados-e-limpeza"><span>04</span>Cuidados e limpeza</a>
+<a href="#controles-de-imagem"><span>05</span>Controles de imagem</a>
+<a href="#o-que-vamos-treinar"><span>06</span>O que vamos treinar</a>
+<a href="#protocolos-pocus-para-upa"><span>07</span>Protocolos POCUS para UPA</a>
+<a href="#acesso-central-guiado-por-usg"><span>08</span>Acesso central guiado por USG</a>
+<a href="#armadilhas-comuns"><span>09</span>Armadilhas comuns</a>
+<a href="#roteiro-da-aula"><span>10</span>Roteiro da aula</a>
+<a href="#checklists-rapidos"><span>11</span>Checklists rápidos</a>
+<a href="#fontes-foam-e-consulta"><span>12</span>Fontes FOAM e consulta</a>
       </nav>
     </aside>
     <div>
@@ -234,7 +515,8 @@
         </div>
       </header>
       <main>
-        <section id="treinamento-de-usg-point-of-care" data-search><h2 id="h-treinamento-de-usg-point-of-care">Treinamento de USG point-of-care</h2>
+        <p id="emptyState" class="empty-state" hidden>Nenhuma seção encontrada para essa busca. Tente termos como conexão, acesso, ganho, limpeza ou FOAM.</p>
+        <section id="treinamento-de-usg-point-of-care" class="section-block reveal" data-search data-section="01"><h2 id="h-treinamento-de-usg-point-of-care">Treinamento de USG point-of-care</h2>
 <p>Material de consulta para a equipe da <strong>UPA</strong> começar a usar o ultrassom point-of-care da unidade com segurança.</p>
 <p>O objetivo inicial não é formar especialista em ultrassom. É fazer todo mundo conseguir:</p>
 <ol>
@@ -265,7 +547,7 @@
 </ul>
 <h3 id="h-como-estudar-depois">Como estudar depois</h3>
 <p>Use este site como roteiro rápido. Para aprofundar, vá direto à página <strong>Fontes FOAM</strong> no final: ali estão guias, atlas de imagens, vídeos e referências abertas para consulta.</p></section>
-<section id="baixar-o-app" data-search><h2 id="h-baixar-o-app">Baixar o app</h2>
+<section id="baixar-o-app" class="section-block reveal" data-search data-section="02"><h2 id="h-baixar-o-app">Baixar o app</h2>
 <p>O aplicativo do aparelho é <strong>My USG</strong>.</p>
 <p>Baixe antes do treinamento para evitar perda de tempo na hora da prática.</p>
 <h3 id="h-iphone-ou-ipad">iPhone ou iPad</h3>
@@ -280,7 +562,7 @@
 <li>Se o app pedir permissões, permita acesso necessário para funcionar.</li>
 <li>Se não conseguir instalar, avise antes da prática para organizarmos outro dispositivo.</li>
 </ul></section>
-<section id="conexao-my-usg" data-search><h2 id="h-conexao-my-usg">Conexão My USG</h2>
+<section id="conexao-my-usg" class="section-block reveal" data-search data-section="03"><h2 id="h-conexao-my-usg">Conexão My USG</h2>
 <p>A conexão deve ser feita sempre na mesma ordem. O ponto mais importante dos manuais locais é: a senha do Wi-Fi da sonda é o <strong>número de série da sonda em letras minúsculas</strong>.</p>
 <h3 id="h-primeiro-acesso-ao-app">Primeiro acesso ao app</h3>
 <p>Se o My USG pedir login:</p>
@@ -318,7 +600,7 @@
 <li>A imagem aparece se pressionar o botão físico freeze/live?</li>
 </ol>
 <p>Se falhar depois disso, pare e peça outro dispositivo. A aula deve continuar.</p></section>
-<section id="cuidados-e-limpeza" data-search><h2 id="h-cuidados-e-limpeza">Cuidados e limpeza</h2>
+<section id="cuidados-e-limpeza" class="section-block reveal" data-search data-section="04"><h2 id="h-cuidados-e-limpeza">Cuidados e limpeza</h2>
 <p>Use sempre a mesma rotina. O objetivo é o aparelho continuar funcionando para toda a equipe.</p>
 <h3 id="h-antes-de-usar">Antes de usar</h3>
 <div class="table-wrap"><table><thead><tr><th>Item</th><th>O que fazer</th></tr></thead><tbody><tr><td>Sonda</td><td>conferir carga, carcaça, face do transdutor e botão</td></tr><tr><td>Celular/tablet</td><td>conferir bateria, Wi-Fi e app My USG</td></tr><tr><td>Gel</td><td>garantir quantidade suficiente antes de chamar o paciente</td></tr><tr><td>Limpeza</td><td>confirmar produto aprovado pela instituição</td></tr><tr><td>Teste</td><td>fazer imagem teste antes da aula ou antes do primeiro uso do plantão</td></tr></tbody></table></div>
@@ -368,7 +650,7 @@
 <li>transdutor tem dano físico;</li>
 <li>houve contato com sangue/secreção e você não sabe o protocolo de desinfecção.</li>
 </ul></section>
-<section id="controles-de-imagem" data-search><h2 id="h-controles-de-imagem">Controles de imagem</h2>
+<section id="controles-de-imagem" class="section-block reveal" data-search data-section="05"><h2 id="h-controles-de-imagem">Controles de imagem</h2>
 <p>Não tente fazer uma imagem perfeita. Primeiro faça uma imagem útil para responder a pergunta clínica.</p>
 <h3 id="h-modelo-mental-rapido">Modelo mental rápido</h3>
 <p>O transdutor emite som, recebe ecos e transforma o retorno em pontos na tela. Eco forte fica branco; eco fraco fica cinza; líquido costuma ficar preto.</p>
@@ -393,7 +675,7 @@
 <p>O marcador físico da sonda precisa corresponder ao marcador da tela. Se estiver em dúvida, faça o “teste do balanço”: mexa uma ponta da sonda e veja qual lado da tela se mexe.</p>
 <h3 id="h-erro-comum">Erro comum</h3>
 <p>Se a imagem está ruim, não mexa só no ganho. Confira gel, contato, face correta, preset, profundidade e orientação.</p></section>
-<section id="o-que-vamos-treinar" data-search><h2 id="h-o-que-vamos-treinar">O que vamos treinar</h2>
+<section id="o-que-vamos-treinar" class="section-block reveal" data-search data-section="06"><h2 id="h-o-que-vamos-treinar">O que vamos treinar</h2>
 <p>A primeira prática é operacional. A equipe deve sair sabendo usar o aparelho sem travar na conexão e sem danificar a sonda.</p>
 <h3 id="h-sequencia-de-pratica">Sequência de prática</h3>
 <ol>
@@ -423,7 +705,7 @@
 <p>Exemplo: “POCUS pulmonar limitado por dor e pouca colaboração. Avaliados campos anteriores bilateralmente. Sliding presente nos pontos avaliados. Sem B-lines difusas nos pontos avaliados. Exame limitado.”</p>
 <h3 id="h-meta-minima-de-cada-participante">Meta mínima de cada participante</h3>
 <p>Conectar, gerar uma imagem, ajustar profundidade/ganho, congelar, salvar, reconhecer limitação e verbalizar quando precisa de supervisão.</p></section>
-<section id="protocolos-pocus-para-upa" data-search><h2 id="h-protocolos-pocus-para-upa">Protocolos POCUS para UPA</h2>
+<section id="protocolos-pocus-para-upa" class="section-block reveal" data-search data-section="07"><h2 id="h-protocolos-pocus-para-upa">Protocolos POCUS para UPA</h2>
 <p>A primeira turma não precisa sair fazendo laudo completo. Ela precisa aprender perguntas clínicas seguras, repetíveis e úteis para emergência.</p>
 <h3 id="h-modulos-desta-primeira-versao">Módulos desta primeira versão</h3>
 <div class="table-wrap"><table><thead><tr><th>Módulo</th><th>Status na primeira aula</th><th>Transdutor</th></tr></thead><tbody><tr><td>Acesso central</td><td>foco prático/cognitivo</td><td>linear</td></tr><tr><td>Pulmão</td><td>demonstração, não competência mínima</td><td>linear ou convexa</td></tr><tr><td>eFAST/FAST</td><td>demonstração, não competência mínima</td><td>convexa/cardíaca e linear para pleura se disponível</td></tr><tr><td>Eco básico</td><td>demonstração, não competência mínima</td><td>convexa/cardíaca</td></tr><tr><td>Volume vesical</td><td>menção básica</td><td>convexa</td></tr><tr><td>Acesso periférico</td><td>apêndice</td><td>linear</td></tr></tbody></table></div>
@@ -479,7 +761,7 @@
 <li>Conduta que mudou ou não mudou.</li>
 </ul>
 <p>Frase segura: “POCUS realizado para pergunta focada. Achados interpretados no contexto clínico. Exame limitado por janela/tempo/colaboração quando aplicável.”</p></section>
-<section id="acesso-central-guiado-por-usg" data-search><h2 id="h-acesso-central-guiado-por-usg">Acesso central guiado por USG</h2>
+<section id="acesso-central-guiado-por-usg" class="section-block reveal" data-search data-section="08"><h2 id="h-acesso-central-guiado-por-usg">Acesso central guiado por USG</h2>
 <p>Nesta primeira versão, o objetivo não é ensinar punção central independente. O objetivo é criar base segura para <strong>pré-scan, anatomia ultrassonográfica, escolha do alvo e prática supervisionada</strong>.</p>
 <p>Competência mínima: reconhecer veia, artéria, profundidade, relação anatômica e limites do exame. Procedimento real exige supervisão direta e protocolo local.</p>
 <h3 id="h-foco-da-aula">Foco da aula</h3>
@@ -496,17 +778,17 @@
 <li>Escolha o melhor lado/sítio.</li>
 <li>Só então avance para preparo conforme protocolo local.</li>
 </ol>
-<figure class="figure"><img src="assets/visuals/acesso-central/saem-anatomia-pescoco-ijv-cca.png" alt="Anatomia do pescoço para acesso jugular: veia jugular interna, artéria carótida comum e esternocleidomastoideo"><figcaption>Anatomia do pescoço para acesso jugular: veia jugular interna, artéria carótida comum e esternocleidomastoideo</figcaption></figure>
+<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" src="assets/visuals/acesso-central/saem-anatomia-pescoco-ijv-cca.png" alt="Anatomia do pescoço para acesso jugular: veia jugular interna, artéria carótida comum e esternocleidomastoideo"></div><figcaption>Anatomia do pescoço para acesso jugular: veia jugular interna, artéria carótida comum e esternocleidomastoideo</figcaption></figure>
 <p>Fonte da imagem: SAEM, página “Venous access”, imagem de anatomia do pescoço cortesia de Sierra Beck, MD. Use como referência visual; a anatomia real muda com rotação da cabeça, volemia e pressão da sonda.</p>
 <h3 id="h-primeiro-arteria-ou-veia">Primeiro: artéria ou veia?</h3>
 <div class="table-wrap"><table><thead><tr><th>Achado</th><th>Veia</th><th>Artéria</th></tr></thead><tbody><tr><td>Compressão</td><td>colaba</td><td>não colaba ou colaba pouco</td></tr><tr><td>Forma</td><td>oval, variável</td><td>redonda, parede mais espessa</td></tr><tr><td>Pulsação</td><td>ausente ou transmitida</td><td>pulsátil</td></tr><tr><td>Doppler</td><td>fluxo venoso</td><td>fluxo pulsátil</td></tr><tr><td>Profundidade</td><td>varia com volemia/posição</td><td>geralmente mais estável</td></tr></tbody></table></div>
 <p>Mnemônico: <strong>veia espreme, artéria pulsa</strong>.</p>
-<figure class="figure"><img src="assets/visuals/acesso-central/saem-veia-arteria-parede.png" alt="Imagem ultrassonográfica comparando parede de artéria e veias"><figcaption>Imagem ultrassonográfica comparando parede de artéria e veias</figcaption></figure>
+<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" src="assets/visuals/acesso-central/saem-veia-arteria-parede.png" alt="Imagem ultrassonográfica comparando parede de artéria e veias"></div><figcaption>Imagem ultrassonográfica comparando parede de artéria e veias</figcaption></figure>
 <p>Fonte da imagem: SAEM, página “Venous access”, imagem cortesia de Sierra Beck, MD e Bradley Wallace, MD.</p>
 <h3 id="h-eixo-curto-e-eixo-longo">Eixo curto e eixo longo</h3>
 <div class="table-wrap"><table><thead><tr><th>Técnica</th><th>Melhor uso</th><th>Risco</th></tr></thead><tbody><tr><td>Eixo curto / fora do plano</td><td>reconhecer anatomia, lateralidade e relação veia-artéria</td><td>confundir corpo da agulha com ponta</td></tr><tr><td>Eixo longo / no plano</td><td>entender trajeto e confirmar fio/agulha no vaso</td><td>perder o plano e achar que está dentro quando está lateral</td></tr></tbody></table></div>
 <p>Use ambos como linguagem visual. Não transforme um deles em regra universal. Para iniciante, o ponto crítico é: <strong>se a ponta sumiu, pare</strong>.</p>
-<figure class="figure"><img src="assets/visuals/acesso-central/saem-eixo-curto-armadilha-ponta.png" alt="Armadilha do eixo curto: a mesma agulha pode parecer em posições diferentes conforme a posição da sonda"><figcaption>Armadilha do eixo curto: a mesma agulha pode parecer em posições diferentes conforme a posição da sonda</figcaption></figure>
+<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" src="assets/visuals/acesso-central/saem-eixo-curto-armadilha-ponta.png" alt="Armadilha do eixo curto: a mesma agulha pode parecer em posições diferentes conforme a posição da sonda"></div><figcaption>Armadilha do eixo curto: a mesma agulha pode parecer em posições diferentes conforme a posição da sonda</figcaption></figure>
 <p>Fonte da imagem: SAEM, página “Venous access”. Esta figura é útil para mostrar por que ver “um ponto branco” não basta; é preciso rastrear a ponta dinamicamente.</p>
 <h3 id="h-jugular-interna">Jugular interna</h3>
 <p>O pré-scan da jugular deve responder:</p>
@@ -532,7 +814,7 @@
 <li>confirme fio no vaso antes de dilatar;</li>
 <li>se não consegue confirmar, peça ajuda e não prossiga.</li>
 </ul>
-<figure class="figure"><img src="assets/visuals/acesso-central/saem-guia-fio-ijv.png" alt="Confirmação ultrassonográfica de estrutura hiperecoica no interior da jugular interna"><figcaption>Confirmação ultrassonográfica de estrutura hiperecoica no interior da jugular interna</figcaption></figure>
+<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" src="assets/visuals/acesso-central/saem-guia-fio-ijv.png" alt="Confirmação ultrassonográfica de estrutura hiperecoica no interior da jugular interna"></div><figcaption>Confirmação ultrassonográfica de estrutura hiperecoica no interior da jugular interna</figcaption></figure>
 <p>Fonte da imagem: SAEM, página “Venous access”, imagem cortesia de Sierra Beck, MD e Bradley Wallace, MD.</p>
 <h3 id="h-acesso-periferico-como-apendice">Acesso periférico como apêndice</h3>
 <p>O acesso periférico guiado por USG será apenas mencionado nesta etapa:</p>
@@ -548,7 +830,7 @@
 <p><code>comprimento x largura x altura x 0,52</code></p>
 <p>Exemplo ilustrativo: <code>10 cm x 8 cm x 6 cm x 0,52 = aproximadamente 250 mL</code>.</p>
 <p>Use como estimativa prática, não como medida absoluta.</p></section>
-<section id="armadilhas-comuns" data-search><h2 id="h-armadilhas-comuns">Armadilhas comuns</h2>
+<section id="armadilhas-comuns" class="section-block reveal" data-search data-section="09"><h2 id="h-armadilhas-comuns">Armadilhas comuns</h2>
 <h3 id="h-conexao">Conexão</h3>
 <div class="table-wrap"><table><thead><tr><th>Armadilha</th><th>Solução</th></tr></thead><tbody><tr><td>Confundir senha do app com senha Wi-Fi</td><td>app Administer usa <code>123456</code>; Wi-Fi usa SN em minúsculas</td></tr><tr><td>Começar sem testar</td><td>ligar, conectar e gerar imagem antes da turma chegar</td></tr><tr><td>Usar cabo no iPhone como plano principal</td><td>usar Wi-Fi</td></tr><tr><td>Senha recusada</td><td>redigitar SN em minúsculas, sem espaços</td></tr><tr><td>Imagem preta</td><td>reiniciar app, reconectar Wi-Fi e checar bateria</td></tr></tbody></table></div>
 <h3 id="h-imagem">Imagem</h3>
@@ -566,7 +848,7 @@
 <div class="table-wrap"><table><thead><tr><th>Situação</th><th>Erro</th><th>Melhor postura</th></tr></thead><tbody><tr><td>FAST negativo</td><td>“não há sangramento”</td><td>“não vi líquido livre nas janelas avaliadas”</td></tr><tr><td>Pulmão com sliding</td><td>“não há doença pulmonar”</td><td>sliding responde principalmente pneumotórax naquele ponto</td></tr><tr><td>B-lines</td><td>“é edema agudo cardiogênico”</td><td>integrar com clínica, coração, volume e contexto</td></tr><tr><td>Bexiga vazia</td><td>“não é retenção”</td><td>confirmar se a janela foi adequada e se o paciente urinou</td></tr><tr><td>Abscesso</td><td>drenar sem Doppler/sem pensar em vaso</td><td>antes de furar, confirme que não é vaso</td></tr></tbody></table></div>
 <h3 id="h-procedimento">Procedimento</h3>
 <p>Se perdeu a ponta da agulha, pare. Reencontre a ponta antes de avançar.</p></section>
-<section id="roteiro-da-aula" data-search><h2 id="h-roteiro-da-aula">Roteiro da aula</h2>
+<section id="roteiro-da-aula" class="section-block reveal" data-search data-section="10"><h2 id="h-roteiro-da-aula">Roteiro da aula</h2>
 <h3 id="h-duracao-sugerida-2h30-a-3h">Duração sugerida: 2h30 a 3h</h3>
 <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>Atividade</th></tr></thead><tbody><tr><td>0-10 min</td><td>Objetivo: POCUS como resposta focada a pergunta clínica</td></tr><tr><td>10-25 min</td><td>Cuidados com aparelho, limpeza, carga, gel, armazenamento</td></tr><tr><td>25-45 min</td><td>Conexão My USG: senha app, Wi-Fi da sonda, teste de imagem</td></tr><tr><td>45-65 min</td><td>Controles básicos: profundidade, ganho, foco, preset, freeze/save</td></tr><tr><td>65-85 min</td><td>Demonstração: convexa e linear, orientação e movimentos</td></tr><tr><td>85-125 min</td><td>Rodízio prático: cada participante conecta, gera, ajusta e salva imagem</td></tr><tr><td>125-160 min</td><td>Protocolos prioritários: eFAST, pulmão, bexiga/rim, partes moles e acesso vascular</td></tr><tr><td>160-180 min</td><td>Armadilhas, checklist final e plano de prática supervisionada</td></tr></tbody></table></div>
 <h3 id="h-promessa-pedagogica">Promessa pedagógica</h3>
@@ -622,7 +904,7 @@
 <li>Guardar imagens/clipes úteis para discussão interna, respeitando privacidade.</li>
 <li>Separar dúvidas recorrentes para atualizar este site.</li>
 </ul></section>
-<section id="checklists-rapidos" data-search><h2 id="h-checklists-rapidos">Checklists rápidos</h2>
+<section id="checklists-rapidos" class="section-block reveal" data-search data-section="11"><h2 id="h-checklists-rapidos">Checklists rápidos</h2>
 <p>Esta página é para usar na hora da aula, no início do plantão ou quando o aparelho “não quer funcionar”.</p>
 <h3 id="h-antes-da-aula">Antes da aula</h3>
 <ul>
@@ -680,7 +962,7 @@
 <li>explicar uma limitação do exame;</li>
 <li>limpar e guardar corretamente.</li>
 </ul></section>
-<section id="fontes-foam-e-consulta" data-search><h2 id="h-fontes-foam-e-consulta">Fontes FOAM e consulta</h2>
+<section id="fontes-foam-e-consulta" class="section-block reveal" data-search data-section="12"><h2 id="h-fontes-foam-e-consulta">Fontes FOAM e consulta</h2>
 <p>Use esta página quando quiser estudar depois da aula. A seleção privilegia material aberto, visual e útil para emergência/UPA.</p>
 <h3 id="h-comecar-por-aqui">Começar por aqui</h3>
 <div class="table-wrap"><table><thead><tr><th>Fonte</th><th>Melhor uso</th></tr></thead><tbody><tr><td><a href="https://www.acep.org/sonoguide" target="_blank" rel="noopener">ACEP Sonoguide</a></td><td>referência estruturada de ultrassom de emergência por aplicação</td></tr><tr><td><a href="https://www.pocus101.com/" target="_blank" rel="noopener">POCUS 101</a></td><td>tutoriais passo a passo para iniciantes</td></tr><tr><td><a href="https://coreultrasound.com/" target="_blank" rel="noopener">Core Ultrasound</a></td><td>vídeos curtos, “5 Minute Sono” e aplicações de emergência</td></tr><tr><td><a href="https://litfl.com/ultrasound-library/" target="_blank" rel="noopener">LITFL Ultrasound Library</a></td><td>revisão rápida para emergência e terapia intensiva</td></tr><tr><td><a href="https://www.thepocusatlas.com/" target="_blank" rel="noopener">The POCUS Atlas</a></td><td>atlas visual de achados e clipes</td></tr></tbody></table></div>
@@ -707,20 +989,45 @@
   </div>
   <script>
     const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
     const sections = Array.from(document.querySelectorAll('[data-search]'));
-    searchInput.addEventListener('input', () => {
+    const applySearch = () => {
       const term = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
       sections.forEach((section) => {
         const text = section.innerText.toLowerCase();
-        section.classList.toggle('hidden-by-search', term.length > 1 && !text.includes(term));
+        const hidden = term.length > 1 && !text.includes(term);
+        section.classList.toggle('hidden-by-search', hidden);
+        if (!hidden) visibleCount += 1;
       });
-    });
+      emptyState.hidden = term.length <= 1 || visibleCount > 0;
+    };
+    searchInput.addEventListener('input', applySearch);
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
       link.addEventListener('click', () => {
         searchInput.value = '';
         sections.forEach((section) => section.classList.remove('hidden-by-search'));
+        emptyState.hidden = true;
       });
     });
+    const revealTargets = Array.from(document.querySelectorAll('.reveal, .figure, .table-wrap'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+      revealTargets.forEach((target, index) => {
+        target.style.transitionDelay = `${Math.min(index * 18, 140)}ms`;
+        observer.observe(target);
+      });
+    } else {
+      revealTargets.forEach((target) => target.classList.add('is-visible'));
+    }
   </script>
 </body>
 </html>

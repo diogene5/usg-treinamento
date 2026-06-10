@@ -64,8 +64,9 @@ def inline(text: str) -> str:
     text = re.sub(
         r"!\[([^\]]*)\]\(([^)]+)\)",
         lambda m: stash(
-            f'<figure class="figure"><img src="{html.escape(normalize_href(m.group(2)), quote=True)}" '
-            f'alt="{html.escape(m.group(1), quote=True)}"><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
+            f'<figure class="figure"><div class="figure-shell"><img loading="lazy" decoding="async" '
+            f'src="{html.escape(normalize_href(m.group(2)), quote=True)}" '
+            f'alt="{html.escape(m.group(1), quote=True)}"></div><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
         ),
         text,
     )
@@ -170,7 +171,9 @@ def render_markdown(markdown: str) -> str:
             poster_attr = f' poster="{html.escape(poster, quote=True)}"' if poster else ""
             out.append(
                 '<figure class="figure video-figure">'
+                '<div class="figure-shell">'
                 f'<video controls preload="metadata" src="{html.escape(src, quote=True)}"{poster_attr}></video>'
+                '</div>'
                 f'<figcaption>{html.escape(caption)}</figcaption></figure>'
             )
             i += 1
@@ -245,11 +248,14 @@ def read_pages() -> list[dict[str, str]]:
 
 
 def build_html(pages: list[dict[str, str]]) -> str:
-    nav = "\n".join(f'<a href="#{page["slug"]}">{html.escape(page["title"])}</a>' for page in pages)
+    nav = "\n".join(
+        f'<a href="#{page["slug"]}"><span>{idx:02d}</span>{html.escape(page["title"])}</a>'
+        for idx, page in enumerate(pages, start=1)
+    )
     sections = "\n".join(
-        f'<section id="{page["slug"]}" data-search>'
+        f'<section id="{page["slug"]}" class="section-block reveal" data-search data-section="{idx:02d}">'
         f'{page["html"]}</section>'
-        for page in pages
+        for idx, page in enumerate(pages, start=1)
     )
     return f"""<!doctype html>
 <html lang="pt-BR">
@@ -257,40 +263,61 @@ def build_html(pages: list[dict[str, str]]) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Treinamento USG point-of-care | UPA</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308756f'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23152123'/%3E%3Cpath d='M16 38c6 5 26 5 32 0' stroke='%23d79043' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ctext x='32' y='31' font-size='19' text-anchor='middle' fill='%23f6f1e9' font-family='system-ui,sans-serif' font-weight='700'%3EUS%3C/text%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {{
-      --bg: #fbfcfc;
-      --surface: #ffffff;
-      --surface-quiet: #f4f7f6;
-      --surface-strong: #e8efed;
-      --ink: #172326;
-      --muted: #5b686b;
-      --line: #d8e1df;
-      --accent: #08756f;
-      --accent-dark: #064f4b;
-      --accent-soft: #dff2ef;
-      --amber: #8a5a12;
-      --amber-soft: #fff6e6;
-      --max: 1160px;
-      --sidebar: 282px;
+      --bg: #f3f6f2;
+      --paper: #fbfaf4;
+      --surface: #fffdf7;
+      --surface-quiet: #eef4ef;
+      --surface-strong: #e2ece7;
+      --ink: #152123;
+      --ink-soft: #263636;
+      --muted: #5f6c67;
+      --rail: #101b1c;
+      --rail-2: #172526;
+      --rail-muted: #a9b7b1;
+      --line: rgba(21, 33, 35, .14);
+      --line-strong: rgba(21, 33, 35, .22);
+      --accent: #126e68;
+      --accent-dark: #0d514d;
+      --accent-soft: #dfeee9;
+      --amber: #b36b27;
+      --amber-soft: #f6e4c9;
+      --danger: #8f3c2e;
+      --max: 1130px;
+      --sidebar: 304px;
+      --radius: 22px;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --sans: "Plus Jakarta Sans", "Satoshi", "Geist", "Aptos", system-ui, sans-serif;
+      --mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
       color-scheme: light;
     }}
     * {{ box-sizing: border-box; }}
     html {{ scroll-behavior: smooth; }}
     body {{
       margin: 0;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--sans);
       color: var(--ink);
       background: var(--bg);
-      line-height: 1.58;
+      line-height: 1.62;
       text-rendering: optimizeLegibility;
     }}
-    a {{ color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }}
+    body::before {{
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    }}
+    a {{ color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }}
     a:hover {{ color: var(--accent-dark); }}
     a:focus-visible, button:focus-visible, input:focus-visible {{
-      outline: 3px solid rgba(8,117,111,.24);
-      outline-offset: 2px;
+      outline: 3px solid rgba(179, 107, 39, .32);
+      outline-offset: 3px;
     }}
     .layout {{
       display: grid;
@@ -302,154 +329,414 @@ def build_html(pages: list[dict[str, str]]) -> str:
       top: 0;
       height: 100dvh;
       overflow: auto;
-      padding: 22px 16px;
-      border-right: 1px solid var(--line);
-      background: #f6faf9;
+      padding: 28px 18px;
+      background: var(--rail);
+      color: var(--rail-muted);
+      box-shadow: inset -1px 0 0 rgba(246, 241, 233, .08);
     }}
     .brand {{
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 18px;
-      margin-bottom: 14px;
+      position: relative;
+      padding: 4px 8px 24px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(246, 241, 233, .11);
     }}
-    .brand strong {{ display: block; font-size: 20px; line-height: 1.12; }}
-    .brand span {{ display: block; color: var(--muted); font-size: 13px; margin-top: 6px; }}
-    nav a {{
+    .brand::before {{
+      content: "";
       display: block;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--ink);
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--amber);
+      margin-bottom: 18px;
+    }}
+    .brand strong {{
+      display: block;
+      max-width: 9ch;
+      color: #f6f1e9;
+      font-size: 32px;
+      font-weight: 760;
+      letter-spacing: 0;
+      line-height: .96;
+    }}
+    .brand span {{
+      display: block;
+      max-width: 22ch;
+      color: var(--rail-muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 12px;
+    }}
+    nav {{
+      display: grid;
+      gap: 3px;
+    }}
+    nav a {{
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      align-items: center;
+      min-height: 42px;
+      gap: 10px;
+      padding: 8px 10px 8px 6px;
+      border-radius: 14px;
+      color: #dbe5df;
       text-decoration: none;
       font-size: 14px;
-      line-height: 1.28;
-      transition: background-color .18s ease, color .18s ease, transform .18s ease;
+      line-height: 1.24;
+      transition: background-color .42s var(--ease), color .42s var(--ease), transform .42s var(--ease);
     }}
-    nav a:hover {{ background: var(--accent-soft); color: var(--accent-dark); transform: translateX(2px); }}
+    nav a span {{
+      font-family: var(--mono);
+      color: var(--amber-soft);
+      font-size: 11px;
+      text-align: center;
+      opacity: .8;
+    }}
+    nav a:hover {{
+      background: rgba(246, 241, 233, .08);
+      color: #fffdf7;
+      transform: translateX(4px);
+    }}
     .topbar {{
       position: sticky;
-      top: 0;
+      top: 18px;
       z-index: 4;
-      border-bottom: 1px solid var(--line);
-      background: rgba(251,252,252,.94);
-      backdrop-filter: blur(12px);
-      padding: 14px 22px;
+      max-width: calc(var(--max) + 56px);
+      margin: 18px auto 0;
+      padding: 7px;
+      border-radius: 28px;
+      background: rgba(251, 250, 244, .84);
+      border: 1px solid rgba(21, 33, 35, .10);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px -44px rgba(15, 28, 29, .42), inset 0 1px 0 rgba(255, 253, 247, .74);
     }}
     .topbar-inner {{
       max-width: var(--max);
       margin: 0 auto;
-      display: flex;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 10px;
       align-items: center;
     }}
     input[type="search"] {{
       width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 11px 12px;
+      min-height: 46px;
+      border: 0;
+      border-radius: 22px;
+      padding: 12px 16px;
+      font: inherit;
       font-size: 15px;
       background: var(--surface);
       color: var(--ink);
+      box-shadow: inset 0 0 0 1px rgba(21, 33, 35, .11);
     }}
-    .actions {{ display: flex; gap: 8px; flex-wrap: wrap; }}
+    input[type="search"]::placeholder {{ color: #6f7c78; }}
+    .actions {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }}
     .actions a, .actions button {{
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
-      color: var(--ink);
-      padding: 10px 12px;
+      min-height: 46px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--rail);
+      color: #f6f1e9;
+      padding: 12px 16px;
+      font: inherit;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 760;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-color .18s ease, color .18s ease, transform .18s ease;
+      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .10);
+      transition: background-color .42s var(--ease), color .42s var(--ease), transform .42s var(--ease);
     }}
-    .actions a:hover, .actions button:hover {{ border-color: var(--accent); color: var(--accent-dark); }}
-    .actions a:active, .actions button:active {{ transform: translateY(1px); }}
+    .actions a:nth-child(2) {{ background: var(--accent-dark); }}
+    .actions button {{ background: var(--amber); color: #20160d; }}
+    .actions a:hover, .actions button:hover {{
+      transform: translateY(-1px);
+    }}
+    .actions a:active, .actions button:active {{ transform: translateY(1px) scale(.99); }}
     main {{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 26px 26px 72px;
+      padding: 34px 30px 88px;
     }}
-    section {{
-      scroll-margin-top: 86px;
-      border-bottom: 1px solid var(--line);
-      padding: 38px 0;
-    }}
-    section:first-of-type {{
-      padding-top: 26px;
-    }}
-    section:first-of-type h1 {{
-      max-width: 920px;
-      font-size: 48px;
-      letter-spacing: 0;
-    }}
-    section:first-of-type > p:first-of-type {{
+    .empty-state {{
       max-width: 760px;
-      font-size: 18px;
+      margin: 26px 0;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: inset 0 0 0 1px var(--line);
       color: var(--muted);
     }}
-    h1, h2, h3, h4, h5 {{ margin: 0 0 12px; line-height: 1.16; letter-spacing: 0; }}
-    h1 {{ font-size: 42px; }}
-    h2 {{ font-size: 32px; margin-top: 8px; }}
-    h3 {{ font-size: 24px; margin-top: 28px; }}
-    h4 {{ font-size: 19px; margin-top: 22px; }}
-    p {{ margin: 0 0 12px; max-width: 78ch; }}
-    ul, ol {{ margin: 8px 0 16px; padding-left: 22px; }}
-    li {{ margin: 6px 0; }}
+    .section-block {{
+      position: relative;
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      column-gap: 34px;
+      scroll-margin-top: 104px;
+      border-bottom: 1px solid var(--line);
+      padding: 70px 0;
+    }}
+    .section-block::before {{
+      content: attr(data-section);
+      grid-column: 1;
+      grid-row: 1 / span 80;
+      align-self: start;
+      position: sticky;
+      top: 112px;
+      width: 56px;
+      padding-top: 12px;
+      border-top: 2px solid var(--amber);
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }}
+    .section-block > * {{ grid-column: 2; }}
+    .section-block:first-of-type {{
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 34px;
+    }}
+    .section-block:first-of-type::before {{ display: none; }}
+    .section-block:first-of-type > * {{ grid-column: 1; }}
+    h1, h2, h3, h4, h5 {{
+      margin: 0 0 14px;
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: var(--ink);
+    }}
+    h2 {{
+      max-width: 18ch;
+      font-size: 38px;
+      font-weight: 780;
+    }}
+    .section-block:first-of-type > h2:first-child {{
+      max-width: 13ch;
+      font-size: 52px;
+      font-weight: 820;
+      letter-spacing: 0;
+    }}
+    .section-block:first-of-type > h2:first-child::before {{
+      content: "UPA / POCUS / Konted C10RL";
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--rail);
+      color: var(--amber-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .10em;
+    }}
+    .section-block:first-of-type > p:first-of-type {{
+      max-width: 760px;
+      font-size: 19px;
+      color: var(--ink-soft);
+    }}
+    h3 {{
+      max-width: 24ch;
+      margin-top: 40px;
+      font-size: 25px;
+      font-weight: 760;
+    }}
+    h3::before {{
+      content: "";
+      display: block;
+      width: 30px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--accent);
+      margin-bottom: 12px;
+    }}
+    h4 {{
+      margin-top: 26px;
+      font-size: 19px;
+      font-weight: 760;
+    }}
+    p {{
+      margin: 0 0 13px;
+      max-width: 74ch;
+    }}
+    ul, ol {{
+      max-width: 74ch;
+      margin: 10px 0 18px;
+      padding-left: 24px;
+    }}
+    li {{ margin: 7px 0; }}
     blockquote {{
-      margin: 16px 0;
-      padding: 14px 16px;
-      border-left: 4px solid var(--accent);
-      background: var(--surface-quiet);
-      border-radius: 0 8px 8px 0;
-      max-width: 84ch;
+      max-width: 820px;
+      margin: 22px 0;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: inset 4px 0 0 var(--accent), inset 0 0 0 1px rgba(18, 110, 104, .16);
+      color: var(--ink-soft);
+      font-weight: 650;
     }}
     code {{
       background: var(--surface-strong);
       border: 1px solid var(--line);
-      border-radius: 5px;
-      padding: 1px 5px;
+      border-radius: 7px;
+      padding: 2px 6px;
       font-size: .92em;
     }}
     pre code {{
       display: block;
-      padding: 14px;
+      padding: 16px;
       overflow: auto;
     }}
     .figure {{
-      margin: 18px 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      padding: 10px;
+      width: min(100%, 700px);
+      margin: 28px 0 20px;
+      padding: 7px;
+      border-radius: 24px;
+      background: rgba(255, 253, 247, .74);
+      border: 1px solid rgba(21, 33, 35, .10);
+      box-shadow: 0 28px 70px -52px rgba(15, 28, 29, .48), inset 0 1px 0 rgba(255, 253, 247, .84);
     }}
-    .figure img {{ display: block; width: 100%; height: auto; }}
-    .figure video {{ display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #12181a; }}
-    figcaption {{ color: var(--muted); font-size: 13px; margin-top: 8px; }}
-    .table-wrap {{ overflow-x: auto; margin: 14px 0 18px; }}
-    table {{ width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); }}
-    th, td {{ border: 1px solid var(--line); padding: 11px 12px; vertical-align: top; text-align: left; }}
-    th {{ background: var(--surface-strong); color: #263638; }}
-    tbody tr:nth-child(even) td {{ background: #fafcfc; }}
+    .figure-shell {{
+      display: grid;
+      place-items: center;
+      min-height: 180px;
+      overflow: hidden;
+      border-radius: 17px;
+      background: #182526;
+      box-shadow: inset 0 1px 0 rgba(255, 253, 247, .12), inset 0 0 0 1px rgba(246, 241, 233, .08);
+    }}
+    .figure img {{
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 380px;
+      object-fit: contain;
+      background: #182526;
+    }}
+    .video-figure {{ width: min(100%, 620px); }}
+    .figure video {{
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      background: #182526;
+    }}
+    figcaption {{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 9px 4px 1px;
+    }}
+    .table-wrap {{
+      width: min(100%, 880px);
+      overflow-x: auto;
+      margin: 18px 0 24px;
+      padding: 5px;
+      border-radius: 20px;
+      background: rgba(255, 253, 247, .78);
+      border: 1px solid rgba(21, 33, 35, .10);
+      box-shadow: 0 24px 62px -52px rgba(15, 28, 29, .38);
+    }}
+    table {{
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 15px;
+      font-size: 14px;
+      background: var(--surface);
+    }}
+    th, td {{
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 12px 13px;
+      vertical-align: top;
+      text-align: left;
+    }}
+    th:last-child, td:last-child {{ border-right: 0; }}
+    tbody tr:last-child td {{ border-bottom: 0; }}
+    th {{
+      background: var(--surface-strong);
+      color: var(--ink);
+      font-weight: 760;
+    }}
+    tbody tr:nth-child(even) td {{ background: #f8faf5; }}
     .task input {{ margin-right: 8px; }}
     .hidden-by-search {{ display: none !important; }}
+    .js .reveal, .js .figure, .js .table-wrap {{
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .72s var(--ease), transform .72s var(--ease);
+    }}
+    .js .is-visible {{
+      opacity: 1;
+      transform: translateY(0);
+    }}
     @media (max-width: 900px) {{
       .layout {{ grid-template-columns: 1fr; }}
-      aside {{ position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }}
-      nav {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; }}
-      .topbar {{ position: static; }}
-      .topbar-inner {{ flex-direction: column; align-items: stretch; }}
-      main {{ padding: 22px 16px 56px; }}
-      section {{ padding: 30px 0; scroll-margin-top: 18px; }}
-      h1, section:first-of-type h1 {{ font-size: 34px; }}
-      h2 {{ font-size: 27px; }}
+      aside {{
+        position: static;
+        height: auto;
+        padding: 22px 16px;
+      }}
+      .brand strong {{ max-width: none; font-size: 28px; }}
+      .brand span {{ max-width: none; }}
+      nav {{ grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 5px; }}
+      nav a {{ min-height: 44px; }}
+      .topbar {{
+        position: static;
+        margin: 14px 14px 0;
+      }}
+      .topbar-inner {{
+        grid-template-columns: 1fr;
+      }}
+      .actions {{ justify-content: stretch; }}
+      .actions a, .actions button {{ flex: 1 1 auto; text-align: center; }}
+      main {{ padding: 24px 16px 62px; }}
+      .section-block {{
+        display: block;
+        padding: 48px 0;
+        scroll-margin-top: 18px;
+      }}
+      .section-block::before {{
+        position: static;
+        display: block;
+        margin-bottom: 16px;
+      }}
+      .section-block:first-of-type {{ padding-top: 28px; }}
+      h2, .section-block:first-of-type > h2:first-child {{ font-size: 34px; max-width: 16ch; }}
       h3 {{ font-size: 22px; }}
+      p, ul, ol {{ max-width: 100%; }}
+      .figure {{ width: 100%; border-radius: 20px; }}
+      .figure-shell {{ min-height: 140px; border-radius: 14px; }}
+      .figure img {{ max-height: 310px; }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      html {{ scroll-behavior: auto; }}
+      *, *::before, *::after {{
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }}
+      .js .reveal, .js .figure, .js .table-wrap {{
+        opacity: 1;
+        transform: none;
+      }}
     }}
     @media print {{
-      aside, .topbar {{ display: none; }}
+      body {{ background: #fffdf7; }}
+      body::before, aside, .topbar {{ display: none; }}
       .layout {{ display: block; }}
       main {{ max-width: none; padding: 0; }}
-      section {{ page-break-inside: avoid; }}
+      .section-block {{ display: block; padding: 24px 0; page-break-inside: avoid; }}
+      .section-block::before {{ display: none; }}
+      .figure, .table-wrap {{ box-shadow: none; }}
     }}
   </style>
 </head>
@@ -476,26 +763,52 @@ def build_html(pages: list[dict[str, str]]) -> str:
         </div>
       </header>
       <main>
+        <p id="emptyState" class="empty-state" hidden>Nenhuma seção encontrada para essa busca. Tente termos como conexão, acesso, ganho, limpeza ou FOAM.</p>
         {sections}
       </main>
     </div>
   </div>
   <script>
     const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
     const sections = Array.from(document.querySelectorAll('[data-search]'));
-    searchInput.addEventListener('input', () => {{
+    const applySearch = () => {{
       const term = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
       sections.forEach((section) => {{
         const text = section.innerText.toLowerCase();
-        section.classList.toggle('hidden-by-search', term.length > 1 && !text.includes(term));
+        const hidden = term.length > 1 && !text.includes(term);
+        section.classList.toggle('hidden-by-search', hidden);
+        if (!hidden) visibleCount += 1;
       }});
-    }});
+      emptyState.hidden = term.length <= 1 || visibleCount > 0;
+    }};
+    searchInput.addEventListener('input', applySearch);
     document.querySelectorAll('a[href^="#"]').forEach((link) => {{
       link.addEventListener('click', () => {{
         searchInput.value = '';
         sections.forEach((section) => section.classList.remove('hidden-by-search'));
+        emptyState.hidden = true;
       }});
     }});
+    const revealTargets = Array.from(document.querySelectorAll('.reveal, .figure, .table-wrap'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion && 'IntersectionObserver' in window) {{
+      const observer = new IntersectionObserver((entries) => {{
+        entries.forEach((entry) => {{
+          if (entry.isIntersecting) {{
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }}
+        }});
+      }}, {{ threshold: 0.08, rootMargin: '0px 0px -8% 0px' }});
+      revealTargets.forEach((target, index) => {{
+        target.style.transitionDelay = `${{Math.min(index * 18, 140)}}ms`;
+        observer.observe(target);
+      }});
+    }} else {{
+      revealTargets.forEach((target) => target.classList.add('is-visible'));
+    }}
   </script>
 </body>
 </html>
