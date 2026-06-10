@@ -29,6 +29,7 @@ Site público atual: [https://diogene5.github.io/usg-treinamento/](https://dioge
 - [docs/](docs): roteiro, checklists, armadilhas, fontes e evidências dos arquivos originais.
 - [assets/media/](assets/media): imagens e vídeo didáticos preservados para aprovação/revisão.
 - [assets/diagrams/](assets/diagrams): diagramas SVG preservados para aprovação/revisão.
+- [assets/visuals/](assets/visuals): imagens reais selecionadas para referência visual, com atribuição.
 - [references/](references): cópias dos PDFs originais do aparelho e do app.
 - [index.html](index.html): website estático para compartilhar com a equipe, gerado apenas a partir das páginas públicas de `content/`.
 

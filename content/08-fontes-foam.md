@@ -25,6 +25,9 @@ Use esta página quando quiser estudar depois da aula. A seleção privilegia ma
 
 | Fonte | Melhor uso |
 |---|---|
+| [SAEM: Venous access](https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education/m3-curriculum/bedside-ultrasonagraphy/venous-access) | referência visual forte para acesso vascular, eixo curto/eixo longo e acesso central |
+| [Geeky Medics: Central Line Insertion](https://geekymedics.com/central-line-insertion-central-venous-cannulation-osce-guide/) | imagem ultrassonográfica anotada de IJV/CCA/SCM e guia de técnica para estudo |
+| [Teleflex Arrow University: Ultrasound Theory and POC Application](https://www.teleflex.com/en/usa/arrowUniversity/vascular/cvc/section5/11.html) | imagem rotulada de jugular interna e carótida |
 | [POCUS101: ultrasound-guided peripheral IV](https://www.pocus101.com/ultrasound-guided-peripheral-iv-insertion-placement-and-access-made-easy/) | passo a passo de acesso periférico guiado |
 | [Merck Manual: ultrasound-guided peripheral IV](https://www.merckmanuals.com/professional/critical-care-medicine/how-to-do-peripheral-vascular-procedures/how-to-do-ultrasound-guided-peripheral-intravenous-catheter-insertion) | referência procedural objetiva |
 | [UCSD: USGPIV phantom](https://emultrasound.sdsc.edu/index.php/2017/12/07/usgpiv-phantom/) | receita de phantom para treino |

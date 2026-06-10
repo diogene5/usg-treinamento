@@ -14,25 +14,24 @@ A primeira prática é operacional. A equipe deve sair sabendo usar o aparelho s
 8. Salvar imagem ou vídeo curto.
 9. Limpar e guardar o aparelho.
 
-## Protocolos que serão demonstrados
+## Núcleo obrigatório da primeira aula
 
-| Situação | Pergunta POCUS |
+| Módulo | O que a pessoa precisa conseguir fazer |
 |---|---|
-| Trauma | há líquido livre ou pneumotórax provável? |
-| Dispneia | há B-lines difusas, derrame, consolidação ou pneumotórax provável? |
-| Retenção urinária/dor lombar | bexiga está cheia? há hidronefrose grosseira? |
-| Pele e partes moles | há coleção drenável? |
-| Acesso venoso | vejo vaso e ponta da agulha? |
+| Aparelho | ligar, cuidar, limpar, guardar e não danificar |
+| Conexão | conectar C10RL ao My USG e recuperar falhas comuns |
+| Imagem | ajustar ganho, profundidade, orientação, freeze/save |
+| Acesso central | fazer pré-scan, diferenciar veia/artéria, entender jugular interna e regra da ponta |
 
-## Protocolos práticos para UPA
+## Demonstrações, não competência mínima
 
-| Módulo | Transdutor | Resultado esperado para iniciante |
-|---|---|---|
-| Pulmão | linear ou convexa | reconhecer sliding, linhas A, B-lines, derrame grosseiro |
-| eFAST | convexa | procurar líquido livre em RUQ, LUQ, pelve e tórax |
-| Bexiga/rim | convexa | identificar bexiga cheia e hidronefrose grosseira |
-| Partes moles | linear | diferenciar celulite de coleção drenável |
-| Acesso vascular | linear | identificar veia, artéria e ponta da agulha |
+| Demonstração | Mensagem principal |
+|---|---|
+| Pulmão | sliding, linhas A/B e derrame grosseiro são perguntas focadas |
+| eFAST | FAST negativo não exclui lesão; janela ruim deve ser dita como ruim |
+| Eco básico | atividade cardíaca, derrame pericárdico e função grosseira são triagem, não laudo |
+| Volume vesical | cálculo é estimativa simples, não medida absoluta |
+| Acesso periférico | apêndice para entender compressibilidade e ponta da agulha |
 
 ## Documentação mínima
 
@@ -48,4 +47,4 @@ Exemplo: “POCUS pulmonar limitado por dor e pouca colaboração. Avaliados cam
 
 ## Meta mínima de cada participante
 
-Conectar, gerar uma imagem, ajustar profundidade/ganho, congelar, salvar e verbalizar uma limitação.
+Conectar, gerar uma imagem, ajustar profundidade/ganho, congelar, salvar, reconhecer limitação e verbalizar quando precisa de supervisão.

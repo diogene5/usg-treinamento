@@ -2,17 +2,18 @@
 
 A primeira turma não precisa sair fazendo laudo completo. Ela precisa aprender perguntas clínicas seguras, repetíveis e úteis para emergência.
 
-## Módulos prioritários
+## Módulos desta primeira versão
 
-| Módulo | Pergunta clínica | Transdutor |
+| Módulo | Status na primeira aula | Transdutor |
 |---|---|---|
-| eFAST/FAST | há líquido livre ou pneumotórax em trauma? | convexa/cardíaca e linear para pleura se disponível |
-| Pulmão | há B-lines difusas, consolidação, derrame, pneumotórax provável? | linear ou convexa |
-| Bexiga/rim | bexiga cheia? hidronefrose grosseira? | convexa |
-| Partes moles | abscesso ou celulite? corpo estranho superficial? | linear |
-| Vascular | veia compressível? trombose proximal evidente? | linear |
-| Acesso venoso | visualizar vaso e ponta da agulha | linear |
-| Cardíaco focado | derrame pericárdico? atividade cardíaca? disfunção grosseira? | convexa/cardíaca |
+| Acesso central | foco prático/cognitivo | linear |
+| Pulmão | demonstração, não competência mínima | linear ou convexa |
+| eFAST/FAST | demonstração, não competência mínima | convexa/cardíaca e linear para pleura se disponível |
+| Eco básico | demonstração, não competência mínima | convexa/cardíaca |
+| Volume vesical | menção básica | convexa |
+| Acesso periférico | apêndice | linear |
+
+O foco operacional é acesso central: pré-scan, jugular interna, femoral como comparação, veia vs artéria, eixo curto/eixo longo, ponta da agulha e supervisão.
 
 ## Pulmão
 
